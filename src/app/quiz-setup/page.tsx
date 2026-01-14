@@ -11,7 +11,13 @@ export default function QuizSetup() {
   const [timerMode, setTimerMode] = useState<TimerMode>('none')
 
   const handleStartQuiz = () => {
-    router.push(`/quiz?type=${kanaType}&count=${questionCount}&timer=${timerMode}`)
+    // localStorage에 퀴즈 설정 저장
+    localStorage.setItem('quizConfig', JSON.stringify({
+      kanaType,
+      questionCount,
+      timerMode,
+    }))
+    router.push('/quiz')
   }
 
   return (

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { useSearchParams, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { hiragana, katakana, KanaData, KanaType, QuestionCount, TimerMode } from '@/data/kana'
 
 interface Question {
@@ -10,14 +10,16 @@ interface Question {
   correctAnswer: string
 }
 
+interface QuizConfig {
+  kanaType: KanaType
+  questionCount: QuestionCount
+  timerMode: TimerMode
+}
+
 export default function QuizPage() {
-  const searchParams = useSearchParams()
   const router = useRouter()
 
-  const kanaType = (searchParams.get('type') as KanaType) || 'hiragana'
-  const questionCount = (searchParams.get('count') as QuestionCount) || 10
-  const timerMode = (searchParams.get('timer') as TimerMode) || 'none'
-
+  const [config, setConfig] = useState<QuizConfig | null>(null)
   const [questions, setQuestions] = useState<Question[]>([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
@@ -27,10 +29,32 @@ export default function QuizPage() {
   const [totalTimer, setTotalTimer] = useState(20 * 60) // 20분 = 1200초
   const [showResult, setShowResult] = useState(false)
 
+  // localStorage에서 설정 읽기
+  useEffect(() => {
+    const savedConfig = localStorage.getItem('quizConfig')
+
+    if (!savedConfig) {
+      // 설정이 없으면 quiz-setup으로 리다이렉트
+      router.replace('/quiz-setup')
+      return
+    }
+
+    try {
+      const parsed = JSON.parse(savedConfig) as QuizConfig
+      setConfig(parsed)
+      // 사용 후 삭제 (새로고침 시 quiz-setup으로 가도록)
+      localStorage.removeItem('quizConfig')
+    } catch {
+      router.replace('/quiz-setup')
+    }
+  }, [router])
+
   // 문제 생성 함수
   const generateQuestions = useCallback(() => {
-    const kanaData = kanaType === 'hiragana' ? hiragana : katakana
-    const count = questionCount === 'all' ? kanaData.length : questionCount
+    if (!config) return
+
+    const kanaData = config.kanaType === 'hiragana' ? hiragana : katakana
+    const count = config.questionCount === 'all' ? kanaData.length : config.questionCount
 
     // 랜덤하게 섞기
     const shuffled = [...kanaData].sort(() => Math.random() - 0.5)
@@ -55,15 +79,17 @@ export default function QuizPage() {
     })
 
     setQuestions(generatedQuestions)
-  }, [kanaType, questionCount])
+  }, [config])
 
   useEffect(() => {
-    generateQuestions()
-  }, [generateQuestions])
+    if (config) {
+      generateQuestions()
+    }
+  }, [config, generateQuestions])
 
   // 문제당 타이머
   useEffect(() => {
-    if (timerMode === 'per-question' && !isFinished && !showResult) {
+    if (config?.timerMode === 'per-question' && !isFinished && !showResult) {
       if (questionTimer <= 0) {
         handleNextQuestion()
         return
@@ -75,11 +101,11 @@ export default function QuizPage() {
 
       return () => clearInterval(timer)
     }
-  }, [timerMode, questionTimer, isFinished, showResult])
+  }, [config?.timerMode, questionTimer, isFinished, showResult])
 
   // 타임어택 타이머
   useEffect(() => {
-    if (timerMode === 'time-attack' && !isFinished) {
+    if (config?.timerMode === 'time-attack' && !isFinished) {
       if (totalTimer <= 0) {
         setIsFinished(true)
         return
@@ -91,7 +117,7 @@ export default function QuizPage() {
 
       return () => clearInterval(timer)
     }
-  }, [timerMode, totalTimer, isFinished])
+  }, [config?.timerMode, totalTimer, isFinished])
 
   const handleAnswerSelect = (answer: string) => {
     if (selectedAnswer || showResult) return
@@ -116,13 +142,14 @@ export default function QuizPage() {
   }
 
   const handleRestart = () => {
-    router.push('/')
+    router.push('/quiz-setup')
   }
 
-  if (questions.length === 0) {
+  // 설정 로딩 중 또는 문제 생성 중
+  if (!config || questions.length === 0) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p>Loading...</p>
+      <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
       </div>
     )
   }
@@ -144,7 +171,7 @@ export default function QuizPage() {
             onClick={handleRestart}
             className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
           >
-            메인으로 돌아가기
+            다시 시작하기
           </button>
         </div>
       </div>
@@ -163,12 +190,12 @@ export default function QuizPage() {
       <div className="w-full max-w-md">
         {/* 타이머 표시 */}
         <div className="mb-4 text-center">
-          {timerMode === 'per-question' && (
+          {config.timerMode === 'per-question' && (
             <div className="text-2xl font-bold text-red-600 dark:text-red-400">
               {questionTimer}초
             </div>
           )}
-          {timerMode === 'time-attack' && (
+          {config.timerMode === 'time-attack' && (
             <div className="text-xl font-bold text-blue-600 dark:text-blue-400">
               남은 시간: {formatTime(totalTimer)}
             </div>
