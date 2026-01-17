@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { hiragana, katakana, KanaType, KanaData } from '@/data/kana'
 import WritingModal from '@/components/WritingModal'
+import { Button } from '@/components/Button'
 
 // romaji를 한글 발음으로 변환하는 맵
 const romajiToKorean: Record<string, string> = {
@@ -104,7 +105,7 @@ export default function StudyPage() {
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black p-4">
       <main className="flex w-full flex-col items-center gap-6 py-8 px-4 max-w-2xl">
         <h1 className="text-3xl font-bold text-black dark:text-white">
-          {kanaType === 'hiragana' ? '히라가나' : '카타카나'} 공부
+          기본 히라가나 / 가타카나 공부
         </h1>
         <p className="text-sm text-zinc-600 dark:text-zinc-400">
           문자를 클릭하면 쓰기 연습을 할 수 있습니다
@@ -112,26 +113,26 @@ export default function StudyPage() {
 
         {/* 가나 타입 선택 */}
         <div className="flex gap-2 w-full max-w-xs">
-          <button
+          <Button
             onClick={() => setKanaType('hiragana')}
             className={`flex-1 py-3 px-4 font-medium rounded-lg transition-colors ${
               kanaType === 'hiragana'
                 ? 'bg-blue-600 text-white'
-                : 'bg-white dark:bg-zinc-800 text-black dark:text-white border border-zinc-300 dark:border-zinc-600'
+                : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
             }`}
           >
             히라가나
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={() => setKanaType('katakana')}
             className={`flex-1 py-3 px-4 font-medium rounded-lg transition-colors ${
               kanaType === 'katakana'
                 ? 'bg-blue-600 text-white'
-                : 'bg-white dark:bg-zinc-800 text-black dark:text-white border border-zinc-300 dark:border-zinc-600'
+                : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
             }`}
           >
             카타카나
-          </button>
+          </Button>
         </div>
 
         {/* 가나 테이블 */}
@@ -158,7 +159,7 @@ export default function StudyPage() {
                     return (
                       <td key={index} className="p-1 text-center">
                         {kana ? (
-                          <button
+                          <Button
                             onClick={() => openWritingModal(kana)}
                             className={`w-12 h-12 sm:w-14 sm:h-14 rounded-lg transition-all flex flex-col items-center justify-center ${
                               activeChar === kana.char
@@ -170,7 +171,7 @@ export default function StudyPage() {
                             <span className="text-[10px] text-zinc-500 dark:text-zinc-400">
                               {romajiToKorean[kana.romaji] || kana.romaji}
                             </span>
-                          </button>
+                          </Button>
                         ) : (
                           <div className="w-12 h-12 sm:w-14 sm:h-14" />
                         )}
@@ -184,12 +185,12 @@ export default function StudyPage() {
         </div>
 
         {/* 뒤로가기 버튼 */}
-        <button
+        <Button
           onClick={() => router.push('/')}
           className="w-full max-w-xs py-3 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors"
         >
           뒤로 가기
-        </button>
+        </Button>
       </main>
 
       {/* 쓰기 연습 모달 */}

@@ -1,6 +1,8 @@
 'use client'
 
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { Button } from './Button'
+import { Icon } from './Icon'
 
 interface StrokeOrderDisplayProps {
   character: string
@@ -345,26 +347,23 @@ export default function StrokeOrderDisplay({
       {/* 컨트롤 버튼 */}
       {mode === 'animation' && (
         <div className="flex gap-2">
-          <button
+          <Button
             onClick={playAnimation}
             disabled={isAnimating}
-            className="flex-1 py-2 px-3 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white text-sm font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
+            size="sm"
+            className="flex-1 py-2 gap-2"
           >
-            <svg
-              className="w-4 h-4"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path d="M8 5v14l11-7z" />
-            </svg>
+            <Icon name="play" size="sm" />
             {isAnimating ? '재생 중...' : '재생'}
-          </button>
-          <button
+          </Button>
+          <Button
             onClick={resetAnimation}
-            className="py-2 px-3 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-black dark:text-white text-sm font-medium rounded-lg transition-colors"
+            variant="secondary"
+            size="sm"
+            className="py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-black dark:text-white"
           >
             초기화
-          </button>
+          </Button>
         </div>
       )}
 
@@ -372,20 +371,7 @@ export default function StrokeOrderDisplay({
       <p className="text-center text-sm text-zinc-500 dark:text-zinc-400">
         총 {strokes.length}획
       </p>
-
-      {/* KanjiVG 출처 */}
-      <p className="text-center text-[10px] text-zinc-400 dark:text-zinc-500">
-        획순 데이터:{' '}
-        <a
-          href="https://kanjivg.tagaini.net/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline hover:text-zinc-600 dark:hover:text-zinc-400"
-        >
-          KanjiVG
-        </a>
-        {' '}(CC BY-SA 3.0)
-      </p>
+      
     </div>
   )
 }

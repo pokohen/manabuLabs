@@ -2,8 +2,19 @@
 
 import { useRef, useEffect, useState, useCallback } from 'react'
 import StrokeOrderDisplay from './StrokeOrderDisplay'
+import { Toggle } from './Toggle'
+import { IconButton } from './IconButton'
+import { Icon } from './Icon'
+import { ToggleGroup } from './ToggleButton'
+import { Button } from './Button'
 
 type TabType = 'write' | 'animation' | 'steps'
+
+const tabOptions: { value: TabType; label: string }[] = [
+  { value: 'write', label: '쓰기 연습' },
+  { value: 'animation', label: '애니메이션' },
+  { value: 'steps', label: '단계별' },
+]
 
 interface StrokeData {
   id: string
@@ -36,6 +47,19 @@ export default function WritingModal({
   const [activeTab, setActiveTab] = useState<TabType>('write')
   const prevIsOpenRef = useRef(false)
   const [guideStrokes, setGuideStrokes] = useState<StrokeData[]>([])
+
+  // 모달 열릴 때 body 스크롤 방지
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   // KanjiVG 가이드 데이터 가져오기
   useEffect(() => {
@@ -169,12 +193,6 @@ export default function WritingModal({
 
   if (!isOpen) return null
 
-  const tabs = [
-    { id: 'write' as TabType, label: '쓰기 연습' },
-    { id: 'animation' as TabType, label: '애니메이션' },
-    { id: 'steps' as TabType, label: '단계별' },
-  ]
-
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
@@ -192,43 +210,18 @@ export default function WritingModal({
               ({reading})
             </span>
           </h2>
-          <button
-            onClick={onClose}
-            className="p-2 rounded-full hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
-            aria-label="닫기"
-          >
-            <svg
-              className="w-6 h-6 text-zinc-500"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+          <IconButton icon="close" label="닫기" size="md" onClick={onClose} />
         </div>
 
         {/* 탭 네비게이션 */}
-        <div className="flex gap-1 p-1 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
-          {tabs.map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex-1 py-2 px-2 text-xs font-medium rounded-md transition-colors ${
-                activeTab === tab.id
-                  ? 'bg-white dark:bg-zinc-700 text-black dark:text-white shadow-sm'
-                  : 'text-zinc-600 dark:text-zinc-400 hover:text-black dark:hover:text-white'
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
+        <ToggleGroup
+          value={activeTab}
+          onChange={setActiveTab}
+          options={tabOptions}
+          variant="tab"
+          size="sm"
+          fullWidth
+        />
 
         {/* 탭 컨텐츠 */}
         {activeTab === 'write' && (
@@ -292,44 +285,30 @@ export default function WritingModal({
             </div>
 
             {/* 가이드 토글 */}
-            <label className="flex items-center gap-2 text-sm text-zinc-600 dark:text-zinc-400 cursor-pointer">
-              <input
-                type="checkbox"
-                checked={showGuide}
-                onChange={(e) => setShowGuide(e.target.checked)}
-                className="w-4 h-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500"
-              />
-              가이드 문자 보기
-            </label>
+            <Toggle
+              checked={showGuide}
+              onChange={setShowGuide}
+              label="가이드 문자 보기"
+            />
 
             {/* 버튼들 */}
             <div className="flex gap-2">
-              <button
+              <Button
                 onClick={clearCanvas}
-                className="flex-1 py-3 px-4 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-black dark:text-white font-medium rounded-lg transition-colors"
+                variant="secondary"
+                className="flex-1 py-3 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-black dark:text-white"
               >
                 지우기
-              </button>
+              </Button>
               {onPlaySound && (
-                <button
+                <Button
                   onClick={onPlaySound}
-                  className="flex-1 py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors flex items-center justify-center gap-2"
+                  variant="primary"
+                  className="flex-1 py-3 gap-2"
                 >
-                  <svg
-                    className="w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"
-                    />
-                  </svg>
+                  <Icon name="speaker" size="md" />
                   발음 듣기
-                </button>
+                </Button>
               )}
             </div>
           </>
@@ -342,6 +321,20 @@ export default function WritingModal({
         {activeTab === 'steps' && (
           <StrokeOrderDisplay character={character} mode="steps" />
         )}
+
+        {/* KanjiVG 출처 */}
+      <p className="text-center text-[10px] text-zinc-400 dark:text-zinc-500">
+        획순 데이터:{' '}
+        <a
+          href="https://kanjivg.tagaini.net/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="underline hover:text-zinc-600 dark:hover:text-zinc-400"
+        >
+          KanjiVG
+        </a>
+        {' '}(CC BY-SA 3.0)
+      </p>
       </div>
     </div>
   )

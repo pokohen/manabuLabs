@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "My Japanese Study",
-  description: "日本語の単語帳 - Japanese vocabulary study app",
+  title: "일본어 공부 앱",
+  description: "일본어 단어를 효과적으로 학습할 수 있는 앱입니다.",
 };
 
 export default function RootLayout({
