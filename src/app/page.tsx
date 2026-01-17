@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation'
 import { Button } from '@/components/Button'
 import { ToggleGroup } from '@/components/ToggleButton'
 import { IconButton } from '@/components/IconButton'
+import type { JLPTLevel, GeminiResponse } from '@/lib/schemas/example-sentence'
 
 type ViewMode = 'menu' | 'example-sentence'
-type JLPTLevel = 'N5' | 'N4' | 'N3' | 'N2' | 'N1'
 
 const jlptOptions: { value: JLPTLevel; label: string }[] = [
   { value: 'N5', label: 'N5' },
@@ -17,24 +17,12 @@ const jlptOptions: { value: JLPTLevel; label: string }[] = [
   { value: 'N1', label: 'N1' },
 ]
 
-interface ExampleSentence {
-  japanese: string
-  reading: string
-  korean: string
-  level: JLPTLevel
-}
-
-interface ExampleResponse {
-  word: string
-  example: ExampleSentence
-}
-
 export default function Home() {
   const router = useRouter()
   const [viewMode, setViewMode] = useState<ViewMode>('menu')
   const [inputWord, setInputWord] = useState('')
   const [jlptLevel, setJlptLevel] = useState<JLPTLevel>('N5')
-  const [exampleResult, setExampleResult] = useState<ExampleResponse | null>(null)
+  const [exampleResult, setExampleResult] = useState<GeminiResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
 
@@ -60,7 +48,7 @@ export default function Home() {
         throw new Error(errorData.error || 'Failed to get examples')
       }
 
-      const data: ExampleResponse = await response.json()
+      const data: GeminiResponse = await response.json()
 
       console.log('Example Response:', data)
       setExampleResult(data)

@@ -1,17 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getGemini } from "@/lib/gemini";
 import { getSupabase } from "@/lib/supabase";
+import {
+  ExampleRequestSchema,
+  GeminiResponseSchema,
+} from "@/lib/schemas/example-sentence";
 
 export async function POST(request: NextRequest) {
   try {
-    const { word, level } = await request.json();
+    const body = await request.json();
 
-    if (!word) {
+    // 요청 검증
+    const parseResult = ExampleRequestSchema.safeParse(body);
+    if (!parseResult.success) {
       return NextResponse.json(
-        { error: "Japanese word is required" },
+        { error: parseResult.error.issues[0].message },
         { status: 400 }
       );
     }
+
+    const { word, level } = parseResult.data;
 
     // 캐시 확인
     const supabase = getSupabase();
@@ -63,7 +71,7 @@ JSON 형식으로만 응답해주세요:
     const response = result.response;
     const text = response.text();
 
-    // JSON 파싱 시도
+    // JSON 파싱
     const jsonMatch = text.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
       return NextResponse.json(
@@ -72,7 +80,19 @@ JSON 형식으로만 응답해주세요:
       );
     }
 
-    const parsedResponse = JSON.parse(jsonMatch[0]);
+    const jsonData = JSON.parse(jsonMatch[0]);
+
+    // Gemini 응답 검증
+    const geminiResult = GeminiResponseSchema.safeParse(jsonData);
+    if (!geminiResult.success) {
+      console.error("Gemini response validation failed:", geminiResult.error);
+      return NextResponse.json(
+        { error: "Invalid response format from AI" },
+        { status: 500 }
+      );
+    }
+
+    const parsedResponse = geminiResult.data;
 
     // 캐시에 저장
     await supabase.from("example_cache").upsert({
