@@ -51,7 +51,7 @@ export default function QuizSetup() {
                     : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
                 }`}
               >
-                카타카나 (ア)
+                가타카나 (ア)
               </Button>
             </div>
           </div>
