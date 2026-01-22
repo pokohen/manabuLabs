@@ -135,10 +135,6 @@ export default function Home() {
               예시 문장 보기
             </Button>
           </div>
-
-          <div className="mt-8 text-center text-sm text-zinc-500 dark:text-zinc-400">
-            <p>Powered by OpenAI and Supabase</p>
-          </div>
         </main>
       </div>
     )
