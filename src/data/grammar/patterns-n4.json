@@ -10,6 +10,26 @@
       "meaning": "~하게 되다 (변화)",
       "formation": "동사 사전형/ない형 + ようになる",
       "explanation": "능력이나 상태의 변화를 나타낸다.",
+      "transformations": [
+        {
+          "original": "話せる",
+          "originalReading": "はなせる",
+          "originalMeaning": "말할 수 있다",
+          "steps": ["話せる", "ようになる"],
+          "result": "話せるようになる",
+          "resultReading": "はなせるようになる",
+          "resultMeaning": "말할 수 있게 되다"
+        },
+        {
+          "original": "食べられる",
+          "originalReading": "たべられる",
+          "originalMeaning": "먹을 수 있다",
+          "steps": ["食べられる", "ようになる"],
+          "result": "食べられるようになる",
+          "resultReading": "たべられるようになる",
+          "resultMeaning": "먹을 수 있게 되다"
+        }
+      ],
       "examples": [
         {
           "japanese": "日本語が話せるようになりました。",
@@ -39,6 +59,26 @@
       "meaning": "~하도록 하다 (노력/습관화)",
       "formation": "동사 사전형/ない형 + ようにする",
       "explanation": "의식적으로 노력하거나 습관을 만들려 함을 나타낸다.",
+      "transformations": [
+        {
+          "original": "運動する",
+          "originalReading": "うんどうする",
+          "originalMeaning": "운동하다",
+          "steps": ["運動する", "ようにする"],
+          "result": "運動するようにする",
+          "resultReading": "うんどうするようにする",
+          "resultMeaning": "운동하도록 하다"
+        },
+        {
+          "original": "遅刻しない",
+          "originalReading": "ちこくしない",
+          "originalMeaning": "지각하지 않다",
+          "steps": ["遅刻しない", "ようにする"],
+          "result": "遅刻しないようにする",
+          "resultReading": "ちこくしないようにする",
+          "resultMeaning": "지각하지 않도록 하다"
+        }
+      ],
       "examples": [
         {
           "japanese": "毎日運動するようにしています。",
@@ -54,6 +94,11 @@
           "japanese": "遅刻しないようにします。",
           "reading": "ちこくしないようにします。",
           "korean": "지각하지 않도록 하겠습니다."
+        },
+        {
+          "japanese": "早く寝るようにしています。",
+          "reading": "はやくねるようにしています。",
+          "korean": "일찍 자도록 하고 있습니다."
         }
       ]
     },
@@ -63,6 +108,26 @@
       "meaning": "~할 수 있다",
       "formation": "동사 사전형 + ことができる",
       "explanation": "가능/능력을 나타낸다. 가능형과 거의 같은 의미.",
+      "transformations": [
+        {
+          "original": "読む",
+          "originalReading": "よむ",
+          "originalMeaning": "읽다",
+          "steps": ["読む", "ことができる"],
+          "result": "読むことができる",
+          "resultReading": "よむことができる",
+          "resultMeaning": "읽을 수 있다"
+        },
+        {
+          "original": "泳ぐ",
+          "originalReading": "およぐ",
+          "originalMeaning": "수영하다",
+          "steps": ["泳ぐ", "ことができる"],
+          "result": "泳ぐことができる",
+          "resultReading": "およぐことができる",
+          "resultMeaning": "수영할 수 있다"
+        }
+      ],
       "examples": [
         {
           "japanese": "漢字を読むことができます。",
@@ -78,9 +143,13 @@
           "japanese": "クレジットカードで払うことができません。",
           "reading": "クレジットカードではらうことができません。",
           "korean": "신용카드로 결제할 수 없습니다."
+        },
+        {
+          "japanese": "日本語を話すことができますか。",
+          "reading": "にほんごをはなすことができますか。",
+          "korean": "일본어를 말할 수 있습니까?"
         }
-      ],
-      "vsPotential": "가능형보다 격식있는 표현. 문어체나 공식적인 상황에서 선호됨."
+      ]
     },
     {
       "id": "sou-da-hearsay",
@@ -88,6 +157,26 @@
       "meaning": "~라고 한다 (전해 들음)",
       "formation": "보통형 + そうだ",
       "explanation": "다른 사람에게 들은 정보를 전달한다.",
+      "transformations": [
+        {
+          "original": "降る",
+          "originalReading": "ふる",
+          "originalMeaning": "내리다",
+          "steps": ["降る", "そうだ"],
+          "result": "降るそうだ",
+          "resultReading": "ふるそうだ",
+          "resultMeaning": "내린다고 한다"
+        },
+        {
+          "original": "おいしい",
+          "originalReading": "おいしい",
+          "originalMeaning": "맛있다",
+          "steps": ["おいしい", "そうだ"],
+          "result": "おいしいそうだ",
+          "resultReading": "おいしいそうだ",
+          "resultMeaning": "맛있다고 한다"
+        }
+      ],
       "examples": [
         {
           "japanese": "明日は雨が降るそうです。",
@@ -103,9 +192,13 @@
           "japanese": "田中さんは病気だそうです。",
           "reading": "たなかさんはびょうきだそうです。",
           "korean": "다나카 씨는 아프다고 합니다."
+        },
+        {
+          "japanese": "ニュースによると、台風が来るそうです。",
+          "reading": "ニュースによると、たいふうがくるそうです。",
+          "korean": "뉴스에 따르면 태풍이 온다고 합니다."
         }
-      ],
-      "notes": ["명사/な형용사: だ + そうだ", "출처를 밝힐 때: ~によると...そうだ"]
+      ]
     },
     {
       "id": "sou-da-appearance",
@@ -113,6 +206,26 @@
       "meaning": "~할 것 같다 / ~해 보인다",
       "formation": "동사 ます형/형용사 어간 + そうだ",
       "explanation": "겉모습으로 판단한 추측을 나타낸다.",
+      "transformations": [
+        {
+          "original": "降る",
+          "originalReading": "ふる",
+          "originalMeaning": "내리다",
+          "steps": ["降り", "そうだ"],
+          "result": "降りそうだ",
+          "resultReading": "ふりそうだ",
+          "resultMeaning": "내릴 것 같다"
+        },
+        {
+          "original": "おいしい",
+          "originalReading": "おいしい",
+          "originalMeaning": "맛있다",
+          "steps": ["おいし", "そうだ"],
+          "result": "おいしそうだ",
+          "resultReading": "おいしそうだ",
+          "resultMeaning": "맛있어 보이다"
+        }
+      ],
       "examples": [
         {
           "japanese": "雨が降りそうです。",
@@ -133,17 +246,17 @@
           "japanese": "この本は難しそうです。",
           "reading": "このほんはむずかしそうです。",
           "korean": "이 책은 어려워 보입니다."
+        },
+        {
+          "japanese": "落ちそうだから気をつけて。",
+          "reading": "おちそうだからきをつけて。",
+          "korean": "떨어질 것 같으니까 조심해."
         }
       ],
       "exceptions": [
         { "original": "いい", "becomes": "よさそう" },
         { "original": "ない", "becomes": "なさそう" }
-      ],
-      "negatives": {
-        "verb": "降らなさそう / 降りそうにない",
-        "iAdj": "おいしくなさそう",
-        "naAdj": "元気じゃなさそう"
-      }
+      ]
     },
     {
       "id": "you-da",
@@ -151,38 +264,72 @@
       "meaning": "~인 것 같다 (추측)",
       "formation": "보통형 + ようだ (명사: のようだ)",
       "explanation": "오감이나 상황에 기반한 추측을 나타낸다.",
+      "transformations": [
+        {
+          "original": "疲れている",
+          "originalReading": "つかれている",
+          "originalMeaning": "피곤하다",
+          "steps": ["疲れている", "ようだ"],
+          "result": "疲れているようだ",
+          "resultReading": "つかれているようだ",
+          "resultMeaning": "피곤한 것 같다"
+        },
+        {
+          "original": "風邪",
+          "originalReading": "かぜ",
+          "originalMeaning": "감기",
+          "steps": ["風邪", "のようだ"],
+          "result": "風邪のようだ",
+          "resultReading": "かぜのようだ",
+          "resultMeaning": "감기인 것 같다"
+        }
+      ],
+      "usages": [
+        {
+          "usage": "추측",
+          "description": "상황이나 오감에 기반한 추측",
+          "examples": [
+            {
+              "japanese": "彼は疲れているようです。",
+              "reading": "かれはつかれているようです。",
+              "korean": "그는 피곤한 것 같습니다."
+            },
+            {
+              "japanese": "誰かが来たようです。",
+              "reading": "だれかがきたようです。",
+              "korean": "누군가 온 것 같습니다."
+            }
+          ]
+        },
+        {
+          "usage": "비유 (~처럼)",
+          "description": "비유적 표현",
+          "examples": [
+            {
+              "japanese": "彼は子供のようです。",
+              "reading": "かれはこどものようです。",
+              "korean": "그는 아이 같습니다."
+            },
+            {
+              "japanese": "夢のような話です。",
+              "reading": "ゆめのようなはなしです。",
+              "korean": "꿈 같은 이야기입니다."
+            }
+          ]
+        }
+      ],
       "examples": [
-        {
-          "japanese": "彼は疲れているようです。",
-          "reading": "かれはつかれているようです。",
-          "korean": "그는 피곤한 것 같습니다."
-        },
-        {
-          "japanese": "誰かが来たようです。",
-          "reading": "だれかがきたようです。",
-          "korean": "누군가 온 것 같습니다."
-        },
         {
           "japanese": "風邪のようです。",
           "reading": "かぜのようです。",
           "korean": "감기인 것 같습니다."
+        },
+        {
+          "japanese": "この部屋は誰もいないようだ。",
+          "reading": "このへやはだれもいないようだ。",
+          "korean": "이 방에는 아무도 없는 것 같다."
         }
-      ],
-      "usageForSimile": {
-        "meaning": "~처럼, ~같이 (비유)",
-        "examples": [
-          {
-            "japanese": "彼は子供のようです。",
-            "reading": "かれはこどものようです。",
-            "korean": "그는 아이 같습니다."
-          },
-          {
-            "japanese": "夢のような話です。",
-            "reading": "ゆめのようなはなしです。",
-            "korean": "꿈 같은 이야기입니다."
-          }
-        ]
-      }
+      ]
     },
     {
       "id": "rashii",
@@ -190,9 +337,30 @@
       "meaning": "~인 것 같다 / ~답다",
       "formation": "보통형 + らしい (명사: 명사 + らしい)",
       "explanation": "정보에 기반한 추측 또는 전형적인 특성을 나타낸다.",
+      "transformations": [
+        {
+          "original": "休み",
+          "originalReading": "やすみ",
+          "originalMeaning": "휴일",
+          "steps": ["休み", "らしい"],
+          "result": "休みらしい",
+          "resultReading": "やすみらしい",
+          "resultMeaning": "휴일인 것 같다"
+        },
+        {
+          "original": "春",
+          "originalReading": "はる",
+          "originalMeaning": "봄",
+          "steps": ["春", "らしい"],
+          "result": "春らしい",
+          "resultReading": "はるらしい",
+          "resultMeaning": "봄다운"
+        }
+      ],
       "usages": [
         {
           "usage": "추측 (전해 들음)",
+          "description": "간접적인 정보에 기반한 추측",
           "examples": [
             {
               "japanese": "明日は休みらしいです。",
@@ -208,6 +376,7 @@
         },
         {
           "usage": "전형적 특성 (~답다)",
+          "description": "그것다운 특성",
           "examples": [
             {
               "japanese": "今日は春らしい天気ですね。",
@@ -234,6 +403,26 @@
       "meaning": "~일지도 모르다",
       "formation": "보통형 + かもしれない",
       "explanation": "불확실한 추측을 나타낸다. (~일 수도 있다)",
+      "transformations": [
+        {
+          "original": "雨",
+          "originalReading": "あめ",
+          "originalMeaning": "비",
+          "steps": ["雨", "かもしれない"],
+          "result": "雨かもしれない",
+          "resultReading": "あめかもしれない",
+          "resultMeaning": "비일지도 모르다"
+        },
+        {
+          "original": "来ない",
+          "originalReading": "こない",
+          "originalMeaning": "안 오다",
+          "steps": ["来ない", "かもしれない"],
+          "result": "来ないかもしれない",
+          "resultReading": "こないかもしれない",
+          "resultMeaning": "안 올지도 모르다"
+        }
+      ],
       "examples": [
         {
           "japanese": "明日は雨かもしれません。",
@@ -249,6 +438,11 @@
           "japanese": "この話は本当かもしれません。",
           "reading": "このはなしはほんとうかもしれません。",
           "korean": "이 이야기는 사실일지도 모릅니다."
+        },
+        {
+          "japanese": "遅れるかもしれないので、先に始めてください。",
+          "reading": "おくれるかもしれないので、さきにはじめてください。",
+          "korean": "늦을지도 모르니까 먼저 시작해 주세요."
         }
       ]
     },
@@ -258,10 +452,30 @@
       "meaning": "~하기 위해 (목적) / ~때문에 (원인)",
       "formation": "동사 사전형/명사の + ために",
       "explanation": "목적이나 원인을 나타낸다.",
+      "transformations": [
+        {
+          "original": "勉強する",
+          "originalReading": "べんきょうする",
+          "originalMeaning": "공부하다",
+          "steps": ["勉強する", "ために"],
+          "result": "勉強するために",
+          "resultReading": "べんきょうするために",
+          "resultMeaning": "공부하기 위해"
+        },
+        {
+          "original": "健康",
+          "originalReading": "けんこう",
+          "originalMeaning": "건강",
+          "steps": ["健康", "のために"],
+          "result": "健康のために",
+          "resultReading": "けんこうのために",
+          "resultMeaning": "건강을 위해"
+        }
+      ],
       "usages": [
         {
           "usage": "목적 (~하기 위해)",
-          "formation": "동사 사전형 + ために",
+          "description": "동작의 목적을 나타냄",
           "examples": [
             {
               "japanese": "日本語を勉強するために日本に来ました。",
@@ -277,7 +491,7 @@
         },
         {
           "usage": "원인 (~때문에)",
-          "formation": "동사 た형/명사の + ために",
+          "description": "원인/이유를 나타냄",
           "examples": [
             {
               "japanese": "事故があったために電車が遅れました。",
@@ -299,6 +513,26 @@
       "meaning": "~인데도, ~하는데도",
       "formation": "보통형 + のに (명사/な형용사: なのに)",
       "explanation": "예상과 다른 결과, 불만, 유감을 나타낸다.",
+      "transformations": [
+        {
+          "original": "勉強した",
+          "originalReading": "べんきょうした",
+          "originalMeaning": "공부했다",
+          "steps": ["勉強した", "のに"],
+          "result": "勉強したのに",
+          "resultReading": "べんきょうしたのに",
+          "resultMeaning": "공부했는데도"
+        },
+        {
+          "original": "日曜日",
+          "originalReading": "にちようび",
+          "originalMeaning": "일요일",
+          "steps": ["日曜日", "なのに"],
+          "result": "日曜日なのに",
+          "resultReading": "にちようびなのに",
+          "resultMeaning": "일요일인데도"
+        }
+      ],
       "examples": [
         {
           "japanese": "勉強したのに、テストに落ちました。",
@@ -320,8 +554,7 @@
           "reading": "にちようびなのに、しごとがあります。",
           "korean": "일요일인데도 일이 있습니다."
         }
-      ],
-      "vsKedo": "けど는 단순한 역접, のに는 유감/불만의 뉘앙스"
+      ]
     },
     {
       "id": "ba-yokatta",
@@ -329,6 +562,26 @@
       "meaning": "~했으면 좋았을 텐데 (후회)",
       "formation": "동사 ば형 + よかった",
       "explanation": "과거에 하지 않은 것에 대한 후회를 나타낸다.",
+      "transformations": [
+        {
+          "original": "勉強する",
+          "originalReading": "べんきょうする",
+          "originalMeaning": "공부하다",
+          "steps": ["勉強すれば", "よかった"],
+          "result": "勉強すればよかった",
+          "resultReading": "べんきょうすればよかった",
+          "resultMeaning": "공부했으면 좋았을 텐데"
+        },
+        {
+          "original": "持ってくる",
+          "originalReading": "もってくる",
+          "originalMeaning": "가져오다",
+          "steps": ["持ってくれば", "よかった"],
+          "result": "持ってくればよかった",
+          "resultReading": "もってくればよかった",
+          "resultMeaning": "가져왔으면 좋았을 텐데"
+        }
+      ],
       "examples": [
         {
           "japanese": "もっと勉強すればよかったです。",
@@ -344,17 +597,13 @@
           "japanese": "あの映画を見ればよかったです。",
           "reading": "あのえいがをみればよかったです。",
           "korean": "그 영화를 봤으면 좋았을 텐데."
-        }
-      ],
-      "negative": {
-        "pattern": "~なければよかった",
-        "meaning": "~하지 않았으면 좋았을 텐데",
-        "example": {
+        },
+        {
           "japanese": "あんなこと言わなければよかった。",
           "reading": "あんなこといわなければよかった。",
           "korean": "그런 말 하지 않았으면 좋았을 텐데."
         }
-      }
+      ]
     },
     {
       "id": "sasete-kudasai",
@@ -362,6 +611,26 @@
       "meaning": "~하게 해 주세요",
       "formation": "동사 사역형 + てください",
       "explanation": "허락을 구하거나 자신이 하겠다는 의지를 나타낸다.",
+      "transformations": [
+        {
+          "original": "説明する",
+          "originalReading": "せつめいする",
+          "originalMeaning": "설명하다",
+          "steps": ["説明させて", "ください"],
+          "result": "説明させてください",
+          "resultReading": "せつめいさせてください",
+          "resultMeaning": "설명하게 해 주세요"
+        },
+        {
+          "original": "考える",
+          "originalReading": "かんがえる",
+          "originalMeaning": "생각하다",
+          "steps": ["考えさせて", "ください"],
+          "result": "考えさせてください",
+          "resultReading": "かんがえさせてください",
+          "resultMeaning": "생각하게 해 주세요"
+        }
+      ],
       "examples": [
         {
           "japanese": "私に説明させてください。",
@@ -377,9 +646,13 @@
           "japanese": "一人で行かせてください。",
           "reading": "ひとりでいかせてください。",
           "korean": "혼자 가게 해 주세요."
+        },
+        {
+          "japanese": "自己紹介させてください。",
+          "reading": "じこしょうかいさせてください。",
+          "korean": "자기소개 하게 해 주세요."
         }
-      ],
-      "morePolite": "~させていただけませんか"
+      ]
     },
     {
       "id": "te-morau",
@@ -387,26 +660,47 @@
       "meaning": "~해 받다",
       "formation": "동사 て형 + もらう/いただく",
       "explanation": "남에게서 은혜를 받음을 나타낸다.",
+      "transformations": [
+        {
+          "original": "手伝う",
+          "originalReading": "てつだう",
+          "originalMeaning": "돕다",
+          "steps": ["手伝って", "もらう"],
+          "result": "手伝ってもらう",
+          "resultReading": "てつだってもらう",
+          "resultMeaning": "도움을 받다"
+        },
+        {
+          "original": "教える",
+          "originalReading": "おしえる",
+          "originalMeaning": "가르치다",
+          "steps": ["教えて", "いただく"],
+          "result": "教えていただく",
+          "resultReading": "おしえていただく",
+          "resultMeaning": "가르침을 받다 (존경)"
+        }
+      ],
       "examples": [
         {
           "japanese": "友達に手伝ってもらいました。",
           "reading": "ともだちにてつだってもらいました。",
-          "korean": "친구에게 도와 받았습니다."
+          "korean": "친구에게 도움을 받았습니다."
         },
         {
           "japanese": "先生に教えていただきました。",
           "reading": "せんせいにおしえていただきました。",
-          "korean": "선생님께 가르쳐 주셨습니다."
+          "korean": "선생님께 가르침을 받았습니다."
         },
         {
           "japanese": "母に料理を作ってもらいました。",
           "reading": "ははにりょうりをつくってもらいました。",
           "korean": "엄마에게 요리를 해 받았습니다."
+        },
+        {
+          "japanese": "駅まで送ってもらえますか。",
+          "reading": "えきまでおくってもらえますか。",
+          "korean": "역까지 데려다 주실 수 있어요?"
         }
-      ],
-      "relatedPatterns": [
-        "~てくれる: 남이 나에게 해 주다",
-        "~てあげる: 내가 남에게 해 주다"
       ]
     },
     {
@@ -415,6 +709,26 @@
       "meaning": "~해 두다 (준비/방치)",
       "formation": "동사 て형 + おく",
       "explanation": "미리 준비하거나 그 상태를 유지함을 나타낸다.",
+      "transformations": [
+        {
+          "original": "予約する",
+          "originalReading": "よやくする",
+          "originalMeaning": "예약하다",
+          "steps": ["予約して", "おく"],
+          "result": "予約しておく",
+          "resultReading": "よやくしておく",
+          "resultMeaning": "예약해 두다"
+        },
+        {
+          "original": "開ける",
+          "originalReading": "あける",
+          "originalMeaning": "열다",
+          "steps": ["開けて", "おく"],
+          "result": "開けておく",
+          "resultReading": "あけておく",
+          "resultMeaning": "열어 두다"
+        }
+      ],
       "examples": [
         {
           "japanese": "旅行の前にホテルを予約しておきます。",
@@ -430,9 +744,13 @@
           "japanese": "明日のために早く寝ておきます。",
           "reading": "あしたのためにはやくねておきます。",
           "korean": "내일을 위해 일찍 자 둡니다."
+        },
+        {
+          "japanese": "資料を準備しておきました。",
+          "reading": "しりょうをじゅんびしておきました。",
+          "korean": "자료를 준비해 두었습니다."
         }
-      ],
-      "casual": "~とく (開けておく → 開けとく)"
+      ]
     },
     {
       "id": "te-shimau",
@@ -440,6 +758,26 @@
       "meaning": "~해 버리다 (완료/유감)",
       "formation": "동사 て형 + しまう",
       "explanation": "완료, 유감, 후회를 나타낸다.",
+      "transformations": [
+        {
+          "original": "やる",
+          "originalReading": "やる",
+          "originalMeaning": "하다",
+          "steps": ["やって", "しまう"],
+          "result": "やってしまう",
+          "resultReading": "やってしまう",
+          "resultMeaning": "해 버리다"
+        },
+        {
+          "original": "なくす",
+          "originalReading": "なくす",
+          "originalMeaning": "잃어버리다",
+          "steps": ["なくして", "しまう"],
+          "result": "なくしてしまう",
+          "resultReading": "なくしてしまう",
+          "resultMeaning": "잃어버리다"
+        }
+      ],
       "examples": [
         {
           "japanese": "宿題を全部やってしまいました。",
@@ -455,6 +793,11 @@
           "japanese": "ケーキを全部食べてしまった。",
           "reading": "ケーキをぜんぶたべてしまった。",
           "korean": "케이크를 전부 먹어 버렸다."
+        },
+        {
+          "japanese": "電車に乗り遅れてしまいました。",
+          "reading": "でんしゃにのりおくれてしまいました。",
+          "korean": "전철에 놓쳐 버렸습니다."
         }
       ],
       "casual": "~ちゃう/~じゃう (食べてしまう → 食べちゃう)"
@@ -465,6 +808,26 @@
       "meaning": "~해 보다 (시도)",
       "formation": "동사 て형 + みる",
       "explanation": "시험 삼아 해 봄을 나타낸다.",
+      "transformations": [
+        {
+          "original": "着る",
+          "originalReading": "きる",
+          "originalMeaning": "입다",
+          "steps": ["着て", "みる"],
+          "result": "着てみる",
+          "resultReading": "きてみる",
+          "resultMeaning": "입어 보다"
+        },
+        {
+          "original": "行く",
+          "originalReading": "いく",
+          "originalMeaning": "가다",
+          "steps": ["行って", "みる"],
+          "result": "行ってみる",
+          "resultReading": "いってみる",
+          "resultMeaning": "가 보다"
+        }
+      ],
       "examples": [
         {
           "japanese": "この服を着てみてもいいですか。",
@@ -480,6 +843,11 @@
           "japanese": "新しいレストランに行ってみました。",
           "reading": "あたらしいレストランにいってみました。",
           "korean": "새 레스토랑에 가 봤습니다."
+        },
+        {
+          "japanese": "このアプリを使ってみてください。",
+          "reading": "このアプリをつかってみてください。",
+          "korean": "이 앱을 사용해 보세요."
         }
       ]
     },
@@ -489,10 +857,30 @@
       "meaning": "막 ~하려는/~하고 있는/~한 참이다",
       "formation": "동사 사전형/ている/た형 + ところ",
       "explanation": "동작의 단계를 나타낸다.",
+      "transformations": [
+        {
+          "original": "出かける",
+          "originalReading": "でかける",
+          "originalMeaning": "외출하다",
+          "steps": ["出かける", "ところ"],
+          "result": "出かけるところ",
+          "resultReading": "でかけるところ",
+          "resultMeaning": "막 나가려는 참"
+        },
+        {
+          "original": "帰ってきた",
+          "originalReading": "かえってきた",
+          "originalMeaning": "돌아왔다",
+          "steps": ["帰ってきた", "ところ"],
+          "result": "帰ってきたところ",
+          "resultReading": "かえってきたところ",
+          "resultMeaning": "막 돌아온 참"
+        }
+      ],
       "usages": [
         {
           "usage": "직전 (~하려던 참)",
-          "formation": "동사 사전형 + ところ",
+          "description": "동작 직전의 상태",
           "example": {
             "japanese": "今から出かけるところです。",
             "reading": "いまからでかけるところです。",
@@ -501,7 +889,7 @@
         },
         {
           "usage": "진행 중 (~하고 있는 중)",
-          "formation": "동사 ている + ところ",
+          "description": "동작 진행 중",
           "example": {
             "japanese": "今、食事をしているところです。",
             "reading": "いま、しょくじをしているところです。",
@@ -510,12 +898,24 @@
         },
         {
           "usage": "직후 (막 ~한 참)",
-          "formation": "동사 た형 + ところ",
+          "description": "동작 직후의 상태",
           "example": {
             "japanese": "今、帰ってきたところです。",
             "reading": "いま、かえってきたところです。",
             "korean": "지금 막 돌아온 참입니다."
           }
+        }
+      ],
+      "examples": [
+        {
+          "japanese": "ちょうど電話しようとしていたところです。",
+          "reading": "ちょうどでんわしようとしていたところです。",
+          "korean": "마침 전화하려던 참이었습니다."
+        },
+        {
+          "japanese": "仕事が終わったところです。",
+          "reading": "しごとがおわったところです。",
+          "korean": "일이 막 끝난 참입니다."
         }
       ]
     },
@@ -525,6 +925,26 @@
       "meaning": "~할 때",
       "formation": "보통형 + とき",
       "explanation": "시간/상황을 나타낸다.",
+      "transformations": [
+        {
+          "original": "行く",
+          "originalReading": "いく",
+          "originalMeaning": "가다",
+          "steps": ["行く", "とき"],
+          "result": "行くとき",
+          "resultReading": "いくとき",
+          "resultMeaning": "갈 때"
+        },
+        {
+          "original": "若い",
+          "originalReading": "わかい",
+          "originalMeaning": "젊다",
+          "steps": ["若い", "とき"],
+          "result": "若いとき",
+          "resultReading": "わかいとき",
+          "resultMeaning": "젊을 때"
+        }
+      ],
       "examples": [
         {
           "japanese": "日本に行くとき、パスポートが必要です。",
@@ -546,8 +966,7 @@
           "reading": "ひまなとき、あそびにきてください。",
           "korean": "한가할 때 놀러 오세요."
         }
-      ],
-      "tenseNote": "사전형: 아직 안 한 동작 / た형: 이미 한 동작"
+      ]
     },
     {
       "id": "nara",
@@ -555,6 +974,26 @@
       "meaning": "~라면, ~이라면",
       "formation": "보통형 + なら (명사/な형용사: だ 생략)",
       "explanation": "가정이나 조건을 나타낸다.",
+      "transformations": [
+        {
+          "original": "行く",
+          "originalReading": "いく",
+          "originalMeaning": "가다",
+          "steps": ["行く", "なら"],
+          "result": "行くなら",
+          "resultReading": "いくなら",
+          "resultMeaning": "간다면"
+        },
+        {
+          "original": "暇",
+          "originalReading": "ひま",
+          "originalMeaning": "한가하다",
+          "steps": ["暇", "なら"],
+          "result": "暇なら",
+          "resultReading": "ひまなら",
+          "resultMeaning": "한가하다면"
+        }
+      ],
       "examples": [
         {
           "japanese": "日本に行くなら、京都に行ってください。",
@@ -570,13 +1009,13 @@
           "japanese": "雨なら、家にいます。",
           "reading": "あめなら、いえにいます。",
           "korean": "비라면 집에 있겠습니다."
+        },
+        {
+          "japanese": "安いなら買います。",
+          "reading": "やすいならかいます。",
+          "korean": "싸다면 사겠습니다."
         }
-      ],
-      "vsOtherConditionals": {
-        "ば": "일반적 가정 (조건 충족시 결과)",
-        "たら": "개별적 상황 (때/만약)",
-        "なら": "상대방 말/상황을 받아서 조언/의견"
-      }
+      ]
     },
     {
       "id": "te-ageru-kureru",
@@ -584,6 +1023,26 @@
       "meaning": "수수 표현 (주고받기)",
       "formation": "동사 て형 + あげる/くれる/もらう",
       "explanation": "은혜의 수수 관계를 나타내는 표현",
+      "transformations": [
+        {
+          "original": "貸す",
+          "originalReading": "かす",
+          "originalMeaning": "빌려주다",
+          "steps": ["貸して", "あげる"],
+          "result": "貸してあげる",
+          "resultReading": "かしてあげる",
+          "resultMeaning": "빌려 주다"
+        },
+        {
+          "original": "手伝う",
+          "originalReading": "てつだう",
+          "originalMeaning": "돕다",
+          "steps": ["手伝って", "くれる"],
+          "result": "手伝ってくれる",
+          "resultReading": "てつだってくれる",
+          "resultMeaning": "도와 주다"
+        }
+      ],
       "usages": [
         {
           "pattern": "~てあげる",
@@ -613,11 +1072,18 @@
           }
         }
       ],
-      "politeVersions": {
-        "あげる": "さしあげる",
-        "くれる": "くださる",
-        "もらう": "いただく"
-      }
+      "examples": [
+        {
+          "japanese": "弟に宿題を教えてあげました。",
+          "reading": "おとうとにしゅくだいをおしえてあげました。",
+          "korean": "동생에게 숙제를 가르쳐 주었습니다."
+        },
+        {
+          "japanese": "母が朝ごはんを作ってくれました。",
+          "reading": "ははがあさごはんをつくってくれました。",
+          "korean": "어머니가 아침밥을 만들어 주셨습니다."
+        }
+      ]
     },
     {
       "id": "you-to-omou",
@@ -625,6 +1091,26 @@
       "meaning": "~하려고 생각하다",
       "formation": "동사 의지형 + とおもう",
       "explanation": "의지나 계획을 나타낸다.",
+      "transformations": [
+        {
+          "original": "行く",
+          "originalReading": "いく",
+          "originalMeaning": "가다",
+          "steps": ["行こう", "と思う"],
+          "result": "行こうと思う",
+          "resultReading": "いこうとおもう",
+          "resultMeaning": "가려고 생각하다"
+        },
+        {
+          "original": "始める",
+          "originalReading": "はじめる",
+          "originalMeaning": "시작하다",
+          "steps": ["始めよう", "と思う"],
+          "result": "始めようと思う",
+          "resultReading": "はじめようとおもう",
+          "resultMeaning": "시작하려고 생각하다"
+        }
+      ],
       "examples": [
         {
           "japanese": "来年、日本に行こうと思っています。",
@@ -640,9 +1126,13 @@
           "japanese": "ダイエットを始めようと思っています。",
           "reading": "ダイエットをはじめようとおもっています。",
           "korean": "다이어트를 시작하려고 생각하고 있습니다."
+        },
+        {
+          "japanese": "今日は早く寝ようと思います。",
+          "reading": "きょうははやくねようとおもいます。",
+          "korean": "오늘은 일찍 자려고 합니다."
         }
-      ],
-      "vsTsumori": "~つもり는 확정된 계획, ~ようと思う는 생각 중인 계획"
+      ]
     },
     {
       "id": "shi",
@@ -650,6 +1140,26 @@
       "meaning": "~하고, ~(하)기도 하고 (이유 나열)",
       "formation": "보통형 + し",
       "explanation": "복수의 이유나 특징을 나열한다.",
+      "transformations": [
+        {
+          "original": "安い",
+          "originalReading": "やすい",
+          "originalMeaning": "싸다",
+          "steps": ["安い", "し"],
+          "result": "安いし",
+          "resultReading": "やすいし",
+          "resultMeaning": "싸기도 하고"
+        },
+        {
+          "original": "おいしい",
+          "originalReading": "おいしい",
+          "originalMeaning": "맛있다",
+          "steps": ["おいしい", "し"],
+          "result": "おいしいし",
+          "resultReading": "おいしいし",
+          "resultMeaning": "맛있기도 하고"
+        }
+      ],
       "examples": [
         {
           "japanese": "この店は安いし、おいしいし、よく来ます。",
@@ -665,6 +1175,11 @@
           "japanese": "彼は頭もいいし、優しいし、人気があります。",
           "reading": "かれはあたまもいいし、やさしいし、にんきがあります。",
           "korean": "그는 머리도 좋고, 친절하기도 하고, 인기가 있습니다."
+        },
+        {
+          "japanese": "今日は天気もいいし、散歩しましょう。",
+          "reading": "きょうはてんきもいいし、さんぽしましょう。",
+          "korean": "오늘은 날씨도 좋고, 산책합시다."
         }
       ]
     },
@@ -674,6 +1189,26 @@
       "meaning": "~이므로, ~이기 때문에",
       "formation": "보통형 + ので (명사/な형용사: なので)",
       "explanation": "이유/원인을 나타낸다. から보다 객관적이고 정중함.",
+      "transformations": [
+        {
+          "original": "遅れた",
+          "originalReading": "おくれた",
+          "originalMeaning": "늦었다",
+          "steps": ["遅れた", "ので"],
+          "result": "遅れたので",
+          "resultReading": "おくれたので",
+          "resultMeaning": "늦어서"
+        },
+        {
+          "original": "休み",
+          "originalReading": "やすみ",
+          "originalMeaning": "쉬는 날",
+          "steps": ["休み", "なので"],
+          "result": "休みなので",
+          "resultReading": "やすみなので",
+          "resultMeaning": "쉬는 날이므로"
+        }
+      ],
       "examples": [
         {
           "japanese": "電車が遅れたので、遅刻しました。",
@@ -689,9 +1224,13 @@
           "japanese": "明日は休みなので、ゆっくり寝ます。",
           "reading": "あしたはやすみなので、ゆっくりねます。",
           "korean": "내일은 쉬는 날이므로 푹 자겠습니다."
+        },
+        {
+          "japanese": "雨が降っているので、傘を持っていきます。",
+          "reading": "あめがふっているので、かさをもっていきます。",
+          "korean": "비가 오고 있어서 우산을 가져갑니다."
         }
-      ],
-      "vsKara": "から: 주관적, 구어적 / ので: 객관적, 정중"
+      ]
     }
   ]
 }

@@ -10,11 +10,47 @@
       "meaning": "~하고 싶다",
       "formation": "동사 ます형 + たい",
       "explanation": "화자의 희망/욕구를 나타낸다. 1인칭에만 사용.",
+      "transformations": [
+        {
+          "original": "食べる",
+          "originalReading": "たべる",
+          "originalMeaning": "먹다",
+          "steps": ["食べ", "たい"],
+          "result": "食べたい",
+          "resultReading": "たべたい",
+          "resultMeaning": "먹고 싶다"
+        },
+        {
+          "original": "行く",
+          "originalReading": "いく",
+          "originalMeaning": "가다",
+          "steps": ["行き", "たい"],
+          "result": "行きたい",
+          "resultReading": "いきたい",
+          "resultMeaning": "가고 싶다"
+        }
+      ],
       "conjugation": {
-        "present": "食べたい (먹고 싶다)",
-        "negative": "食べたくない (먹고 싶지 않다)",
-        "past": "食べたかった (먹고 싶었다)",
-        "pastNegative": "食べたくなかった (먹고 싶지 않았다)"
+        "present": {
+          "japanese": "食べたい",
+          "reading": "たべたい",
+          "korean": "먹고 싶다"
+        },
+        "negative": {
+          "japanese": "食べたくない",
+          "reading": "たべたくない",
+          "korean": "먹고 싶지 않다"
+        },
+        "past": {
+          "japanese": "食べたかった",
+          "reading": "たべたかった",
+          "korean": "먹고 싶었다"
+        },
+        "pastNegative": {
+          "japanese": "食べたくなかった",
+          "reading": "たべたくなかった",
+          "korean": "먹고 싶지 않았다"
+        }
       },
       "examples": [
         {
@@ -44,6 +80,26 @@
       "meaning": "~하고 있다 / ~해 있다",
       "formation": "동사 て형 + いる",
       "explanation": "진행, 상태, 습관, 결과의 지속을 나타낸다.",
+      "transformations": [
+        {
+          "original": "食べる",
+          "originalReading": "たべる",
+          "originalMeaning": "먹다",
+          "steps": ["食べて", "いる"],
+          "result": "食べている",
+          "resultReading": "たべている",
+          "resultMeaning": "먹고 있다"
+        },
+        {
+          "original": "読む",
+          "originalReading": "よむ",
+          "originalMeaning": "읽다",
+          "steps": ["読んで", "いる"],
+          "result": "読んでいる",
+          "resultReading": "よんでいる",
+          "resultMeaning": "읽고 있다"
+        }
+      ],
       "usages": [
         {
           "usage": "진행",
@@ -106,6 +162,26 @@
       "meaning": "~해 주세요",
       "formation": "동사 て형 + ください",
       "explanation": "정중한 부탁/요청을 나타낸다.",
+      "transformations": [
+        {
+          "original": "書く",
+          "originalReading": "かく",
+          "originalMeaning": "쓰다",
+          "steps": ["書いて", "ください"],
+          "result": "書いてください",
+          "resultReading": "かいてください",
+          "resultMeaning": "써 주세요"
+        },
+        {
+          "original": "待つ",
+          "originalReading": "まつ",
+          "originalMeaning": "기다리다",
+          "steps": ["待って", "ください"],
+          "result": "待ってください",
+          "resultReading": "まってください",
+          "resultMeaning": "기다려 주세요"
+        }
+      ],
       "examples": [
         {
           "japanese": "ここに名前を書いてください。",
@@ -137,6 +213,26 @@
       "meaning": "~하지 말아 주세요",
       "formation": "동사 ない형 + でください",
       "explanation": "정중하게 금지를 요청한다.",
+      "transformations": [
+        {
+          "original": "撮る",
+          "originalReading": "とる",
+          "originalMeaning": "찍다",
+          "steps": ["撮らない", "でください"],
+          "result": "撮らないでください",
+          "resultReading": "とらないでください",
+          "resultMeaning": "찍지 말아 주세요"
+        },
+        {
+          "original": "心配する",
+          "originalReading": "しんぱいする",
+          "originalMeaning": "걱정하다",
+          "steps": ["心配しない", "でください"],
+          "result": "心配しないでください",
+          "resultReading": "しんぱいしないでください",
+          "resultMeaning": "걱정하지 말아 주세요"
+        }
+      ],
       "examples": [
         {
           "japanese": "ここで写真を撮らないでください。",
@@ -161,6 +257,26 @@
       "meaning": "~해도 된다",
       "formation": "동사 て형 + もいい",
       "explanation": "허가를 나타낸다.",
+      "transformations": [
+        {
+          "original": "座る",
+          "originalReading": "すわる",
+          "originalMeaning": "앉다",
+          "steps": ["座って", "もいい"],
+          "result": "座ってもいい",
+          "resultReading": "すわってもいい",
+          "resultMeaning": "앉아도 된다"
+        },
+        {
+          "original": "開ける",
+          "originalReading": "あける",
+          "originalMeaning": "열다",
+          "steps": ["開けて", "もいい"],
+          "result": "開けてもいい",
+          "resultReading": "あけてもいい",
+          "resultMeaning": "열어도 된다"
+        }
+      ],
       "examples": [
         {
           "japanese": "ここに座ってもいいですか。",
@@ -189,6 +305,26 @@
       "meaning": "~하면 안 된다",
       "formation": "동사 て형 + はいけない/はだめ",
       "explanation": "금지를 나타낸다.",
+      "transformations": [
+        {
+          "original": "食べる",
+          "originalReading": "たべる",
+          "originalMeaning": "먹다",
+          "steps": ["食べて", "はいけない"],
+          "result": "食べてはいけない",
+          "resultReading": "たべてはいけない",
+          "resultMeaning": "먹으면 안 된다"
+        },
+        {
+          "original": "吸う",
+          "originalReading": "すう",
+          "originalMeaning": "피우다",
+          "steps": ["吸って", "はだめ"],
+          "result": "吸ってはだめ",
+          "resultReading": "すってはだめ",
+          "resultMeaning": "피우면 안 돼"
+        }
+      ],
       "examples": [
         {
           "japanese": "ここで食べてはいけません。",
@@ -214,6 +350,26 @@
       "meaning": "~한 적이 있다",
       "formation": "동사 た형 + ことがある",
       "explanation": "과거의 경험을 나타낸다.",
+      "transformations": [
+        {
+          "original": "行く",
+          "originalReading": "いく",
+          "originalMeaning": "가다",
+          "steps": ["行った", "ことがある"],
+          "result": "行ったことがある",
+          "resultReading": "いったことがある",
+          "resultMeaning": "간 적이 있다"
+        },
+        {
+          "original": "食べる",
+          "originalReading": "たべる",
+          "originalMeaning": "먹다",
+          "steps": ["食べた", "ことがある"],
+          "result": "食べたことがある",
+          "resultReading": "たべたことがある",
+          "resultMeaning": "먹은 적이 있다"
+        }
+      ],
       "examples": [
         {
           "japanese": "日本に行ったことがあります。",
@@ -239,6 +395,26 @@
       "meaning": "~할 생각이다/예정이다",
       "formation": "동사 사전형/ない형 + つもり",
       "explanation": "의지나 계획을 나타낸다.",
+      "transformations": [
+        {
+          "original": "行く",
+          "originalReading": "いく",
+          "originalMeaning": "가다",
+          "steps": ["行く", "つもり"],
+          "result": "行くつもり",
+          "resultReading": "いくつもり",
+          "resultMeaning": "갈 생각이다"
+        },
+        {
+          "original": "飲む",
+          "originalReading": "のむ",
+          "originalMeaning": "마시다",
+          "steps": ["飲まない", "つもり"],
+          "result": "飲まないつもり",
+          "resultReading": "のまないつもり",
+          "resultMeaning": "안 마실 생각이다"
+        }
+      ],
       "examples": [
         {
           "japanese": "来年、日本に行くつもりです。",
@@ -263,6 +439,26 @@
       "meaning": "~하기 전에",
       "formation": "동사 사전형 + まえに / 명사 + のまえに",
       "explanation": "시간적으로 앞선 행동을 나타낸다.",
+      "transformations": [
+        {
+          "original": "寝る",
+          "originalReading": "ねる",
+          "originalMeaning": "자다",
+          "steps": ["寝る", "前に"],
+          "result": "寝る前に",
+          "resultReading": "ねるまえに",
+          "resultMeaning": "자기 전에"
+        },
+        {
+          "original": "食事",
+          "originalReading": "しょくじ",
+          "originalMeaning": "식사",
+          "steps": ["食事", "の前に"],
+          "result": "食事の前に",
+          "resultReading": "しょくじのまえに",
+          "resultMeaning": "식사 전에"
+        }
+      ],
       "examples": [
         {
           "japanese": "寝る前に歯を磨きます。",
@@ -287,6 +483,26 @@
       "meaning": "~한 후에",
       "formation": "동사 た형 + あとで / 명사 + のあとで",
       "explanation": "시간적으로 뒤따르는 행동을 나타낸다.",
+      "transformations": [
+        {
+          "original": "食べる",
+          "originalReading": "たべる",
+          "originalMeaning": "먹다",
+          "steps": ["食べた", "後で"],
+          "result": "食べた後で",
+          "resultReading": "たべたあとで",
+          "resultMeaning": "먹은 후에"
+        },
+        {
+          "original": "授業",
+          "originalReading": "じゅぎょう",
+          "originalMeaning": "수업",
+          "steps": ["授業", "の後で"],
+          "result": "授業の後で",
+          "resultReading": "じゅぎょうのあとで",
+          "resultMeaning": "수업 후에"
+        }
+      ],
       "examples": [
         {
           "japanese": "ご飯を食べた後で、散歩します。",
@@ -311,6 +527,26 @@
       "meaning": "~하고 나서",
       "formation": "동사 て형 + から",
       "explanation": "순서를 강조하며 뒤따르는 행동을 나타낸다.",
+      "transformations": [
+        {
+          "original": "洗う",
+          "originalReading": "あらう",
+          "originalMeaning": "씻다",
+          "steps": ["洗って", "から"],
+          "result": "洗ってから",
+          "resultReading": "あらってから",
+          "resultMeaning": "씻고 나서"
+        },
+        {
+          "original": "する",
+          "originalReading": "する",
+          "originalMeaning": "하다",
+          "steps": ["して", "から"],
+          "result": "してから",
+          "resultReading": "してから",
+          "resultMeaning": "하고 나서"
+        }
+      ],
       "examples": [
         {
           "japanese": "手を洗ってから、食べてください。",
@@ -336,6 +572,26 @@
       "meaning": "~하면서",
       "formation": "동사 ます형 + ながら",
       "explanation": "두 가지 동작을 동시에 함을 나타낸다.",
+      "transformations": [
+        {
+          "original": "聞く",
+          "originalReading": "きく",
+          "originalMeaning": "듣다",
+          "steps": ["聞き", "ながら"],
+          "result": "聞きながら",
+          "resultReading": "ききながら",
+          "resultMeaning": "들으면서"
+        },
+        {
+          "original": "歩く",
+          "originalReading": "あるく",
+          "originalMeaning": "걷다",
+          "steps": ["歩き", "ながら"],
+          "result": "歩きながら",
+          "resultReading": "あるきながら",
+          "resultMeaning": "걸으면서"
+        }
+      ],
       "examples": [
         {
           "japanese": "音楽を聞きながら勉強します。",
@@ -361,6 +617,26 @@
       "meaning": "~하러 가다/오다/돌아가다",
       "formation": "동사 ます형 + に行く/来る/帰る",
       "explanation": "이동의 목적을 나타낸다.",
+      "transformations": [
+        {
+          "original": "見る",
+          "originalReading": "みる",
+          "originalMeaning": "보다",
+          "steps": ["見", "に行く"],
+          "result": "見に行く",
+          "resultReading": "みにいく",
+          "resultMeaning": "보러 가다"
+        },
+        {
+          "original": "遊ぶ",
+          "originalReading": "あそぶ",
+          "originalMeaning": "놀다",
+          "steps": ["遊び", "に来る"],
+          "result": "遊びに来る",
+          "resultReading": "あそびにくる",
+          "resultMeaning": "놀러 오다"
+        }
+      ],
       "examples": [
         {
           "japanese": "映画を見に行きます。",
@@ -385,6 +661,26 @@
       "meaning": "~하는 게 좋다",
       "formation": "동사 た형/ない형 + ほうがいい",
       "explanation": "충고나 제안을 나타낸다.",
+      "transformations": [
+        {
+          "original": "寝る",
+          "originalReading": "ねる",
+          "originalMeaning": "자다",
+          "steps": ["寝た", "ほうがいい"],
+          "result": "寝たほうがいい",
+          "resultReading": "ねたほうがいい",
+          "resultMeaning": "자는 게 좋다"
+        },
+        {
+          "original": "食べる",
+          "originalReading": "たべる",
+          "originalMeaning": "먹다",
+          "steps": ["食べない", "ほうがいい"],
+          "result": "食べないほうがいい",
+          "resultReading": "たべないほうがいい",
+          "resultMeaning": "안 먹는 게 좋다"
+        }
+      ],
       "examples": [
         {
           "japanese": "早く寝たほうがいいですよ。",
@@ -413,6 +709,26 @@
       "meaning": "~하는 것을 잘하다/못하다/좋아하다/싫어하다",
       "formation": "동사 사전형 + のが + 형용사",
       "explanation": "동사를 명사화하여 능력이나 취향을 나타낸다.",
+      "transformations": [
+        {
+          "original": "作る",
+          "originalReading": "つくる",
+          "originalMeaning": "만들다",
+          "steps": ["作る", "のが上手"],
+          "result": "作るのが上手",
+          "resultReading": "つくるのがじょうず",
+          "resultMeaning": "만드는 것을 잘하다"
+        },
+        {
+          "original": "歌う",
+          "originalReading": "うたう",
+          "originalMeaning": "부르다",
+          "steps": ["歌う", "のが好き"],
+          "result": "歌うのが好き",
+          "resultReading": "うたうのがすき",
+          "resultMeaning": "부르는 것을 좋아하다"
+        }
+      ],
       "examples": [
         {
           "japanese": "料理を作るのが上手です。",
@@ -437,6 +753,26 @@
       "meaning": "~하는 것은 ~하다",
       "formation": "동사 사전형 + のは + 형용사/명사",
       "explanation": "동사구를 주어로 만들어 평가나 설명을 한다.",
+      "transformations": [
+        {
+          "original": "勉強する",
+          "originalReading": "べんきょうする",
+          "originalMeaning": "공부하다",
+          "steps": ["勉強する", "のは楽しい"],
+          "result": "勉強するのは楽しい",
+          "resultReading": "べんきょうするのはたのしい",
+          "resultMeaning": "공부하는 것은 즐겁다"
+        },
+        {
+          "original": "運動する",
+          "originalReading": "うんどうする",
+          "originalMeaning": "운동하다",
+          "steps": ["運動する", "のは大変"],
+          "result": "運動するのは大変",
+          "resultReading": "うんどうするのはたいへん",
+          "resultMeaning": "운동하는 것은 힘들다"
+        }
+      ],
       "examples": [
         {
           "japanese": "日本語を勉強するのは楽しいです。",
@@ -461,6 +797,26 @@
       "meaning": "~라고 생각하다",
       "formation": "보통형 + とおもう",
       "explanation": "의견이나 추측을 나타낸다.",
+      "transformations": [
+        {
+          "original": "雨だ",
+          "originalReading": "あめだ",
+          "originalMeaning": "비다",
+          "steps": ["雨だ", "と思う"],
+          "result": "雨だと思う",
+          "resultReading": "あめだとおもう",
+          "resultMeaning": "비라고 생각하다"
+        },
+        {
+          "original": "面白い",
+          "originalReading": "おもしろい",
+          "originalMeaning": "재미있다",
+          "steps": ["面白い", "と思う"],
+          "result": "面白いと思う",
+          "resultReading": "おもしろいとおもう",
+          "resultMeaning": "재미있다고 생각하다"
+        }
+      ],
       "examples": [
         {
           "japanese": "明日は雨だと思います。",
@@ -486,6 +842,26 @@
       "meaning": "~라고 하는",
       "formation": "명사 + という + 명사",
       "explanation": "이름이나 명칭을 소개할 때 사용한다.",
+      "transformations": [
+        {
+          "original": "桜",
+          "originalReading": "さくら",
+          "originalMeaning": "벚꽃",
+          "steps": ["桜", "という花"],
+          "result": "桜という花",
+          "resultReading": "さくらというはな",
+          "resultMeaning": "사쿠라라는 꽃"
+        },
+        {
+          "original": "田中",
+          "originalReading": "たなか",
+          "originalMeaning": "다나카",
+          "steps": ["田中", "という人"],
+          "result": "田中という人",
+          "resultReading": "たなかというひと",
+          "resultMeaning": "다나카라는 사람"
+        }
+      ],
       "examples": [
         {
           "japanese": "「桜」という花を知っていますか。",
@@ -510,6 +886,26 @@
       "meaning": "~이겠지요 / ~일 것이다",
       "formation": "보통형 + でしょう (명사/な형용사는 だ 생략)",
       "explanation": "추측을 나타낸다.",
+      "transformations": [
+        {
+          "original": "晴れる",
+          "originalReading": "はれる",
+          "originalMeaning": "맑다",
+          "steps": ["晴れる", "でしょう"],
+          "result": "晴れるでしょう",
+          "resultReading": "はれるでしょう",
+          "resultMeaning": "맑겠지요"
+        },
+        {
+          "original": "日本人",
+          "originalReading": "にほんじん",
+          "originalMeaning": "일본인",
+          "steps": ["日本人", "でしょう"],
+          "result": "日本人でしょう",
+          "resultReading": "にほんじんでしょう",
+          "resultMeaning": "일본인이겠지요"
+        }
+      ],
       "examples": [
         {
           "japanese": "明日は晴れるでしょう。",
@@ -535,6 +931,26 @@
       "meaning": "~해야 한다",
       "formation": "동사 ない형 (ない → なければ) + ならない",
       "explanation": "의무나 필요를 나타낸다.",
+      "transformations": [
+        {
+          "original": "勉強する",
+          "originalReading": "べんきょうする",
+          "originalMeaning": "공부하다",
+          "steps": ["勉強し", "なければならない"],
+          "result": "勉強しなければならない",
+          "resultReading": "べんきょうしなければならない",
+          "resultMeaning": "공부해야 한다"
+        },
+        {
+          "original": "起きる",
+          "originalReading": "おきる",
+          "originalMeaning": "일어나다",
+          "steps": ["起き", "なければならない"],
+          "result": "起きなければならない",
+          "resultReading": "おきなければならない",
+          "resultMeaning": "일어나야 한다"
+        }
+      ],
       "examples": [
         {
           "japanese": "毎日勉強しなければなりません。",
@@ -563,6 +979,26 @@
       "meaning": "~하지 않아도 된다",
       "formation": "동사 ない형 (ない → なくて) + もいい",
       "explanation": "불필요함을 나타낸다.",
+      "transformations": [
+        {
+          "original": "来る",
+          "originalReading": "くる",
+          "originalMeaning": "오다",
+          "steps": ["来なくて", "もいい"],
+          "result": "来なくてもいい",
+          "resultReading": "こなくてもいい",
+          "resultMeaning": "안 와도 된다"
+        },
+        {
+          "original": "急ぐ",
+          "originalReading": "いそぐ",
+          "originalMeaning": "서두르다",
+          "steps": ["急がなくて", "もいい"],
+          "result": "急がなくてもいい",
+          "resultReading": "いそがなくてもいい",
+          "resultMeaning": "서두르지 않아도 된다"
+        }
+      ],
       "examples": [
         {
           "japanese": "明日は来なくてもいいです。",

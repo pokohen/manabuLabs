@@ -5,12 +5,29 @@ export interface GrammarExample {
   korean: string
 }
 
+// 변환 예시 타입
+export interface Transformation {
+  original: string
+  originalReading: string
+  originalMeaning: string
+  steps: string[]
+  result: string
+  resultReading: string
+  resultMeaning: string
+}
+
 // N5/N4 문형 관련 타입
+export interface ConjugationItem {
+  japanese: string
+  reading: string
+  korean: string
+}
+
 export interface PatternConjugation {
-  present?: string
-  negative?: string
-  past?: string
-  pastNegative?: string
+  present?: string | ConjugationItem
+  negative?: string | ConjugationItem
+  past?: string | ConjugationItem
+  pastNegative?: string | ConjugationItem
 }
 
 export interface PatternUsage {
@@ -32,6 +49,7 @@ export interface GrammarPattern {
   meaning: string
   formation: string
   explanation: string
+  transformations?: Transformation[]
   conjugation?: PatternConjugation
   usages?: PatternUsage[]
   examples?: GrammarExample[]

@@ -2,7 +2,13 @@
 
 import { useState } from 'react'
 import { Button } from '@/components/Button'
-import type { GrammarPattern, GrammarExample } from '@/data/grammar'
+import type { GrammarPattern, GrammarExample, ConjugationItem } from '@/data/grammar'
+
+// 활용형 텍스트 변환 헬퍼
+function formatConjugation(item: string | ConjugationItem): string {
+  if (typeof item === 'string') return item
+  return `${item.japanese} (${item.reading}) - ${item.korean}`
+}
 
 interface GrammarCardProps {
   pattern: GrammarPattern
@@ -119,25 +125,25 @@ export default function GrammarCard({ pattern, isExpanded, onToggle }: GrammarCa
                   {pattern.conjugation.present && (
                     <div>
                       <span className="text-zinc-500 dark:text-zinc-400">현재: </span>
-                      <span className="text-black dark:text-white">{pattern.conjugation.present}</span>
+                      <span className="text-black dark:text-white">{formatConjugation(pattern.conjugation.present)}</span>
                     </div>
                   )}
                   {pattern.conjugation.negative && (
                     <div>
                       <span className="text-zinc-500 dark:text-zinc-400">부정: </span>
-                      <span className="text-black dark:text-white">{pattern.conjugation.negative}</span>
+                      <span className="text-black dark:text-white">{formatConjugation(pattern.conjugation.negative)}</span>
                     </div>
                   )}
                   {pattern.conjugation.past && (
                     <div>
                       <span className="text-zinc-500 dark:text-zinc-400">과거: </span>
-                      <span className="text-black dark:text-white">{pattern.conjugation.past}</span>
+                      <span className="text-black dark:text-white">{formatConjugation(pattern.conjugation.past)}</span>
                     </div>
                   )}
                   {pattern.conjugation.pastNegative && (
                     <div>
                       <span className="text-zinc-500 dark:text-zinc-400">과거부정: </span>
-                      <span className="text-black dark:text-white">{pattern.conjugation.pastNegative}</span>
+                      <span className="text-black dark:text-white">{formatConjugation(pattern.conjugation.pastNegative)}</span>
                     </div>
                   )}
                 </div>

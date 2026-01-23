@@ -186,7 +186,7 @@ export default function MonjiStudyPage() {
 
         {/* 뒤로가기 버튼 */}
         <Button
-          onClick={() => router.push('/')}
+          onClick={() => router.push('/base-study')}
           className="w-full max-w-xs py-3 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors"
         >
           뒤로 가기
