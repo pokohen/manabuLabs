@@ -12,8 +12,10 @@ import VerbConjugationCard from './VerbConjugationCard'
 import ParticleCard from './ParticleCard'
 import AdjectiveCard from './AdjectiveCard'
 import StepLearning from './StepLearning'
+import VerbStepLearning from './VerbStepLearning'
 import GrammarDetailModal from './GrammarDetailModal'
-import type { GrammarPattern } from '@/data/grammar'
+import VerbConjugationDetailModal from './VerbConjugationDetailModal'
+import type { GrammarPattern, VerbConjugation } from '@/data/grammar'
 
 interface GrammarStepPageProps {
   category: GrammarCategory
@@ -27,6 +29,7 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
   const [learningMode, setLearningMode] = useState<LearningMode>('select')
   const [selectedPattern, setSelectedPattern] = useState<GrammarPattern | null>(null)
+  const [selectedConjugation, setSelectedConjugation] = useState<VerbConjugation | null>(null)
 
   const { type, data } = getGrammarDataByCategory(category)
   const categoryInfo = grammarCategories.find((c) => c.id === category)
@@ -95,13 +98,26 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
     }
   }
 
-  // 단계별 학습 모드 (patterns 타입만 지원)
+  // 단계별 학습 모드 (patterns 타입)
   if (learningMode === 'step' && type === 'patterns') {
     return (
       <StepLearning
         patterns={data.patterns}
         categoryLabel={categoryInfo?.label || data.title}
         onExit={() => setLearningMode('select')}
+        onGoToList={() => setLearningMode('list')}
+      />
+    )
+  }
+
+  // 단계별 학습 모드 (verb 타입)
+  if (learningMode === 'step' && type === 'verb') {
+    return (
+      <VerbStepLearning
+        conjugations={data.conjugations}
+        categoryLabel={categoryInfo?.label || data.title}
+        onExit={() => setLearningMode('select')}
+        onGoToList={() => setLearningMode('list')}
       />
     )
   }
@@ -119,8 +135,8 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
           </p>
 
           <div className="w-full space-y-4 mt-4">
-            {/* 단계별 학습 (patterns 타입만 지원) */}
-            {type === 'patterns' && (
+            {/* 단계별 학습 (patterns, verb 타입 지원) */}
+            {(type === 'patterns' || type === 'verb') && (
               <Button
                 onClick={() => setLearningMode('step')}
                 className="w-full py-5 px-6 bg-green-500 hover:bg-green-600 text-white text-xl font-bold rounded-lg transition-colors shadow-lg"
@@ -128,7 +144,7 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
                 <div className="flex flex-col items-center">
                   <span>단계별 학습</span>
                   <span className="text-sm font-normal opacity-80 mt-1">
-                    하나씩 집중하며 퀴즈로 확인
+                    {type === 'patterns' ? '하나씩 집중하며 퀴즈로 확인' : '활용형별로 학습하기'}
                   </span>
                 </div>
               </Button>
@@ -147,8 +163,8 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
               </div>
             </Button>
 
-            {/* 문제 풀기 (patterns 타입만 지원) */}
-            {type === 'patterns' && onQuiz && (
+            {/* 문제 풀기 */}
+            {onQuiz && (
               <Button
                 onClick={onQuiz}
                 className="w-full py-5 px-6 bg-emerald-600 hover:bg-emerald-700 text-white text-xl font-bold rounded-lg transition-colors shadow-lg"
@@ -156,7 +172,7 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
                 <div className="flex flex-col items-center">
                   <span>문제 풀기</span>
                   <span className="text-sm font-normal opacity-80 mt-1">
-                    퍼즐로 예문 맞추기
+                    {type === 'patterns' ? '퍼즐로 예문 맞추기' : '4지선다 퀴즈'}
                   </span>
                 </div>
               </Button>
@@ -216,7 +232,7 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
                 </div>
 
                 {/* 패턴 */}
-                <div className="min-w-[80px] sm:min-w-[100px]">
+                <div className="min-w-20 sm:min-w-[100px]">
                   <span className="text-xl sm:text-2xl font-bold text-emerald-600 dark:text-emerald-400">
                     {pattern.pattern}
                   </span>
@@ -240,6 +256,44 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
                 </div>
               </button>
             ))
+          ) : type === 'verb' ? (
+            // 동사 활용 타입: 클릭하면 모달로 표시
+            data.conjugations.map((conjugation, index) => (
+              <button
+                key={conjugation.id}
+                onClick={() => setSelectedConjugation(conjugation)}
+                className="w-full cursor-pointer bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 flex items-center gap-4 text-left hover:border-emerald-300 dark:hover:border-emerald-700 hover:shadow-md transition-all group"
+              >
+                {/* 번호 */}
+                <div className="w-8 h-8 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center text-sm text-zinc-500 dark:text-zinc-400 font-medium shrink-0">
+                  {index + 1}
+                </div>
+
+                {/* 활용형 이름 */}
+                <div className="min-w-20 sm:min-w-[100px]">
+                  <span className="text-xl sm:text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+                    {conjugation.name}
+                  </span>
+                </div>
+
+                {/* 용법 */}
+                <div className="flex-1 min-w-0">
+                  <p className="text-base sm:text-lg font-medium text-black dark:text-white truncate">
+                    {conjugation.usage}
+                  </p>
+                  <p className="text-xs sm:text-sm text-zinc-500 dark:text-zinc-400">
+                    {conjugation.level}
+                  </p>
+                </div>
+
+                {/* 화살표 */}
+                <div className="w-8 h-8 bg-zinc-100 dark:bg-zinc-800 group-hover:bg-emerald-100 dark:group-hover:bg-emerald-900/30 rounded-full flex items-center justify-center transition-colors shrink-0">
+                  <svg className="w-4 h-4 text-zinc-400 group-hover:text-emerald-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </button>
+            ))
           ) : (
             // 기타 타입: 기존 아코디언 카드 사용
             renderCards()
@@ -252,6 +306,14 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
         <GrammarDetailModal
           pattern={selectedPattern}
           onClose={() => setSelectedPattern(null)}
+        />
+      )}
+
+      {/* 동사 활용 상세 모달 */}
+      {selectedConjugation && (
+        <VerbConjugationDetailModal
+          conjugation={selectedConjugation}
+          onClose={() => setSelectedConjugation(null)}
         />
       )}
     </div>

@@ -36,6 +36,7 @@ interface StepLearningProps {
   patterns: GrammarPattern[]
   categoryLabel: string
   onExit: () => void
+  onGoToList?: () => void
 }
 
 type LearningStep = 'intro' | 'formation' | 'examples' | 'quiz'
@@ -45,12 +46,13 @@ interface QuizOption {
   isCorrect: boolean
 }
 
-export default function StepLearning({ patterns, categoryLabel, onExit }: StepLearningProps) {
+export default function StepLearning({ patterns, categoryLabel, onExit, onGoToList }: StepLearningProps) {
   const [currentPatternIndex, setCurrentPatternIndex] = useState(0)
   const [currentStep, setCurrentStep] = useState<LearningStep>('intro')
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [showQuizResult, setShowQuizResult] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
+  const [isCompleted, setIsCompleted] = useState(false)
 
   const currentPattern = patterns[currentPatternIndex]
   const totalPatterns = patterns.length
@@ -174,6 +176,42 @@ export default function StepLearning({ patterns, categoryLabel, onExit }: StepLe
   const isLastPattern = currentPatternIndex === totalPatterns - 1
   const isQuizCorrect = selectedAnswer !== null && quizOptions[selectedAnswer]?.isCorrect
 
+  // 완료 화면
+  if (isCompleted) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black p-4">
+        <main className="flex w-full flex-col items-center gap-8 py-16 px-8 max-w-md">
+          <div className="text-center">
+            <div className="text-6xl mb-4">🎉</div>
+            <h1 className="text-3xl font-bold text-zinc-900 dark:text-white mb-2">
+              학습 완료!
+            </h1>
+            <p className="text-lg text-zinc-600 dark:text-zinc-400">
+              {categoryLabel} {totalPatterns}개 문법을 모두 학습했습니다
+            </p>
+          </div>
+
+          <div className="w-full space-y-3 mt-4">
+            {onGoToList && (
+              <Button
+                onClick={onGoToList}
+                className="w-full py-4 px-4 bg-blue-500 hover:bg-blue-600 text-white text-lg font-bold rounded-lg transition-colors"
+              >
+                전체 리스트 보기
+              </Button>
+            )}
+            <Button
+              onClick={onExit}
+              className="w-full py-3 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors"
+            >
+              메뉴로 돌아가기
+            </Button>
+          </div>
+        </main>
+      </div>
+    )
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-zinc-50 dark:bg-black p-4">
       {/* 헤더 */}
@@ -187,7 +225,7 @@ export default function StepLearning({ patterns, categoryLabel, onExit }: StepLe
               {!isLastPattern && (
                 <Button
                   onClick={handleSkip}
-                  className="py-1 px-3 bg-transparent hover:bg-zinc-700 border-1 border-zinc-700 text-white text-sm font-medium rounded-lg transition-colors"
+                  className="py-1 px-3 bg-transparent hover:bg-zinc-700 border border-zinc-700 text-white text-sm font-medium rounded-lg transition-colors"
                 >
                   건너뛰기
                 </Button>
@@ -439,7 +477,7 @@ export default function StepLearning({ patterns, categoryLabel, onExit }: StepLe
               {currentStep === 'quiz' ? (
                 showQuizResult && (
                   <Button
-                    onClick={isLastPattern ? onExit : handleNext}
+                    onClick={isLastPattern ? () => setIsCompleted(true) : handleNext}
                     className="flex-1 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-colors"
                   >
                     {isLastPattern ? '학습 완료!' : '다음 문법'}

@@ -16,11 +16,23 @@ export default function CategoryPage() {
     notFound()
   }
 
+  const handleQuiz = () => {
+    if (category === 'verb-conjugation') {
+      router.push('/grammar-study/verb-quiz')
+    } else if (category === 'particles') {
+      router.push('/grammar-study/particle-quiz')
+    } else if (category === 'adjectives') {
+      router.push('/grammar-study/adjective-quiz')
+    } else {
+      router.push(`/grammar-study/quiz?level=${category}`)
+    }
+  }
+
   return (
     <GrammarStepPage
       category={category as GrammarCategory}
       onBack={() => router.push('/grammar-study')}
-      onQuiz={() => router.push(`/grammar-study/quiz?level=${category}`)}
+      onQuiz={handleQuiz}
     />
   )
 }
