@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import AdjectiveQuizSetup from '../ui/AdjectiveQuizSetup'
-import AdjectiveConjugationQuiz, { QuestionCount } from '../ui/AdjectiveConjugationQuiz'
+import { AdjectiveQuizSetup, AdjectiveConjugationQuiz } from '../ui/adjective'
+import type { AdjectiveQuestionCount as QuestionCount } from '../ui/adjective'
 
 type PageMode = 'setup' | 'quiz'
 

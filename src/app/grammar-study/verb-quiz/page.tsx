@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import VerbConjugationQuizSetup from '../ui/VerbConjugationQuizSetup'
-import VerbConjugationQuiz, { QuestionCount } from '../ui/VerbConjugationQuiz'
+import { VerbConjugationQuizSetup, VerbConjugationQuiz } from '../ui/verb'
+import type { QuestionCount } from '../ui/verb'
 
 type PageMode = 'setup' | 'quiz'
 

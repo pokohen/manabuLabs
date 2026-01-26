@@ -1,7 +1,7 @@
 'use client'
 
 import type { Particle, GrammarExample } from '@/data/grammar'
-import SpeakerButton from './SpeakerButton'
+import { SpeakerButton } from '../common'
 
 interface ParticleCardProps {
   particle: Particle

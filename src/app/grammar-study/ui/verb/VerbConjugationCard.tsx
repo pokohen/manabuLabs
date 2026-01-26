@@ -1,7 +1,7 @@
 'use client'
 
 import type { VerbConjugation, VerbGroup } from '@/data/grammar'
-import SpeakerButton from './SpeakerButton'
+import { SpeakerButton } from '../common'
 
 interface VerbConjugationCardProps {
   conjugation: VerbConjugation

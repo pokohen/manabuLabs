@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import verbConjugationData from '@/data/grammar/verb-conjugation.json'
-import QuizResultScreen, { AnsweredItem } from './QuizResultScreen'
-import QuizInput from './QuizInput'
+import { QuizResultScreen, QuizInput } from '../common'
+import type { AnsweredItem } from '../common'
 import ConjugationDetailModal, { QuizQuestion } from './ConjugationDetailModal'
 
 export type QuestionCount = 10 | 20 | 'all'

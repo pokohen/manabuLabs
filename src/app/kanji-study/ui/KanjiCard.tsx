@@ -1,7 +1,7 @@
 'use client'
 
 import { KanjiData } from '@/data/kanji'
-import SpeakerButton from '@/app/grammar-study/ui/SpeakerButton'
+import { SpeakerButton } from '@/app/grammar-study/ui/common'
 
 interface KanjiCardProps {
   kanji: KanjiData

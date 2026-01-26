@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/Button'
-import SpeakerButton, { SpeakerIcon } from './SpeakerButton'
+import { SpeakerButton, SpeakerIcon } from '../common'
 
 interface PuzzleQuestionProps {
   korean: string

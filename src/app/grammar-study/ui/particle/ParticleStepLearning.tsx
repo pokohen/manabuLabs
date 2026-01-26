@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/Button'
 import type { Particle, GrammarExample } from '@/data/grammar'
-import LearningCompletionScreen from './LearningCompletionScreen'
-import SpeakerButton from './SpeakerButton'
+import { LearningCompletionScreen, SpeakerButton } from '../common'
 
 interface ParticleStepLearningProps {
   particles: Particle[]
   categoryLabel: string
+  initialIndex?: number
+  onIndexChange?: (index: number) => void
   onExit: () => void
   onGoToList?: () => void
 }
@@ -20,8 +21,8 @@ interface QuizOption {
   isCorrect: boolean
 }
 
-export default function ParticleStepLearning({ particles, categoryLabel, onExit, onGoToList }: ParticleStepLearningProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+export default function ParticleStepLearning({ particles, categoryLabel, initialIndex = 0, onIndexChange, onExit, onGoToList }: ParticleStepLearningProps) {
+  const [currentIndex, setCurrentIndex] = useState(initialIndex)
   const [currentStep, setCurrentStep] = useState<LearningStep>('intro')
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [showQuizResult, setShowQuizResult] = useState(false)
@@ -30,6 +31,11 @@ export default function ParticleStepLearning({ particles, categoryLabel, onExit,
   const currentParticle = particles[currentIndex]
   const totalParticles = particles.length
   const progress = (currentIndex / totalParticles) * 100
+
+  // URL 동기화
+  useEffect(() => {
+    onIndexChange?.(currentIndex)
+  }, [currentIndex, onIndexChange])
 
   const steps: LearningStep[] = ['intro', 'usages', 'examples', 'quiz']
   const currentStepIndex = steps.indexOf(currentStep)

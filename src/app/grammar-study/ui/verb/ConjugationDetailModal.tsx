@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import verbConjugationData from '@/data/grammar/verb-conjugation.json'
-import type { AnsweredItem } from './QuizResultScreen'
+import type { AnsweredItem } from '../common'
 
 interface QuizQuestion {
   dictionary: string

@@ -7,30 +7,32 @@ import {
   grammarCategories,
   GrammarCategory,
 } from '@/data/grammar'
-import GrammarCard from './GrammarCard'
-import VerbConjugationCard from './VerbConjugationCard'
-import ParticleCard from './ParticleCard'
-import AdjectiveCard from './AdjectiveCard'
-import StepLearning from './StepLearning'
-import VerbStepLearning from './VerbStepLearning'
-import GrammarDetailModal from './GrammarDetailModal'
-import VerbConjugationDetailModal from './VerbConjugationDetailModal'
-import ParticleDetailModal from './ParticleDetailModal'
-import AdjectiveDetailModal from './AdjectiveDetailModal'
-import ParticleStepLearning from './ParticleStepLearning'
+import { GrammarCard, GrammarDetailModal, StepLearning } from './patterns'
+import { VerbConjugationCard, VerbConjugationDetailModal, VerbStepLearning } from './verb'
+import { ParticleCard, ParticleDetailModal, ParticleStepLearning } from './particle'
+import { AdjectiveCard, AdjectiveDetailModal } from './adjective'
 import type { GrammarPattern, VerbConjugation, Particle, AdjectiveType } from '@/data/grammar'
+
+type LearningMode = 'select' | 'list' | 'step'
 
 interface GrammarStepPageProps {
   category: GrammarCategory
+  mode: LearningMode
+  initialIndex: number
+  onModeChange: (mode: LearningMode, index?: number) => void
   onBack: () => void
   onQuiz?: () => void
 }
 
-type LearningMode = 'select' | 'list' | 'step'
-
-export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarStepPageProps) {
+export default function GrammarStepPage({
+  category,
+  mode,
+  initialIndex,
+  onModeChange,
+  onBack,
+  onQuiz
+}: GrammarStepPageProps) {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null)
-  const [learningMode, setLearningMode] = useState<LearningMode>('select')
   const [selectedPattern, setSelectedPattern] = useState<GrammarPattern | null>(null)
   const [selectedConjugation, setSelectedConjugation] = useState<VerbConjugation | null>(null)
   const [selectedParticle, setSelectedParticle] = useState<Particle | null>(null)
@@ -104,43 +106,49 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
   }
 
   // 단계별 학습 모드 (patterns 타입)
-  if (learningMode === 'step' && type === 'patterns') {
+  if (mode === 'step' && type === 'patterns') {
     return (
       <StepLearning
         patterns={data.patterns}
         categoryLabel={categoryInfo?.label || data.title}
-        onExit={() => setLearningMode('select')}
-        onGoToList={() => setLearningMode('list')}
+        initialIndex={initialIndex}
+        onIndexChange={(index) => onModeChange('step', index)}
+        onExit={() => onModeChange('select')}
+        onGoToList={() => onModeChange('list')}
       />
     )
   }
 
   // 단계별 학습 모드 (verb 타입)
-  if (learningMode === 'step' && type === 'verb') {
+  if (mode === 'step' && type === 'verb') {
     return (
       <VerbStepLearning
         conjugations={data.conjugations}
         categoryLabel={categoryInfo?.label || data.title}
-        onExit={() => setLearningMode('select')}
-        onGoToList={() => setLearningMode('list')}
+        initialIndex={initialIndex}
+        onIndexChange={(index) => onModeChange('step', index)}
+        onExit={() => onModeChange('select')}
+        onGoToList={() => onModeChange('list')}
       />
     )
   }
 
   // 단계별 학습 모드 (particles 타입)
-  if (learningMode === 'step' && type === 'particles') {
+  if (mode === 'step' && type === 'particles') {
     return (
       <ParticleStepLearning
         particles={data.particles}
         categoryLabel={categoryInfo?.label || data.title}
-        onExit={() => setLearningMode('select')}
-        onGoToList={() => setLearningMode('list')}
+        initialIndex={initialIndex}
+        onIndexChange={(index) => onModeChange('step', index)}
+        onExit={() => onModeChange('select')}
+        onGoToList={() => onModeChange('list')}
       />
     )
   }
 
   // 학습 모드 선택 화면
-  if (learningMode === 'select') {
+  if (mode === 'select') {
     return (
       <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black p-4">
         <main className="flex w-full flex-col items-center gap-8 py-16 px-8 max-w-md">
@@ -155,7 +163,7 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
             {/* 단계별 학습 (patterns, verb, particles 타입 지원) */}
             {(type === 'patterns' || type === 'verb' || type === 'particles') && (
               <Button
-                onClick={() => setLearningMode('step')}
+                onClick={() => onModeChange('step')}
                 className={`w-full py-5 px-6 ${type === 'particles' ? 'bg-orange-500 hover:bg-orange-600' : 'bg-green-500 hover:bg-green-600'} text-white text-xl font-bold rounded-lg transition-colors shadow-lg`}
               >
                 <div className="flex flex-col items-center">
@@ -169,7 +177,7 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
 
             {/* 리스트 보기 */}
             <Button
-              onClick={() => setLearningMode('list')}
+              onClick={() => onModeChange('list')}
               className="w-full py-5 px-6 bg-blue-500 hover:bg-blue-600 text-white text-xl font-bold rounded-lg transition-colors shadow-lg"
             >
               <div className="flex flex-col items-center">
@@ -214,7 +222,7 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
         <div className="max-w-2xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setLearningMode('select')}
+              onClick={() => onModeChange('select')}
               className="w-10 h-10 bg-white dark:bg-zinc-800 rounded-full flex items-center justify-center shadow-sm hover:shadow-md transition-shadow border border-zinc-200 dark:border-zinc-700"
             >
               <svg className="w-5 h-5 text-zinc-600 dark:text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -325,7 +333,7 @@ export default function GrammarStepPage({ category, onBack, onQuiz }: GrammarSte
                 </div>
 
                 {/* 조사 */}
-                <div className="min-w-16 sm:min-w-[80px]">
+                <div className="min-w-16 sm:min-w-20">
                   <span className="text-3xl sm:text-4xl font-bold text-orange-600 dark:text-orange-400">
                     {particle.particle}
                   </span>

@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import type { AdjectiveType, ComparisonForm } from '@/data/grammar'
-import SpeakerButton from './SpeakerButton'
+import { SpeakerButton } from '../common'
 
 interface AdjectiveCardProps {
   adjectiveType: AdjectiveType

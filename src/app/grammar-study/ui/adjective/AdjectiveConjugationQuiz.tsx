@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import adjectiveData from '@/data/grammar/adjective.json'
-import QuizResultScreen, { AnsweredItem } from './QuizResultScreen'
-import QuizInput from './QuizInput'
+import { QuizResultScreen, QuizInput } from '../common'
+import type { AnsweredItem } from '../common'
 
 export type QuestionCount = 10 | 20 | 'all'
 

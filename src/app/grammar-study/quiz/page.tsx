@@ -2,8 +2,8 @@
 
 import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import GrammarQuizSetup, { QuestionCount } from '../ui/GrammarQuizSetup'
-import GrammarPuzzleQuiz from '../ui/GrammarPuzzleQuiz'
+import { GrammarQuizSetup, GrammarPuzzleQuiz } from '../ui/patterns'
+import type { QuestionCount } from '../ui/patterns'
 import { GrammarCategory } from '@/data/grammar'
 
 function QuizContent() {

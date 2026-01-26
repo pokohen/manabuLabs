@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/Button'
 import type { GrammarPattern, GrammarExample } from '@/data/grammar'
-import LearningCompletionScreen from './LearningCompletionScreen'
-import { IntroStep, FormationStep, ExamplesStep, QuizStep } from './LearningSteps'
+import { LearningCompletionScreen, IntroStep, FormationStep, ExamplesStep, QuizStep } from '../common'
 
 interface StepLearningProps {
   patterns: GrammarPattern[]
   categoryLabel: string
+  initialIndex?: number
+  onIndexChange?: (index: number) => void
   onExit: () => void
   onGoToList?: () => void
 }
@@ -20,8 +21,8 @@ interface QuizOption {
   isCorrect: boolean
 }
 
-export default function StepLearning({ patterns, categoryLabel, onExit, onGoToList }: StepLearningProps) {
-  const [currentPatternIndex, setCurrentPatternIndex] = useState(0)
+export default function StepLearning({ patterns, categoryLabel, initialIndex = 0, onIndexChange, onExit, onGoToList }: StepLearningProps) {
+  const [currentPatternIndex, setCurrentPatternIndex] = useState(initialIndex)
   const [currentStep, setCurrentStep] = useState<LearningStep>('intro')
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null)
   const [showQuizResult, setShowQuizResult] = useState(false)
@@ -31,6 +32,11 @@ export default function StepLearning({ patterns, categoryLabel, onExit, onGoToLi
   const currentPattern = patterns[currentPatternIndex]
   const totalPatterns = patterns.length
   const progress = ((currentPatternIndex) / totalPatterns) * 100
+
+  // URL 동기화
+  useEffect(() => {
+    onIndexChange?.(currentPatternIndex)
+  }, [currentPatternIndex, onIndexChange])
 
   const steps: LearningStep[] = ['intro', 'formation', 'examples', 'quiz']
   const currentStepIndex = steps.indexOf(currentStep)

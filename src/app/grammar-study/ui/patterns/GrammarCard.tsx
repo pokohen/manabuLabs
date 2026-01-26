@@ -1,7 +1,7 @@
 'use client'
 
 import type { GrammarPattern, GrammarExample, ConjugationItem } from '@/data/grammar'
-import SpeakerButton from './SpeakerButton'
+import { SpeakerButton } from '../common'
 
 // 활용형 텍스트 변환 헬퍼
 function formatConjugation(item: string | ConjugationItem): string {

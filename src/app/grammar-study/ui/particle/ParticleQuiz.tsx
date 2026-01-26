@@ -3,9 +3,9 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/Button'
 import particlesData from '@/data/grammar/particles.json'
-import QuizResultScreen, { AnsweredItem } from './QuizResultScreen'
+import { QuizResultScreen, SpeakerButton } from '../common'
+import type { AnsweredItem } from '../common'
 import ParticleDetailModal from './ParticleDetailModal'
-import SpeakerButton from './SpeakerButton'
 import type { Particle, GrammarExample } from '@/data/grammar'
 
 export type QuestionCount = 10 | 20 | 'all'

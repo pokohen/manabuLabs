@@ -3,11 +3,13 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/Button'
 import type { VerbConjugation } from '@/data/grammar'
-import QuizInput from './QuizInput'
+import { QuizInput } from '../common'
 
 interface VerbStepLearningProps {
   conjugations: VerbConjugation[]
   categoryLabel: string
+  initialIndex?: number
+  onIndexChange?: (index: number) => void
   onExit: () => void
   onGoToList?: () => void
 }
@@ -17,16 +19,23 @@ type LearningStep = 'learn' | 'quiz'
 export default function VerbStepLearning({
   conjugations,
   categoryLabel,
+  initialIndex = 0,
+  onIndexChange,
   onExit,
   onGoToList,
 }: VerbStepLearningProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(initialIndex)
   const [step, setStep] = useState<LearningStep>('learn')
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const [quizKey, setQuizKey] = useState(0) // QuizInput 리셋용
 
   const currentConjugation = conjugations[currentIndex]
+
+  // URL 동기화
+  useEffect(() => {
+    onIndexChange?.(currentIndex)
+  }, [currentIndex, onIndexChange])
 
   // 퀴즈용 랜덤 예시 (클라이언트에서만 생성)
   const [quizExample, setQuizExample] = useState(currentConjugation.examples[0])

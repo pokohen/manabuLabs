@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import type { AdjectiveType } from '@/data/grammar'
-import SpeakerButton from './SpeakerButton'
+import { SpeakerButton } from '../common'
 
 interface AdjectiveDetailModalProps {
   adjectiveType: AdjectiveType

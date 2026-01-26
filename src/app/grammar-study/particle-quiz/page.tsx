@@ -2,8 +2,8 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import ParticleQuizSetup, { QuestionCount } from '../ui/ParticleQuizSetup'
-import ParticleQuiz from '../ui/ParticleQuiz'
+import { ParticleQuizSetup, ParticleQuiz } from '../ui/particle'
+import type { ParticleQuestionCount as QuestionCount } from '../ui/particle'
 
 type PageMode = 'setup' | 'quiz'
 

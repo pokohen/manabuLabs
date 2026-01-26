@@ -4,12 +4,10 @@ import { useState, useEffect, useCallback } from 'react'
 import { Button } from '@/components/Button'
 import { getGrammarDataByCategory, GrammarCategory, GrammarPattern, GrammarExample } from '@/data/grammar'
 import GrammarDetailModal from './GrammarDetailModal'
-import QuizResultScreen, { AnsweredItem } from './QuizResultScreen'
-import QuizLoadingScreen from './QuizLoadingScreen'
-import QuizErrorScreen from './QuizErrorScreen'
 import PuzzleQuestion from './PuzzleQuestion'
-import { speakJapanese, SpeakerIcon } from './SpeakerButton'
 import type { QuestionCount } from './GrammarQuizSetup'
+import { QuizResultScreen, QuizLoadingScreen, QuizErrorScreen, speakJapanese, SpeakerIcon } from '../common'
+import type { AnsweredItem } from '../common'
 
 interface QuizQuestion {
   pattern: GrammarPattern
