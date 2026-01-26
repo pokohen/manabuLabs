@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/Button'
-import { grammarCategories } from '@/data/grammar'
+import { grammarMenu, isGroupCategory } from '@/data/grammar'
 
 export default function GrammarStudyPage() {
   const router = useRouter()
@@ -17,19 +17,38 @@ export default function GrammarStudyPage() {
           학습할 카테고리를 선택하세요
         </p>
 
-        <div className="w-full space-y-4 mt-4">
-          {grammarCategories.map(({ id, label, color, description }) => (
-            <Button
-              key={id}
-              onClick={() => router.push(`/grammar-study/${id}`)}
-              className={`w-full py-5 px-6 ${color} text-white text-xl font-bold rounded-lg transition-colors shadow-lg`}
-            >
-              <div className="flex flex-col items-center">
-                <span>{label}</span>
-                <span className="text-sm font-normal opacity-80 mt-1">{description}</span>
-              </div>
-            </Button>
-          ))}
+        <div className="w-full space-y-3 mt-4">
+          {grammarMenu.map((item) => {
+            // 그룹 카테고리는 별도 페이지로 이동
+            if (isGroupCategory(item)) {
+              return (
+                <Button
+                  key={item.id}
+                  onClick={() => router.push(`/grammar-study/${item.id}`)}
+                  className={`w-full py-5 px-6 ${item.color} text-white text-xl font-bold rounded-lg transition-colors shadow-lg`}
+                >
+                  <div className="flex flex-col items-center">
+                    <span>{item.label}</span>
+                    <span className="text-sm font-normal opacity-80 mt-1">{item.description}</span>
+                  </div>
+                </Button>
+              )
+            }
+
+            // 단일 카테고리
+            return (
+              <Button
+                key={item.id}
+                onClick={() => router.push(`/grammar-study/${item.id}`)}
+                className={`w-full py-5 px-6 ${item.color} text-white text-xl font-bold rounded-lg transition-colors shadow-lg`}
+              >
+                <div className="flex flex-col items-center">
+                  <span>{item.label}</span>
+                  <span className="text-sm font-normal opacity-80 mt-1">{item.description}</span>
+                </div>
+              </Button>
+            )
+          })}
         </div>
 
         <Button
