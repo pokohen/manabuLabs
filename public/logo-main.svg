@@ -1,0 +1,16 @@
+<svg width="180" height="50" viewBox="0 0 180 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+  </defs>
+  <!-- Leaf Icon -->
+  <path d="M22 3C17.5 8.5 9 15 9 25C9 35 16.5 41 22 43C27.5 41 35 35 35 25C35 15 26.5 8.5 22 3Z" stroke="url(#mainGrad)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M15.5 17L22 12L28.5 17" stroke="url(#mainGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M22 12V34" stroke="url(#mainGrad)" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M15.5 34L22 39L28.5 34" stroke="url(#mainGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Text -->
+  <text x="48" y="29" font-family="Outfit, sans-serif" font-size="22" font-weight="600" letter-spacing="3" fill="#1a202c">MANABU</text>
+  <text x="48" y="42" font-family="Outfit, sans-serif" font-size="9" font-weight="500" letter-spacing="5" fill="#667eea">LABS</text>
+</svg>

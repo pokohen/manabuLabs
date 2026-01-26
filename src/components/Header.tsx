@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import Logo, { LogoIcon } from './Logo'
 
 // 아이콘 컴포넌트들
 function HomeIcon({ className }: { className?: string }) {
@@ -111,11 +112,8 @@ export default function Header() {
             </button>
 
             {/* 로고 */}
-            <Link href="/" className="flex items-center gap-2 group cursor-pointer">
-              <span className="text-2xl transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">🇯🇵</span>
-              <span className="font-bold text-lg text-zinc-900 dark:text-white transition-colors group-hover:text-blue-600 dark:group-hover:text-blue-400">
-                일본어 공부
-              </span>
+            <Link href="/" className="flex items-center cursor-pointer group">
+              <Logo size="sm" className="transition-transform duration-300 group-hover:scale-105" />
             </Link>
 
             {/* 빈 공간 (균형용) */}
@@ -140,16 +138,13 @@ export default function Header() {
       >
         {/* 서랍 헤더 */}
         <div className="flex items-center justify-between p-4 border-b border-zinc-200 dark:border-zinc-800">
-          <Link href="/" onClick={() => setIsDrawerOpen(false)} className="flex items-center gap-2 group cursor-pointer">
-            <span
-              className="text-2xl transition-transform duration-500"
-              style={{ animation: isDrawerOpen ? 'bounceIn 0.5s ease-out' : 'none' }}
-            >
-              🇯🇵
-            </span>
-            <span className="font-bold text-lg text-zinc-900 dark:text-white">
-              일본어 공부
-            </span>
+          <Link
+            href="/"
+            onClick={() => setIsDrawerOpen(false)}
+            className="cursor-pointer"
+            style={{ animation: isDrawerOpen ? 'bounceIn 0.5s ease-out' : 'none' }}
+          >
+            <Logo size="sm" />
           </Link>
           <button
             onClick={() => setIsDrawerOpen(false)}
@@ -199,9 +194,12 @@ export default function Header() {
 
         {/* 서랍 하단 */}
         <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-zinc-200 dark:border-zinc-800">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 text-center">
-            일본어 학습 앱 v1.0
-          </p>
+          <div className="flex items-center justify-center gap-2">
+            <LogoIcon size={16} />
+            <p className="text-xs text-zinc-500 dark:text-zinc-400">
+              MANABU LABS v1.0
+            </p>
+          </div>
         </div>
       </div>
     </>

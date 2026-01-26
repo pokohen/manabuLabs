@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/Button'
+import Logo from '@/components/Logo'
 
 export default function Home() {
   const router = useRouter()
@@ -9,10 +10,8 @@ export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black p-4">
       <main className="flex w-full flex-col items-center gap-8 py-16 px-8">
-        <h1 className="text-4xl font-bold text-black dark:text-white">
-          일본어 공부 앱
-        </h1>
-        <p className="text-lg text-zinc-600 dark:text-zinc-400">
+        <Logo size="lg" className="mb-2" />
+        <p className="text-lg text-zinc-600 dark:text-zinc-400 text-center">
           히라가나 / 가타카나 공부와 예시 문장 생성을 통해 일본어 실력을 향상시키세요!
         </p>
 

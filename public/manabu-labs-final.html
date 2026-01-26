@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MANABU LABS - 최종 로고 패키지</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+    
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      text-align: center;
+      color: #1a202c;
+      margin-bottom: 8px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+    
+    .subtitle {
+      text-align: center;
+      color: #718096;
+      margin-bottom: 45px;
+      font-size: 14px;
+    }
+    
+    .logo-section {
+      background: white;
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 25px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+    
+    .section-badge {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 20px;
+      letter-spacing: 0.5px;
+    }
+    
+    .section-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #2d3748;
+    }
+    
+    .section-desc {
+      font-size: 12px;
+      color: #a0aec0;
+      margin-left: auto;
+    }
+    
+    .logo-display {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    
+    .logo-box {
+      border-radius: 16px;
+      padding: 40px 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 120px;
+      position: relative;
+    }
+    
+    .logo-box.light {
+      background: #f8fafc;
+    }
+    
+    .logo-box.dark {
+      background: #1a202c;
+    }
+    
+    .bg-label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      font-size: 10px;
+      color: #a0aec0;
+      font-weight: 500;
+    }
+    
+    .bg-label.white {
+      color: #4a5568;
+    }
+    
+    /* Icon Grid */
+    .icon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 25px;
+    }
+    
+    .icon-item {
+      text-align: center;
+    }
+    
+    .icon-wrapper {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .icon-wrapper.dark {
+      background: #1a202c;
+    }
+    
+    .icon-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #4a5568;
+    }
+    
+    .icon-size {
+      font-size: 11px;
+      color: #a0aec0;
+      margin-top: 2px;
+    }
+    
+    /* Favicon Grid */
+    .favicon-grid {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+    
+    .favicon-item {
+      text-align: center;
+    }
+    
+    .favicon-wrapper {
+      background: #f8fafc;
+      border-radius: 12px;
+      padding: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    
+    .favicon-wrapper.dark {
+      background: #1a202c;
+    }
+    
+    /* Usage Guide */
+    .usage-guide {
+      background: linear-gradient(135deg, #667eea08 0%, #764ba208 100%);
+      border-radius: 16px;
+      padding: 25px;
+      margin-top: 30px;
+    }
+    
+    .usage-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #4a5568;
+      margin-bottom: 15px;
+    }
+    
+    .usage-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    
+    @media (max-width: 500px) {
+      .usage-list {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .usage-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: #718096;
+    }
+    
+    .usage-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      flex-shrink: 0;
+    }
+    
+    /* Color Palette */
+    .color-palette {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    
+    .color-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      padding: 8px 14px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    
+    .color-swatch {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+    }
+    
+    .color-info span {
+      display: block;
+    }
+    
+    .color-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: #4a5568;
+    }
+    
+    .color-hex {
+      font-size: 10px;
+      color: #a0aec0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌿 MANABU LABS</h1>
+    <p class="subtitle">최종 로고 패키지</p>
+    
+    <!-- Main Logo -->
+    <div class="logo-section">
+      <div class="section-header">
+        <div class="section-badge">MAIN</div>
+        <div class="section-title">메인 로고 (가로형)</div>
+        <div class="section-desc">헤더, 네비게이션용</div>
+      </div>
+      <div class="logo-display">
+        <div class="logo-box light">
+          <span class="bg-label white">Light Mode</span>
+          <svg width="180" height="50" viewBox="0 0 180 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="mainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#667eea"/>
+                <stop offset="100%" style="stop-color:#764ba2"/>
+              </linearGradient>
+            </defs>
+            <!-- Leaf Icon -->
+            <path d="M22 3C17.5 8.5 9 15 9 25C9 35 16.5 41 22 43C27.5 41 35 35 35 25C35 15 26.5 8.5 22 3Z" stroke="url(#mainGrad)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15.5 17L22 12L28.5 17" stroke="url(#mainGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 12V34" stroke="url(#mainGrad)" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M15.5 34L22 39L28.5 34" stroke="url(#mainGrad)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Text -->
+            <text x="48" y="29" font-family="Outfit, sans-serif" font-size="22" font-weight="600" letter-spacing="3" fill="#1a202c">MANABU</text>
+            <text x="48" y="42" font-family="Outfit, sans-serif" font-size="9" font-weight="500" letter-spacing="5" fill="#667eea">LABS</text>
+          </svg>
+        </div>
+        <div class="logo-box dark">
+          <span class="bg-label">Dark Mode</span>
+          <svg width="180" height="50" viewBox="0 0 180 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="mainGradD" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#818cf8"/>
+                <stop offset="100%" style="stop-color:#a78bfa"/>
+              </linearGradient>
+            </defs>
+            <path d="M22 3C17.5 8.5 9 15 9 25C9 35 16.5 41 22 43C27.5 41 35 35 35 25C35 15 26.5 8.5 22 3Z" stroke="url(#mainGradD)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15.5 17L22 12L28.5 17" stroke="url(#mainGradD)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M22 12V34" stroke="url(#mainGradD)" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M15.5 34L22 39L28.5 34" stroke="url(#mainGradD)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="48" y="29" font-family="Outfit, sans-serif" font-size="22" font-weight="600" letter-spacing="3" fill="#ffffff">MANABU</text>
+            <text x="48" y="42" font-family="Outfit, sans-serif" font-size="9" font-weight="500" letter-spacing="5" fill="rgba(255,255,255,0.7)">LABS</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+    
+    <!-- App Icons -->
+    <div class="logo-section">
+      <div class="section-header">
+        <div class="section-badge">ICON</div>
+        <div class="section-title">앱 아이콘</div>
+        <div class="section-desc">iOS, Android, PWA</div>
+      </div>
+      <div class="icon-grid">
+        <!-- 512px -->
+        <div class="icon-item">
+          <div class="icon-wrapper">
+            <svg width="80" height="80" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="icon512" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea"/>
+                  <stop offset="100%" style="stop-color:#764ba2"/>
+                </linearGradient>
+              </defs>
+              <rect width="512" height="512" rx="115" fill="url(#icon512)"/>
+              <path d="M256 80C207 130 130 185 130 285C130 385 195 440 256 460C317 440 382 385 382 285C382 185 305 130 256 80Z" stroke="white" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M192 195L256 150L320 195" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M256 150V360" stroke="white" stroke-width="20" stroke-linecap="round"/>
+              <path d="M192 360L256 405L320 360" stroke="white" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-label">앱 아이콘</div>
+          <div class="icon-size">512 × 512</div>
+        </div>
+        
+        <!-- 192px -->
+        <div class="icon-item">
+          <div class="icon-wrapper">
+            <svg width="64" height="64" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="icon192" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea"/>
+                  <stop offset="100%" style="stop-color:#764ba2"/>
+                </linearGradient>
+              </defs>
+              <rect width="192" height="192" rx="42" fill="url(#icon192)"/>
+              <path d="M96 30C78 48 48 70 48 107C48 144 73 165 96 172C119 165 144 144 144 107C144 70 114 48 96 30Z" stroke="white" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M72 73L96 56L120 73" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M96 56V135" stroke="white" stroke-width="8" stroke-linecap="round"/>
+              <path d="M72 135L96 152L120 135" stroke="white" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-label">PWA 아이콘</div>
+          <div class="icon-size">192 × 192</div>
+        </div>
+        
+        <!-- Dark Version -->
+        <div class="icon-item">
+          <div class="icon-wrapper dark">
+            <svg width="64" height="64" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="icon192d" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#818cf8"/>
+                  <stop offset="100%" style="stop-color:#a78bfa"/>
+                </linearGradient>
+              </defs>
+              <rect width="192" height="192" rx="42" fill="#1a202c"/>
+              <path d="M96 30C78 48 48 70 48 107C48 144 73 165 96 172C119 165 144 144 144 107C144 70 114 48 96 30Z" stroke="url(#icon192d)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M72 73L96 56L120 73" stroke="url(#icon192d)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M96 56V135" stroke="url(#icon192d)" stroke-width="8" stroke-linecap="round"/>
+              <path d="M72 135L96 152L120 135" stroke="url(#icon192d)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-label">다크 버전</div>
+          <div class="icon-size">192 × 192</div>
+        </div>
+        
+        <!-- Monochrome -->
+        <div class="icon-item">
+          <div class="icon-wrapper">
+            <svg width="64" height="64" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="192" height="192" rx="42" fill="#f8fafc"/>
+              <defs>
+                <linearGradient id="iconMono" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea"/>
+                  <stop offset="100%" style="stop-color:#764ba2"/>
+                </linearGradient>
+              </defs>
+              <path d="M96 30C78 48 48 70 48 107C48 144 73 165 96 172C119 165 144 144 144 107C144 70 114 48 96 30Z" stroke="url(#iconMono)" stroke-width="8" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M72 73L96 56L120 73" stroke="url(#iconMono)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M96 56V135" stroke="url(#iconMono)" stroke-width="8" stroke-linecap="round"/>
+              <path d="M72 135L96 152L120 135" stroke="url(#iconMono)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-label">라이트 버전</div>
+          <div class="icon-size">192 × 192</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Favicons -->
+    <div class="logo-section">
+      <div class="section-header">
+        <div class="section-badge">FAVICON</div>
+        <div class="section-title">파비콘</div>
+        <div class="section-desc">브라우저 탭, 북마크</div>
+      </div>
+      <div class="favicon-grid">
+        <!-- 48px -->
+        <div class="favicon-item">
+          <div class="favicon-wrapper">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="fav48" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea"/>
+                  <stop offset="100%" style="stop-color:#764ba2"/>
+                </linearGradient>
+              </defs>
+              <path d="M24 4C19 10 10 17 10 28C10 39 18 45 24 47C30 45 38 39 38 28C38 17 29 10 24 4Z" stroke="url(#fav48)" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M17 18L24 13L31 18" stroke="url(#fav48)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M24 13V37" stroke="url(#fav48)" stroke-width="3" stroke-linecap="round"/>
+              <path d="M17 37L24 42L31 37" stroke="url(#fav48)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-label">48px</div>
+        </div>
+        
+        <!-- 32px -->
+        <div class="favicon-item">
+          <div class="favicon-wrapper">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="fav32" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea"/>
+                  <stop offset="100%" style="stop-color:#764ba2"/>
+                </linearGradient>
+              </defs>
+              <path d="M16 2C12 7 5 12 5 19C5 26 11 30 16 31C21 30 27 26 27 19C27 12 20 7 16 2Z" stroke="url(#fav32)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11 12L16 8L21 12" stroke="url(#fav32)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 8V25" stroke="url(#fav32)" stroke-width="2" stroke-linecap="round"/>
+              <path d="M11 25L16 29L21 25" stroke="url(#fav32)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-label">32px</div>
+        </div>
+        
+        <!-- 16px -->
+        <div class="favicon-item">
+          <div class="favicon-wrapper">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="fav16" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" style="stop-color:#667eea"/>
+                  <stop offset="100%" style="stop-color:#764ba2"/>
+                </linearGradient>
+              </defs>
+              <path d="M8 1C6 3.5 2.5 6 2.5 9.5C2.5 13 5.5 15 8 15.5C10.5 15 13.5 13 13.5 9.5C13.5 6 10 3.5 8 1Z" stroke="url(#fav16)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M5.5 6L8 4L10.5 6" stroke="url(#fav16)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M8 4V12.5" stroke="url(#fav16)" stroke-width="1.5" stroke-linecap="round"/>
+              <path d="M5.5 12.5L8 14.5L10.5 12.5" stroke="url(#fav16)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-label">16px</div>
+        </div>
+        
+        <!-- Filled versions -->
+        <div class="favicon-item">
+          <div class="favicon-wrapper" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px;">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16 2C12 7 5 12 5 19C5 26 11 30 16 31C21 30 27 26 27 19C27 12 20 7 16 2Z" stroke="white" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M11 12L16 8L21 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M16 8V25" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              <path d="M11 25L16 29L21 25" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="icon-label">Filled 32px</div>
+        </div>
+      </div>
+      
+      <!-- Usage Guide -->
+      <div class="usage-guide">
+        <div class="usage-title">📌 사용 가이드</div>
+        <div class="usage-list">
+          <div class="usage-item">
+            <div class="usage-dot"></div>
+            <span><strong>512px</strong> - App Store, Play Store</span>
+          </div>
+          <div class="usage-item">
+            <div class="usage-dot"></div>
+            <span><strong>192px</strong> - PWA, Android</span>
+          </div>
+          <div class="usage-item">
+            <div class="usage-dot"></div>
+            <span><strong>48px</strong> - 고해상도 파비콘</span>
+          </div>
+          <div class="usage-item">
+            <div class="usage-dot"></div>
+            <span><strong>32px</strong> - 표준 파비콘</span>
+          </div>
+          <div class="usage-item">
+            <div class="usage-dot"></div>
+            <span><strong>16px</strong> - 최소 파비콘</span>
+          </div>
+          <div class="usage-item">
+            <div class="usage-dot"></div>
+            <span><strong>Filled</strong> - 배경색 필요시</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Color Palette -->
+    <div class="logo-section">
+      <div class="section-header">
+        <div class="section-badge">COLOR</div>
+        <div class="section-title">컬러 팔레트</div>
+      </div>
+      <div class="color-palette">
+        <div class="color-item">
+          <div class="color-swatch" style="background: #667eea;"></div>
+          <div class="color-info">
+            <span class="color-name">Primary</span>
+            <span class="color-hex">#667EEA</span>
+          </div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background: #764ba2;"></div>
+          <div class="color-info">
+            <span class="color-name">Secondary</span>
+            <span class="color-hex">#764BA2</span>
+          </div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background: #818cf8;"></div>
+          <div class="color-info">
+            <span class="color-name">Light Primary</span>
+            <span class="color-hex">#818CF8</span>
+          </div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background: #a78bfa;"></div>
+          <div class="color-info">
+            <span class="color-name">Light Secondary</span>
+            <span class="color-hex">#A78BFA</span>
+          </div>
+        </div>
+        <div class="color-item">
+          <div class="color-swatch" style="background: #1a202c;"></div>
+          <div class="color-info">
+            <span class="color-name">Dark BG</span>
+            <span class="color-hex">#1A202C</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
