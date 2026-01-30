@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
     const supabase = getSupabase();
     const { data: cached } = await supabase
       .from("example_cache")
-      .select("example")
+      .select("example, word_japanese, word_reading, word_korean")
       .eq("word", word)
       .eq("level", level)
       .single();
@@ -77,6 +77,9 @@ export async function POST(request: NextRequest) {
       console.log("Cache hit for:", word, level);
       return NextResponse.json({
         word,
+        wordJapanese: cached.word_japanese ?? word,
+        wordReading: cached.word_reading ?? "",
+        wordKorean: cached.word_korean ?? "",
         example: cached.example,
         cached: true,
       });
@@ -96,6 +99,7 @@ export async function POST(request: NextRequest) {
 - 입력이 일본어인 경우, 그대로 사용해주세요
 - "wordJapanese"는 항상 일본어 표기 (한자 포함)
 - "wordReading"은 항상 히라가나로 읽는 방법
+- "wordKorean"은 해당 단어의 한국어 뜻
 - 난이도는 JLPT ${level} 수준으로 해주세요
 
 JSON 형식으로만 응답해주세요:
@@ -103,6 +107,7 @@ JSON 형식으로만 응답해주세요:
   "word": "${word}",
   "wordJapanese": "일본어 단어 (한자 표기)",
   "wordReading": "히라가나 읽기",
+  "wordKorean": "한국어 뜻",
   "example": {
     "japanese": "일본어 문장",
     "reading": "문장 전체의 히라가나 읽기",
@@ -143,6 +148,9 @@ JSON 형식으로만 응답해주세요:
       word,
       level,
       example: parsedResponse.example,
+      word_japanese: parsedResponse.wordJapanese,
+      word_reading: parsedResponse.wordReading,
+      word_korean: parsedResponse.wordKorean ?? "",
     });
 
     return NextResponse.json(parsedResponse);

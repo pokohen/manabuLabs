@@ -25,6 +25,7 @@ export const GeminiResponseSchema = z.object({
   word: z.string(),
   wordJapanese: z.string(),
   wordReading: z.string(),
+  wordKorean: z.string().optional(),
   example: ExampleSentenceSchema,
 })
 export type GeminiResponse = z.infer<typeof GeminiResponseSchema>

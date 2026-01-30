@@ -29,6 +29,7 @@ export default function WordSentence() {
   const [isLoading, setIsLoading] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [usageCount, setUsageCount] = useState(0)
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
   const fetchUsageCount = useCallback(async () => {
     if (!user) return
@@ -55,6 +56,7 @@ export default function WordSentence() {
 
     setIsLoading(true)
     setExampleResult(null)
+    setErrorMessage(null)
     try {
       const response = await fetch('/api/example-sentence', {
         method: 'POST',
@@ -73,7 +75,7 @@ export default function WordSentence() {
           router.push('/login?redirectTo=/word-sentence')
           return
         }
-        throw new Error(errorData.error || 'Failed to get examples')
+        throw new Error(errorData.error || '예문 생성에 실패했습니다.')
       }
 
       const data: GeminiResponse = await response.json()
@@ -84,6 +86,7 @@ export default function WordSentence() {
     } catch (error) {
       console.error('Error:', error)
       setExampleResult(null)
+      setErrorMessage(error instanceof Error ? error.message : '예문 생성에 실패했습니다.')
     } finally {
       setIsLoading(false)
     }
@@ -206,15 +209,26 @@ export default function WordSentence() {
             {usageCount >= DAILY_LIMIT ? '오늘 한도 초과' : '예시 문장 생성'}
           </Button>
 
+          {errorMessage && (
+            <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-lg">
+              <p className="text-sm text-red-700 dark:text-red-300">{errorMessage}</p>
+            </div>
+          )}
+
           {exampleResult && (
             <div className="space-y-4">
               <div className="p-3 bg-green-100 dark:bg-green-900 rounded-lg space-y-1">
                 <div className="flex items-baseline gap-2">
                   <span className="text-sm text-green-700 dark:text-green-300">단어: </span>
-                  <span className="text-lg font-bold text-green-800 dark:text-green-200">{exampleResult.wordJapanese}</span>
-                  <span className="text-sm text-green-600 dark:text-green-400">({exampleResult.wordReading})</span>
+                  <span className="text-lg font-bold text-green-800 dark:text-green-200">{exampleResult.wordJapanese || exampleResult.word}</span>
+                  {exampleResult.wordReading && (
+                    <span className="text-sm text-green-600 dark:text-green-400">({exampleResult.wordReading})</span>
+                  )}
                 </div>
-                {exampleResult.word !== exampleResult.wordJapanese && (
+                {exampleResult.wordKorean && (
+                  <p className="text-sm text-green-700 dark:text-green-300">뜻: {exampleResult.wordKorean}</p>
+                )}
+                {exampleResult.word !== exampleResult.wordJapanese && exampleResult.wordJapanese && (
                   <p className="text-xs text-green-600 dark:text-green-400">입력: {exampleResult.word}</p>
                 )}
               </div>
