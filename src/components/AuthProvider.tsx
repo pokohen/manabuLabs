@@ -2,8 +2,9 @@
 
 import { useEffect } from 'react'
 import { usePathname } from 'next/navigation'
-import { useAuthStore } from '@/store/authStore'
+import { useAuthStore, type UserRole } from '@/store/authStore'
 import { useThemeStore, type ThemeMode } from '@/store/themeStore'
+import { usePartnerStore } from '@/store/partnerStore'
 import { createBrowserSupabaseClient } from '@/lib/supabase/client'
 import { findStudyMenu } from '@/lib/study-menu'
 
@@ -13,7 +14,10 @@ export function AuthProvider() {
   const setUser = useAuthStore((s) => s.setUser)
   const setLoading = useAuthStore((s) => s.setLoading)
   const setLastStudiedMenu = useAuthStore((s) => s.setLastStudiedMenu)
+  const setRole = useAuthStore((s) => s.setRole)
   const setMode = useThemeStore((s) => s.setMode)
+  const setPartner = usePartnerStore((s) => s.setPartner)
+  const clearPartner = usePartnerStore((s) => s.clearPartner)
   const pathname = usePathname()
 
   // 초기 사용자 로드 + auth state 리스너
@@ -25,6 +29,10 @@ export function AuthProvider() {
 
       if (user) {
         await loadUserPreferences(user.id)
+        await loadPartnerInfo(user.id)
+      } else {
+        clearPartner()
+        setRole('default')
       }
     }
 
@@ -36,6 +44,10 @@ export function AuthProvider() {
 
         if (user) {
           await loadUserPreferences(user.id)
+          await loadPartnerInfo(user.id)
+        } else {
+          clearPartner()
+          setRole('default')
         }
       }
     )
@@ -69,7 +81,7 @@ export function AuthProvider() {
   async function loadUserPreferences(userId: string) {
     const { data } = await supabase
       .from('user_preferences')
-      .select('theme, last_studied_menu, deleted_at')
+      .select('theme, last_studied_menu, deleted_at, role')
       .eq('user_id', userId)
       .single()
 
@@ -91,6 +103,20 @@ export function AuthProvider() {
     if (data?.last_studied_menu) {
       setLastStudiedMenu(data.last_studied_menu)
     }
+    if (data?.role) {
+      setRole(data.role as UserRole)
+    }
+  }
+
+  async function loadPartnerInfo(userId: string) {
+    const { data } = await supabase
+      .from('partners')
+      .select('*')
+      .eq('user_id', userId)
+      .eq('is_active', true)
+      .single()
+
+    setPartner(data ?? null)
   }
 
   return null

@@ -34,7 +34,7 @@ export async function updateSession(request: NextRequest) {
   } = await supabase.auth.getUser()
 
   // 보호 경로: 비로그인 시 /login으로 리다이렉트
-  const protectedPaths = ['/word-sentence', '/profile']
+  const protectedPaths = ['/word-sentence', '/profile', '/partner-dashboard', '/admin']
   const isProtected = protectedPaths.some((p) => request.nextUrl.pathname.startsWith(p))
 
   if (!user && isProtected) {

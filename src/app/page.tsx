@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/Button'
 import Logo from '@/components/Logo'
+import BannerCarousel from '@/components/BannerCarousel'
 import { useAuthStore } from '@/store/authStore'
 import { findStudyMenu } from '@/lib/study-menu'
 
@@ -37,6 +38,8 @@ export default function Home() {
             </svg>
           </button>
         )}
+
+        <BannerCarousel position="home" />
 
         <div className="w-full max-w-md gap-4 mt-8 grid grid-cols-2">
 
