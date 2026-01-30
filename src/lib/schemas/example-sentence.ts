@@ -23,6 +23,8 @@ export type ExampleSentence = z.infer<typeof ExampleSentenceSchema>
 // Gemini API 응답 스키마
 export const GeminiResponseSchema = z.object({
   word: z.string(),
+  wordJapanese: z.string(),
+  wordReading: z.string(),
   example: ExampleSentenceSchema,
 })
 export type GeminiResponse = z.infer<typeof GeminiResponseSchema>

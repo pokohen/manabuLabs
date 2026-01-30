@@ -1,6 +1,7 @@
 export { default as SpeakerButton, speakJapanese, SpeakerIcon } from './SpeakerButton'
 export { default as HandwritingCanvas } from './HandwritingCanvas'
 export { default as QuizInput } from './QuizInput'
+export type { QuizMode } from './QuizInput'
 export { default as QuizResultScreen } from './QuizResultScreen'
 export type { AnsweredItem } from './QuizResultScreen'
 export { default as QuizLoadingScreen } from './QuizLoadingScreen'

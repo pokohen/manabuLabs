@@ -3,8 +3,8 @@
 // 현재 재생 중인 오디오
 let currentAudio: HTMLAudioElement | null = null
 
-// Google Cloud TTS API 호출
-export async function speakJapanese(text: string) {
+// TTS API 호출 (reading이 있으면 후리가나로 발음)
+export async function speakJapanese(text: string, reading?: string) {
   try {
     // 이전 오디오 중지
     if (currentAudio) {
@@ -15,7 +15,7 @@ export async function speakJapanese(text: string) {
     const response = await fetch('/api/tts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text }),
+      body: JSON.stringify({ text, reading }),
     })
 
     if (!response.ok) {
@@ -44,6 +44,7 @@ export function SpeakerIcon({ className = "w-5 h-5" }: { className?: string }) {
 // 스피커 버튼 컴포넌트
 interface SpeakerButtonProps {
   text: string
+  reading?: string
   className?: string
   iconClassName?: string
   title?: string
@@ -51,13 +52,14 @@ interface SpeakerButtonProps {
 
 export default function SpeakerButton({
   text,
+  reading,
   className = "p-2 rounded-full bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-700 dark:text-zinc-300 transition-colors cursor-pointer",
   iconClassName = "w-5 h-5",
   title = "문장 듣기"
 }: SpeakerButtonProps) {
   return (
     <button
-      onClick={() => speakJapanese(text)}
+      onClick={() => speakJapanese(text, reading)}
       className={className}
       title={title}
     >

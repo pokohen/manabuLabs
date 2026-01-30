@@ -51,12 +51,6 @@ export default function GrammarStudyPage() {
           })}
         </div>
 
-        <Button
-          onClick={() => router.push('/')}
-          className="w-full py-3 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors mt-4"
-        >
-          뒤로 가기
-        </Button>
       </main>
     </div>
   )

@@ -65,14 +65,14 @@ export default function StepLearning({ patterns, categoryLabel, initialIndex = 0
     setQuizOptions(options.sort(() => Math.random() - 0.5))
   }, [currentPattern, currentPatternIndex, patterns])
 
-  const speakJapanese = async (text: string) => {
+  const speakJapanese = async (text: string, reading?: string) => {
     if (isSpeaking) return
     setIsSpeaking(true)
     try {
       const response = await fetch('/api/tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ text, reading }),
       })
       if (response.ok) {
         const { audio } = await response.json()
@@ -181,7 +181,7 @@ export default function StepLearning({ patterns, categoryLabel, initialIndex = 0
               {!isLastPattern && (
                 <Button
                   onClick={handleSkip}
-                  className="py-1 px-3 bg-transparent hover:bg-zinc-700 border border-zinc-700 text-white text-sm font-medium rounded-lg transition-colors"
+                  className="py-1 px-3 bg-transparent hover:bg-zinc-200 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-white text-sm font-medium rounded-lg transition-colors"
                 >
                   건너뛰기
                 </Button>

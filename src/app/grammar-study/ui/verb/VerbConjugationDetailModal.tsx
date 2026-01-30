@@ -26,7 +26,7 @@ export default function VerbConjugationDetailModal({
     }
   }, [])
 
-  const speakJapanese = async (text: string) => {
+  const speakJapanese = async (text: string, reading?: string) => {
     if (isSpeaking) return
 
     setIsSpeaking(true)
@@ -34,7 +34,7 @@ export default function VerbConjugationDetailModal({
       const response = await fetch('/api/tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ text, reading }),
       })
 
       if (!response.ok) throw new Error('TTS failed')
@@ -233,7 +233,7 @@ export default function VerbConjugationDetailModal({
                       )}
                     </div>
                     <Button
-                      onClick={() => speakJapanese(example.conjugated)}
+                      onClick={() => speakJapanese(example.conjugated, example.reading)}
                       className="p-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-full transition-colors flex-shrink-0"
                       disabled={isSpeaking}
                     >
@@ -268,7 +268,7 @@ export default function VerbConjugationDetailModal({
                       </p>
                     </div>
                     <Button
-                      onClick={() => speakJapanese(example.japanese)}
+                      onClick={() => speakJapanese(example.japanese, example.reading)}
                       className="p-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-full transition-colors flex-shrink-0"
                       disabled={isSpeaking}
                     >

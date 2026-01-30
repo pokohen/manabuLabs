@@ -308,6 +308,7 @@ export default function ParticleQuiz({ questionCount, onExit }: ParticleQuizProp
               </p>
               <SpeakerButton
                 text={currentQuestion.example.japanese}
+                reading={currentQuestion.example.reading}
                 className="p-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-full transition-colors text-zinc-600 dark:text-zinc-400"
                 iconClassName="w-5 h-5"
               />

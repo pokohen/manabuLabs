@@ -150,7 +150,7 @@ export default function ParticleStepLearning({ particles, categoryLabel, initial
               {!isLastParticle && (
                 <Button
                   onClick={handleSkip}
-                  className="py-1 px-3 bg-transparent hover:bg-zinc-700 border border-zinc-700 text-white text-sm font-medium rounded-lg transition-colors"
+                  className="py-1 px-3 bg-transparent hover:bg-zinc-200 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-white text-sm font-medium rounded-lg transition-colors"
                 >
                   건너뛰기
                 </Button>
@@ -292,6 +292,7 @@ export default function ParticleStepLearning({ particles, categoryLabel, initial
                       </div>
                       <SpeakerButton
                         text={example.japanese}
+                        reading={example.reading}
                         className="p-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-full transition-colors text-zinc-600 dark:text-zinc-400"
                         iconClassName="w-5 h-5"
                       />

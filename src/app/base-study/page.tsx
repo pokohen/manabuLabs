@@ -34,13 +34,6 @@ export default function Page() {
             히라가나 / 가타카나 퀴즈
           </Button>
 
-          <Button
-            onClick={() => router.push('/')}
-            className="w-full py-3 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors mt-4"
-          >
-            뒤로 가기
-          </Button>
-
         </div>
       </main>
     </div>

@@ -127,7 +127,7 @@ export function FormationStep({ pattern }: StepProps) {
 // Step 3: 예문 학습
 interface ExamplesStepProps extends StepProps {
   examples: GrammarExample[]
-  onSpeak: (text: string) => void
+  onSpeak: (text: string, reading?: string) => void
 }
 
 export function ExamplesStep({ examples, onSpeak }: ExamplesStepProps) {
@@ -155,7 +155,7 @@ export function ExamplesStep({ examples, onSpeak }: ExamplesStepProps) {
             </div>
             <IconButton
               icon="speaker"
-              onClick={() => onSpeak(example.japanese)}
+              onClick={() => onSpeak(example.japanese, example.reading)}
               label="음성 재생"
               size="md"
               className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"

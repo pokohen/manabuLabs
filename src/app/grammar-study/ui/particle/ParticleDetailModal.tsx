@@ -167,6 +167,7 @@ export default function ParticleDetailModal({ particle, onClose }: ParticleDetai
                         </div>
                         <SpeakerButton
                           text={usage.examples[0].japanese}
+                          reading={usage.examples[0].reading}
                           className="p-1.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-full transition-colors text-zinc-600 dark:text-zinc-400"
                           iconClassName="w-4 h-4"
                         />
@@ -214,6 +215,7 @@ export default function ParticleDetailModal({ particle, onClose }: ParticleDetai
                     </div>
                     <SpeakerButton
                       text={example.japanese}
+                      reading={example.reading}
                       className="p-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-full transition-colors text-zinc-600 dark:text-zinc-400"
                       iconClassName="w-5 h-5"
                     />

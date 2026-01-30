@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { Button } from '@/components/Button'
 import { JLPTLevel } from '@/data/kanji'
 import KanjiStepPage from './ui/stepPage'
@@ -17,7 +16,6 @@ const jlptLevels: { level: SelectableLevel; label: string; color: string }[] = [
 ]
 
 export default function KanjiStudyPage() {
-  const router = useRouter()
   const [selectedLevel, setSelectedLevel] = useState<SelectableLevel | null>(null)
 
   // 급수가 선택되면 KanjiStepPage 표시
@@ -35,7 +33,7 @@ export default function KanjiStudyPage() {
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black p-4">
       <main className="flex w-full flex-col items-center gap-8 py-16 px-8 max-w-md">
         <h1 className="text-3xl font-bold text-black dark:text-white">
-          한자 공부
+          한자 공부 (beta)
         </h1>
         <p className="text-lg text-zinc-600 dark:text-zinc-400 text-center">
           JLPT 급수를 선택하세요
@@ -53,12 +51,6 @@ export default function KanjiStudyPage() {
           ))}
         </div>
 
-        <Button
-          onClick={() => router.push('/base-study')}
-          className="w-full py-3 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors mt-4"
-        >
-          뒤로 가기
-        </Button>
       </main>
     </div>
   )

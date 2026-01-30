@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/Button'
 import type { VerbConjugation } from '@/data/grammar'
 import { QuizInput } from '../common'
+import type { QuizMode } from '../common'
 
 interface VerbStepLearningProps {
   conjugations: VerbConjugation[]
@@ -29,6 +30,7 @@ export default function VerbStepLearning({
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
   const [quizKey, setQuizKey] = useState(0) // QuizInput 리셋용
+  const [quizMode, setQuizMode] = useState<QuizMode>('typing')
 
   const currentConjugation = conjugations[currentIndex]
 
@@ -57,7 +59,7 @@ export default function VerbStepLearning({
     return parts.length > 0 ? parts[0] : ''
   })() : ''
 
-  const speakJapanese = async (text: string) => {
+  const speakJapanese = async (text: string, reading?: string) => {
     if (isSpeaking) return
 
     setIsSpeaking(true)
@@ -65,7 +67,7 @@ export default function VerbStepLearning({
       const response = await fetch('/api/tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ text, reading }),
       })
 
       if (!response.ok) throw new Error('TTS failed')
@@ -268,7 +270,7 @@ export default function VerbStepLearning({
                       </p>
                     </div>
                     <Button
-                      onClick={() => speakJapanese(example.conjugated)}
+                      onClick={() => speakJapanese(example.conjugated, example.reading)}
                       className="p-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-full transition-colors"
                       disabled={isSpeaking}
                     >
@@ -320,6 +322,8 @@ export default function VerbStepLearning({
               onResult={() => {}}
               onComplete={handleQuizComplete}
               completeButtonText={currentIndex < conjugations.length - 1 ? '다음 활용형' : '완료'}
+              quizMode={quizMode}
+              onQuizModeChange={setQuizMode}
             />
           </div>
         )}

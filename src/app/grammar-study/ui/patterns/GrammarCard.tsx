@@ -26,6 +26,7 @@ function ExampleItem({ example }: { example: GrammarExample }) {
         </div>
         <SpeakerButton
           text={example.japanese}
+          reading={example.reading}
           className="p-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-full transition-colors flex-shrink-0 text-zinc-600 dark:text-zinc-400"
           iconClassName="w-5 h-5"
         />

@@ -196,7 +196,7 @@ export default function GrammarPuzzleQuiz({ level, questionCount, onExit }: Gram
     // 자동 읽기가 켜져 있으면 정답 문장 읽기
     if (autoSpeak) {
       setTimeout(() => {
-        speakJapanese(currentQuestion.example.japanese)
+        speakJapanese(currentQuestion.example.japanese, currentQuestion.example.reading)
       }, 300)
     }
   }
@@ -297,7 +297,7 @@ export default function GrammarPuzzleQuiz({ level, questionCount, onExit }: Gram
                   </div>
                   <div className="flex flex-col gap-2 shrink-0">
                     <button
-                      onClick={() => speakJapanese(q.example.japanese)}
+                      onClick={() => speakJapanese(q.example.japanese, q.example.reading)}
                       className={`p-2 rounded-lg transition-colors cursor-pointer ${buttonColorClass}`}
                       title="문장 듣기"
                     >

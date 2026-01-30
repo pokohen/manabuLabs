@@ -124,6 +124,7 @@ export default function AdjectiveDetailModal({ adjectiveType, onClose }: Adjecti
                     </div>
                     <SpeakerButton
                       text={conj.example.conjugated || conj.example.casual || conj.example.word}
+                      reading={conj.example.reading}
                       className={`p-2 rounded-full transition-colors ${
                         isIAdjective
                           ? 'bg-pink-100 dark:bg-pink-900/30 hover:bg-pink-200 dark:hover:bg-pink-900/50 text-pink-600 dark:text-pink-400'
@@ -164,6 +165,7 @@ export default function AdjectiveDetailModal({ adjectiveType, onClose }: Adjecti
                     </div>
                     <SpeakerButton
                       text={word.word}
+                      reading={word.reading}
                       className={`p-1.5 rounded-full transition-colors flex-shrink-0 ml-2 ${
                         isIAdjective
                           ? 'bg-pink-100 dark:bg-pink-900/30 hover:bg-pink-200 dark:hover:bg-pink-900/50 text-pink-600 dark:text-pink-400'
@@ -241,6 +243,7 @@ export default function AdjectiveDetailModal({ adjectiveType, onClose }: Adjecti
                         </div>
                         <SpeakerButton
                           text={word.word}
+                          reading={word.reading}
                           className="p-1 bg-red-200 dark:bg-red-800 hover:bg-red-300 dark:hover:bg-red-700 rounded-full transition-colors text-red-700 dark:text-red-300"
                           iconClassName="w-3 h-3"
                         />

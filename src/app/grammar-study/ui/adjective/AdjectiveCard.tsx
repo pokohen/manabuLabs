@@ -78,6 +78,7 @@ export default function AdjectiveCard({
                             </span>
                             <SpeakerButton
                               text={conj.example.conjugated || conj.example.casual || conj.example.word}
+                              reading={conj.example.reading}
                               className="p-1 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-full transition-colors text-zinc-600 dark:text-zinc-400"
                               iconClassName="w-4 h-4"
                             />
@@ -175,6 +176,7 @@ export default function AdjectiveCard({
                     </div>
                     <SpeakerButton
                       text={word.word}
+                      reading={word.reading}
                       className="p-1.5 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 rounded-full transition-colors flex-shrink-0 text-zinc-600 dark:text-zinc-400"
                       iconClassName="w-4 h-4"
                     />

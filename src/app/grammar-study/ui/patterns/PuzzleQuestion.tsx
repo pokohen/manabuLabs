@@ -159,7 +159,7 @@ export default function PuzzleQuestion({
                 <p className={`font-medium ${isCorrect ? 'text-emerald-700 dark:text-emerald-300' : 'text-red-700 dark:text-red-300'}`}>
                   {isCorrect ? '정답입니다!' : '오답입니다'}
                 </p>
-                <SpeakerButton text={japanese} />
+                <SpeakerButton text={japanese} reading={reading} />
               </div>
               {!isCorrect && (
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 mt-1">

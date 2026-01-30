@@ -1,10 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import { Button } from '@/components/Button'
 import { ToggleGroup } from '@/components/ToggleButton'
 import { IconButton } from '@/components/IconButton'
+import { useAuthStore } from '@/store/authStore'
+import { createBrowserSupabaseClient } from '@/lib/supabase/client'
 import type { JLPTLevel, GeminiResponse } from '@/lib/schemas/example-sentence'
 
 const jlptOptions: { value: JLPTLevel; label: string }[] = [
@@ -16,13 +18,37 @@ const jlptOptions: { value: JLPTLevel; label: string }[] = [
 ]
 
 
+const DAILY_LIMIT = 5
+
 export default function WordSentence() {
   const router = useRouter()
+  const { user, isLoading: authLoading } = useAuthStore()
   const [inputWord, setInputWord] = useState('')
   const [jlptLevel, setJlptLevel] = useState<JLPTLevel>('N5')
   const [exampleResult, setExampleResult] = useState<GeminiResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [isSpeaking, setIsSpeaking] = useState(false)
+  const [usageCount, setUsageCount] = useState(0)
+
+  const fetchUsageCount = useCallback(async () => {
+    if (!user) return
+    const supabase = createBrowserSupabaseClient()
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+    const { count } = await supabase
+      .from('usage_logs')
+      .select('*', { count: 'exact', head: true })
+      .eq('user_id', user.id)
+      .eq('action', 'example_sentence')
+      .gte('created_at', today.toISOString())
+    setUsageCount(count ?? 0)
+  }, [user])
+
+  useEffect(() => {
+    if (user) {
+      fetchUsageCount()
+    }
+  }, [user, fetchUsageCount])
 
   const handleGetExamples = async () => {
     if (!inputWord.trim()) return
@@ -43,6 +69,10 @@ export default function WordSentence() {
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}))
+        if (response.status === 401) {
+          router.push('/login?redirectTo=/word-sentence')
+          return
+        }
         throw new Error(errorData.error || 'Failed to get examples')
       }
 
@@ -50,6 +80,7 @@ export default function WordSentence() {
 
       console.log('Example Response:', data)
       setExampleResult(data)
+      await fetchUsageCount()
     } catch (error) {
       console.error('Error:', error)
       setExampleResult(null)
@@ -58,7 +89,7 @@ export default function WordSentence() {
     }
   }
 
-  const speakJapanese = async (text: string) => {
+  const speakJapanese = async (text: string, reading?: string) => {
     if (isSpeaking) return
 
     setIsSpeaking(true)
@@ -66,7 +97,7 @@ export default function WordSentence() {
       const response = await fetch('/api/tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ text, reading }),
       })
 
       if (!response.ok) {
@@ -92,14 +123,47 @@ export default function WordSentence() {
     }
   }
   
+  if (authLoading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black">
+        <div className="animate-pulse text-zinc-500 dark:text-zinc-400">로딩 중...</div>
+      </div>
+    )
+  }
+
+  if (!user) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-zinc-50 dark:bg-black p-4">
+        <div className="w-full max-w-sm text-center space-y-6">
+          <h1 className="text-2xl font-bold text-black dark:text-white">로그인이 필요합니다</h1>
+          <p className="text-zinc-500 dark:text-zinc-400 text-sm">
+            예문 생성 기능을 사용하려면 로그인해 주세요.
+          </p>
+          <Button
+            onClick={() => router.push('/login?redirectTo=/word-sentence')}
+            className="w-full py-3 px-4 bg-green-600 hover:bg-green-700"
+          >
+            로그인하러 가기
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black p-4">
       <main className="flex w-full flex-col items-center gap-8 py-16 px-8">
         <h1 className="text-3xl font-bold text-black dark:text-white">
-          예시 문장 보기
+          문장 보기
         </h1>
 
         <div className="w-full max-w-md space-y-4">
+          {/* 사용량 표시 */}
+          <div className="text-right">
+            <span className={`text-sm ${usageCount >= DAILY_LIMIT ? 'text-red-500' : 'text-zinc-500 dark:text-zinc-400'}`}>
+              오늘 {usageCount}/{DAILY_LIMIT}회 사용
+            </span>
+          </div>
           <div>
             <label
               htmlFor="inputWord"
@@ -112,7 +176,7 @@ export default function WordSentence() {
               type="text"
               value={inputWord}
               onChange={(e) => setInputWord(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleGetExamples()}
+              onKeyDown={(e) => e.key === 'Enter' && e.preventDefault()}
               className="w-full p-3 border border-zinc-300 dark:border-zinc-700 rounded-lg bg-white dark:bg-zinc-900 text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="예: 食べる, 勉強, 学校..."
             />
@@ -135,18 +199,24 @@ export default function WordSentence() {
 
           <Button
             onClick={handleGetExamples}
-            disabled={!inputWord.trim()}
+            disabled={!inputWord.trim() || usageCount >= DAILY_LIMIT}
             isLoading={isLoading}
             className="w-full py-3 px-4 bg-green-600 hover:bg-green-700 disabled:bg-zinc-400"
           >
-            예시 문장 생성
+            {usageCount >= DAILY_LIMIT ? '오늘 한도 초과' : '예시 문장 생성'}
           </Button>
 
           {exampleResult && (
             <div className="space-y-4">
-              <div className="p-3 bg-green-100 dark:bg-green-900 rounded-lg">
-                <span className="text-sm text-green-700 dark:text-green-300">단어: </span>
-                <span className="text-lg font-bold text-green-800 dark:text-green-200">{exampleResult.word}</span>
+              <div className="p-3 bg-green-100 dark:bg-green-900 rounded-lg space-y-1">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-sm text-green-700 dark:text-green-300">단어: </span>
+                  <span className="text-lg font-bold text-green-800 dark:text-green-200">{exampleResult.wordJapanese}</span>
+                  <span className="text-sm text-green-600 dark:text-green-400">({exampleResult.wordReading})</span>
+                </div>
+                {exampleResult.word !== exampleResult.wordJapanese && (
+                  <p className="text-xs text-green-600 dark:text-green-400">입력: {exampleResult.word}</p>
+                )}
               </div>
 
                 <div className="p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg space-y-2">
@@ -154,7 +224,7 @@ export default function WordSentence() {
                     <div className="text-xs text-zinc-500 dark:text-zinc-400">예문</div>
                     <IconButton
                       icon="speaker"
-                      onClick={() => speakJapanese(exampleResult.example.japanese)}
+                      onClick={() => speakJapanese(exampleResult.example.japanese, exampleResult.example.reading)}
                       label="음성 재생"
                       size="md"
                       className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
@@ -176,13 +246,6 @@ export default function WordSentence() {
             </div>
           )}
 
-          <Button
-            onClick={() => router.push('/')}
-            variant="secondary"
-            className="w-full py-3 px-4 bg-zinc-500 hover:bg-zinc-600"
-          >
-            뒤로 가기
-          </Button>
         </div>
       </main>
     </div>

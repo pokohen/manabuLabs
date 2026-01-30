@@ -105,12 +105,6 @@ export default function KanjiStepPage({ step, onBack }: KanjiStepPageProps) {
             <h1 className="text-2xl font-bold text-black dark:text-white">
               {step} 한자 ({kanjiList.length}자)
             </h1>
-            <Button
-              onClick={onBack}
-              className="py-2 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors"
-            >
-              뒤로 가기
-            </Button>
           </div>
           {/* 퀴즈 버튼 */}
           <Button

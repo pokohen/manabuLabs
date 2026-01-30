@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import adjectiveData from '@/data/grammar/adjective.json'
 import { QuizResultScreen, QuizInput } from '../common'
-import type { AnsweredItem } from '../common'
+import type { AnsweredItem, QuizMode } from '../common'
 
 export type QuestionCount = 10 | 20 | 'all'
 
@@ -182,6 +182,7 @@ export default function AdjectiveConjugationQuiz({ questionCount, onExit }: Adje
   const [answeredQuestions, setAnsweredQuestions] = useState<AnsweredItem<AdjectiveQuestion>[]>([])
   const [showResult, setShowResult] = useState(false)
   const [quizKey, setQuizKey] = useState(0)
+  const [quizMode, setQuizMode] = useState<QuizMode>('typing')
 
   // 클라이언트에서만 문제 생성 (SSR 불일치 방지)
   useEffect(() => {
@@ -369,6 +370,8 @@ export default function AdjectiveConjugationQuiz({ questionCount, onExit }: Adje
             onResult={handleQuizResult}
             onComplete={handleNext}
             completeButtonText={currentIndex < questions.length - 1 ? '다음 문제' : '결과 보기'}
+            quizMode={quizMode}
+            onQuizModeChange={setQuizMode}
           />
         </div>
       </main>

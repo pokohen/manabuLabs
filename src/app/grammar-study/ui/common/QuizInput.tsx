@@ -4,7 +4,7 @@ import { useState, useRef } from 'react'
 import { Button } from '@/components/Button'
 import HandwritingCanvas, { HandwritingCanvasRef } from './HandwritingCanvas'
 
-type QuizMode = 'typing' | 'handwriting'
+export type QuizMode = 'typing' | 'handwriting'
 
 interface QuizInputProps {
   correctAnswer: string
@@ -14,6 +14,8 @@ interface QuizInputProps {
   onResult: (isCorrect: boolean, userAnswer: string) => void
   onComplete: () => void
   completeButtonText?: string
+  quizMode: QuizMode
+  onQuizModeChange: (mode: QuizMode) => void
 }
 
 export default function QuizInput({
@@ -23,9 +25,10 @@ export default function QuizInput({
   displayReading,
   onResult,
   onComplete,
-  completeButtonText = '다음'
+  completeButtonText = '다음',
+  quizMode,
+  onQuizModeChange,
 }: QuizInputProps) {
-  const [quizMode, setQuizMode] = useState<QuizMode>('typing')
   const [typingInput, setTypingInput] = useState('')
   const [showAnswer, setShowAnswer] = useState(false)
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null)
@@ -67,7 +70,7 @@ export default function QuizInput({
         {/* 모드 선택 */}
         <div className="flex justify-center gap-2">
           <button
-            onClick={() => setQuizMode('typing')}
+            onClick={() => onQuizModeChange('typing')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               quizMode === 'typing'
                 ? 'bg-emerald-600 text-white'
@@ -77,7 +80,7 @@ export default function QuizInput({
             타자 입력
           </button>
           <button
-            onClick={() => setQuizMode('handwriting')}
+            onClick={() => onQuizModeChange('handwriting')}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
               quizMode === 'handwriting'
                 ? 'bg-emerald-600 text-white'

@@ -57,12 +57,6 @@ export default function ParticleQuizSetup({ onStart, onBack }: ParticleQuizSetup
           >
             퀴즈 시작
           </Button>
-          <Button
-            onClick={onBack}
-            className="w-full py-3 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors"
-          >
-            뒤로 가기
-          </Button>
         </div>
       </main>
     </div>

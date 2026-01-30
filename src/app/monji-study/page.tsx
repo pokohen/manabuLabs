@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { hiragana, katakana, KanaType, KanaData } from '@/data/kana'
 import WritingModal from '@/components/WritingModal'
 import { Button } from '@/components/Button'
@@ -36,7 +35,6 @@ const kanaRows = [
 ]
 
 export default function MonjiStudyPage() {
-  const router = useRouter()
   const [kanaType, setKanaType] = useState<KanaType>('hiragana')
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [activeChar, setActiveChar] = useState<string | null>(null)
@@ -114,6 +112,7 @@ export default function MonjiStudyPage() {
         {/* 가나 타입 선택 */}
         <div className="flex gap-2 w-full max-w-xs">
           <Button
+            variant="none"
             onClick={() => setKanaType('hiragana')}
             className={`flex-1 py-3 px-4 font-medium rounded-lg transition-colors ${
               kanaType === 'hiragana'
@@ -124,6 +123,7 @@ export default function MonjiStudyPage() {
             히라가나
           </Button>
           <Button
+            variant="none"
             onClick={() => setKanaType('katakana')}
             className={`flex-1 py-3 px-4 font-medium rounded-lg transition-colors ${
               kanaType === 'katakana'
@@ -160,6 +160,7 @@ export default function MonjiStudyPage() {
                       <td key={index} className="p-1 text-center">
                         {kana ? (
                           <Button
+                            variant="none"
                             onClick={() => openWritingModal(kana)}
                             className={`w-12 h-12 sm:w-14 sm:h-14 rounded-lg transition-all flex flex-col items-center justify-center ${
                               activeChar === kana.char
@@ -184,13 +185,6 @@ export default function MonjiStudyPage() {
           </table>
         </div>
 
-        {/* 뒤로가기 버튼 */}
-        <Button
-          onClick={() => router.push('/base-study')}
-          className="w-full max-w-xs py-3 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors"
-        >
-          뒤로 가기
-        </Button>
       </main>
 
       {/* 쓰기 연습 모달 */}

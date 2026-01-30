@@ -55,14 +55,14 @@ export default function GrammarDetailModal({ pattern, onClose }: GrammarDetailMo
     { key: 'examples', label: '예문' },
   ]
 
-  const speakJapanese = async (text: string) => {
+  const speakJapanese = async (text: string, reading?: string) => {
     if (isSpeaking) return
     setIsSpeaking(true)
     try {
       const response = await fetch('/api/tts', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
+        body: JSON.stringify({ text, reading }),
       })
       if (response.ok) {
         const { audio } = await response.json()
@@ -269,7 +269,7 @@ export default function GrammarDetailModal({ pattern, onClose }: GrammarDetailMo
                         </div>
                         <IconButton
                           icon="speaker"
-                          onClick={() => speakJapanese(example.japanese)}
+                          onClick={() => speakJapanese(example.japanese, example.reading)}
                           label="음성 재생"
                           size="md"
                           className="text-zinc-600 hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200 bg-zinc-100 dark:bg-zinc-700 rounded-full p-2"

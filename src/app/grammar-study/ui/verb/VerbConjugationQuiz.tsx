@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import verbConjugationData from '@/data/grammar/verb-conjugation.json'
 import { QuizResultScreen, QuizInput } from '../common'
-import type { AnsweredItem } from '../common'
+import type { AnsweredItem, QuizMode } from '../common'
 import ConjugationDetailModal, { QuizQuestion } from './ConjugationDetailModal'
 
 export type QuestionCount = 10 | 20 | 'all'
@@ -55,6 +55,7 @@ export default function VerbConjugationQuiz({ questionCount, onExit }: VerbConju
   const [showResult, setShowResult] = useState(false)
   const [selectedQuestion, setSelectedQuestion] = useState<AnsweredItem<QuizQuestion> | null>(null)
   const [quizKey, setQuizKey] = useState(0)
+  const [quizMode, setQuizMode] = useState<QuizMode>('typing')
 
   // 클라이언트에서만 문제 생성 (SSR 불일치 방지)
   useEffect(() => {
@@ -253,6 +254,8 @@ export default function VerbConjugationQuiz({ questionCount, onExit }: VerbConju
             onResult={handleQuizResult}
             onComplete={handleNext}
             completeButtonText={currentIndex < questions.length - 1 ? '다음 문제' : '결과 보기'}
+            quizMode={quizMode}
+            onQuizModeChange={setQuizMode}
           />
         </div>
       </main>

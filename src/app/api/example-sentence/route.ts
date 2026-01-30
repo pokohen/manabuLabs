@@ -1,13 +1,56 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getGemini } from "@/lib/gemini";
 import { getSupabase } from "@/lib/supabase";
+import { createServerSupabaseClient } from "@/lib/supabase/server";
 import {
   ExampleRequestSchema,
   GeminiResponseSchema,
 } from "@/lib/schemas/example-sentence";
 
+const DAILY_LIMIT = 5;
+
 export async function POST(request: NextRequest) {
   try {
+    // 인증 확인
+    const authSupabase = await createServerSupabaseClient();
+    const {
+      data: { user },
+    } = await authSupabase.auth.getUser();
+
+    if (!user) {
+      return NextResponse.json(
+        { error: "로그인이 필요합니다." },
+        { status: 401 }
+      );
+    }
+
+    // 일일 사용량 체크
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const { count } = await authSupabase
+      .from("usage_logs")
+      .select("*", { count: "exact", head: true })
+      .eq("user_id", user.id)
+      .eq("action", "example_sentence")
+      .gte("created_at", today.toISOString());
+
+    if ((count ?? 0) >= DAILY_LIMIT) {
+      return NextResponse.json(
+        {
+          error: "오늘의 예문 생성 한도(5회)를 초과했습니다.",
+          dailyLimit: DAILY_LIMIT,
+          used: count,
+        },
+        { status: 429 }
+      );
+    }
+
+    // 사용량 기록 (rate limit 통과 후 바로 기록)
+    await authSupabase.from("usage_logs").insert({
+      user_id: user.id,
+      action: "example_sentence",
+    });
+
     const body = await request.json();
 
     // 요청 검증
@@ -46,22 +89,23 @@ export async function POST(request: NextRequest) {
       model: "gemini-2.5-flash",
     });
 
-    const prompt = `일본어 단어 "${word}"를 사용한 예시 문장을 1개 만들어주세요.
+    const prompt = `"${word}"를 사용한 일본어 예시 문장을 1개 만들어주세요.
 
-각 문장에 대해 다음 형식으로 응답해주세요:
-1. 일본어 문장
-2. 읽는 방법 (히라가나)
-3. 한국어 번역
-4. 해당 단어의 JLPT 수준 (예: N5, N4, N3, N2, N1)
-
-난이도는 JLPT ${level} 수준으로 해주세요
+규칙:
+- 입력이 한국어인 경우, 해당 뜻에 맞는 일본어 단어로 변환해주세요
+- 입력이 일본어인 경우, 그대로 사용해주세요
+- "wordJapanese"는 항상 일본어 표기 (한자 포함)
+- "wordReading"은 항상 히라가나로 읽는 방법
+- 난이도는 JLPT ${level} 수준으로 해주세요
 
 JSON 형식으로만 응답해주세요:
 {
   "word": "${word}",
+  "wordJapanese": "일본어 단어 (한자 표기)",
+  "wordReading": "히라가나 읽기",
   "example": {
     "japanese": "일본어 문장",
-    "reading": "히라가나 읽기",
+    "reading": "문장 전체의 히라가나 읽기",
     "korean": "한국어 번역",
     "level": "N5"
   }
