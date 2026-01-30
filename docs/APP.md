@@ -107,6 +107,26 @@
 | `Logo` / `LogoIcon` | 로고 컴포넌트 |
 | `Button` | 공통 버튼 |
 
+### 관리자 대시보드 (`src/app/admin/_components/`)
+
+| 컴포넌트 | 설명 |
+|----------|------|
+| `AdminDashboardClient` | 메인 컴포넌트 (탭 라우팅) |
+| `types` | 공유 인터페이스 (UserItem, CategoryItem, PartnerItem, BannerItem) |
+| `UsersTab` | 회원 목록 + UserEditModal (역할 변경, 파트너 등록) |
+| `CategoriesTab` | 카테고리 CRUD (slug, display_name, bio 입력) |
+| `PartnersTab` | 파트너 목록 관리 (user_id + category_id) |
+| `AdminBannersTab` | 배너 CRUD (카테고리 선택 + BannerEditor) |
+
+### 파트너 대시보드 (`src/app/partner-dashboard/_components/`)
+
+| 컴포넌트 | 설명 |
+|----------|------|
+| `PartnerDashboardClient` | 메인 컴포넌트 (탭 라우팅 + PresenceIndicator) |
+| `ProfileTab` | 단체 프로필 편집 (display_name, bio) |
+| `LinksTab` | 단체 링크 CRUD |
+| `PartnerBannersTab` | 단체 배너 CRUD (BannerEditor 포함) |
+
 ### 상태 관리 (`src/store/`)
 
 | 스토어 | 상태 |

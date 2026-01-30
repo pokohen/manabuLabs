@@ -52,11 +52,23 @@ src/
 │   │   ├── tokenize/             # 토큰화
 │   │   └── tts/                  # 음성 합성
 │   ├── admin/                    # 관리자 대시보드
+│   │   └── _components/
+│   │       ├── AdminDashboardClient.tsx  # 메인 (탭 라우팅)
+│   │       ├── types.ts                 # 공유 인터페이스
+│   │       ├── UsersTab.tsx             # 회원 관리 + 편집 모달
+│   │       ├── CategoriesTab.tsx        # 카테고리 관리
+│   │       ├── PartnersTab.tsx          # 파트너 관리
+│   │       └── AdminBannersTab.tsx      # 배너 관리
 │   ├── base-study/               # 히라가나/가타카나 학습
 │   ├── grammar-study/            # 문법 학습
 │   ├── kanji-study/              # 한자 학습
 │   ├── partner/[slug]/           # 공개 단체 페이지 (카테고리 slug 조회)
 │   ├── partner-dashboard/        # 파트너 대시보드
+│   │   └── _components/
+│   │       ├── PartnerDashboardClient.tsx  # 메인 (탭 라우팅 + Presence)
+│   │       ├── ProfileTab.tsx             # 단체 프로필 편집
+│   │       ├── LinksTab.tsx               # 링크 관리
+│   │       └── PartnerBannersTab.tsx      # 배너 관리
 │   ├── word-sentence/            # 단어/문장 학습
 │   ├── quiz/                     # 퀴즈
 │   ├── quiz-setup/               # 퀴즈 설정
