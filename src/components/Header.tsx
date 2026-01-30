@@ -112,7 +112,7 @@ export default function Header() {
 
       {/* 서랍 메뉴 */}
       <div
-        className={`fixed top-0 left-0 z-50 h-full w-72 bg-white dark:bg-zinc-900 shadow-2xl transform transition-transform duration-300 ease-out ${
+        className={`fixed top-0 left-0 z-[51] h-full w-72 bg-white dark:bg-zinc-900 shadow-2xl transform transition-transform duration-300 ease-out ${
           isDrawerOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -212,10 +212,16 @@ export default function Header() {
                 </button>
                 <button
                   onClick={async () => {
-                    const supabase = createBrowserSupabaseClient()
-                    await supabase.auth.signOut()
-                    setIsDrawerOpen(false)
-                    router.push('/')
+                    console.log('[Header] 로그아웃 클릭')
+                    try {
+                      const supabase = createBrowserSupabaseClient()
+                      const { error } = await supabase.auth.signOut()
+                      if (error) console.error('[Header] signOut error:', error)
+                      setIsDrawerOpen(false)
+                      router.push('/')
+                    } catch (e) {
+                      console.error('[Header] signOut exception:', e)
+                    }
                   }}
                   className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-red-500 dark:hover:text-red-400 transition-colors cursor-pointer shrink-0 px-2 py-1"
                 >
