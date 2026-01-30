@@ -20,34 +20,20 @@ export function AuthProvider() {
   const clearPartner = usePartnerStore((s) => s.clearPartner)
   const pathname = usePathname()
 
-  // 초기 사용자 로드 + auth state 리스너
+  // auth state 리스너 (초기 로드 + 세션 변화 감지를 onAuthStateChange 하나로 처리)
   useEffect(() => {
-    const initAuth = async () => {
-      // StoreHydrator가 이미 서버 데이터를 주입한 경우 초기 fetch 스킵
-      const state = useAuthStore.getState()
-      if (!state.isLoading && state.user !== null) {
-        return
-      }
-
-      const { data: { user } } = await supabase.auth.getUser()
-      setUser(user)
-      setLoading(false)
-
-      if (user) {
-        await loadUserPreferences(user.id)
-        await loadPartnerInfo(user.id)
-      } else {
-        clearPartner()
-        setRole('default')
-      }
-    }
-
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
-        // INITIAL_SESSION에서 일시적으로 session이 null일 수 있음 (토큰 갱신 중)
-        // 이 경우 StoreHydrator가 이미 세팅한 role을 'default'로 덮어쓰는 것을 방지
-        if (event === 'INITIAL_SESSION' && !session) {
-          return
+        // StoreHydrator가 이미 서버 데이터를 주입한 경우 초기 fetch 스킵
+        if (event === 'INITIAL_SESSION') {
+          const state = useAuthStore.getState()
+          if (!state.isLoading && state.user !== null) {
+            return
+          }
+          // 토큰 갱신 중 일시적 null session → 스킵
+          if (!session) {
+            return
+          }
         }
 
         const user = session?.user ?? null
@@ -63,8 +49,6 @@ export function AuthProvider() {
         }
       }
     )
-
-    initAuth()
 
     return () => {
       subscription.unsubscribe()
