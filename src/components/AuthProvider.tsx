@@ -43,7 +43,13 @@ export function AuthProvider() {
     }
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
+      async (event, session) => {
+        // INITIAL_SESSION에서 일시적으로 session이 null일 수 있음 (토큰 갱신 중)
+        // 이 경우 StoreHydrator가 이미 세팅한 role을 'default'로 덮어쓰는 것을 방지
+        if (event === 'INITIAL_SESSION' && !session) {
+          return
+        }
+
         const user = session?.user ?? null
         setUser(user)
         setLoading(false)
@@ -51,7 +57,7 @@ export function AuthProvider() {
         if (user) {
           await loadUserPreferences(user.id)
           await loadPartnerInfo(user.id)
-        } else {
+        } else if (event === 'SIGNED_OUT') {
           clearPartner()
           setRole('default')
         }
