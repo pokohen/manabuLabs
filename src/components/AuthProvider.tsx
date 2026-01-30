@@ -75,11 +75,13 @@ export function AuthProvider() {
   }, [pathname, setLastStudiedMenu])
 
   async function loadUserPreferences(userId: string) {
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('user_preferences')
       .select('theme, last_studied_menu, deleted_at, role')
       .eq('user_id', userId)
       .single()
+
+    console.log('[AuthProvider] loadUserPreferences:', { userId, data, error })
 
     // 소프트 삭제 복구: 7일 이내 재로그인 시 deleted_at 해제
     if (data?.deleted_at) {
@@ -110,7 +112,7 @@ export function AuthProvider() {
       .select('*, partner_categories(*)')
       .eq('user_id', userId)
       .eq('is_active', true)
-      .single()
+      .maybeSingle()
 
     if (data) {
       const { partner_categories, ...partnerData } = data
