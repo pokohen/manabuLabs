@@ -24,14 +24,18 @@ export function AuthProvider() {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       async (event, session) => {
+        console.log('[AuthProvider] onAuthStateChange:', event, { hasSession: !!session, userId: session?.user?.id })
+
         // StoreHydrator가 이미 서버 데이터를 주입한 경우 초기 fetch 스킵
         if (event === 'INITIAL_SESSION') {
           const state = useAuthStore.getState()
           if (!state.isLoading && state.user !== null) {
+            console.log('[AuthProvider] INITIAL_SESSION 스킵 (StoreHydrator)')
             return
           }
           // 세션 없음 → 비로그인 상태 확정
           if (!session) {
+            console.log('[AuthProvider] INITIAL_SESSION 세션 없음 → 비로그인')
             setUser(null)
             setLoading(false)
             return
@@ -46,6 +50,7 @@ export function AuthProvider() {
           await loadUserPreferences(user.id)
           await loadPartnerInfo(user.id)
         } else if (event === 'SIGNED_OUT') {
+          console.log('[AuthProvider] SIGNED_OUT → 상태 초기화')
           clearPartner()
           setRole('default')
         }
