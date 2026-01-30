@@ -10,20 +10,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params
   const supabase = await createServerSupabaseClient()
 
-  const { data: partner } = await supabase
-    .from('partners')
+  const { data: category } = await supabase
+    .from('partner_categories')
     .select('display_name, bio')
     .eq('slug', slug)
     .eq('is_active', true)
     .single()
 
-  if (!partner) {
+  if (!category) {
     return { title: '파트너를 찾을 수 없습니다' }
   }
 
   return {
-    title: `${partner.display_name} | MANABU LABS`,
-    description: partner.bio || `${partner.display_name}의 파트너 페이지`,
+    title: `${category.display_name} | MANABU LABS`,
+    description: category.bio || `${category.display_name}의 파트너 페이지`,
   }
 }
 
@@ -31,21 +31,21 @@ export default async function PartnerPage({ params }: PageProps) {
   const { slug } = await params
   const supabase = await createServerSupabaseClient()
 
-  const { data: partner } = await supabase
-    .from('partners')
+  const { data: category } = await supabase
+    .from('partner_categories')
     .select('*')
     .eq('slug', slug)
     .eq('is_active', true)
     .single()
 
-  if (!partner) {
+  if (!category) {
     notFound()
   }
 
   const { data: links } = await supabase
     .from('partner_links')
     .select('*')
-    .eq('partner_id', partner.id)
+    .eq('category_id', category.id)
     .eq('is_active', true)
     .order('sort_order', { ascending: true })
 
@@ -54,30 +54,30 @@ export default async function PartnerPage({ params }: PageProps) {
       <main className="flex w-full max-w-md flex-col items-center gap-6 py-16 px-4">
         {/* 아바타 */}
         <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-zinc-200 dark:border-zinc-700 bg-zinc-200 dark:bg-zinc-800">
-          {partner.avatar_url ? (
+          {category.avatar_url ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
-              src={partner.avatar_url}
-              alt={partner.display_name}
+              src={category.avatar_url}
+              alt={category.display_name}
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-3xl font-bold text-zinc-500 dark:text-zinc-400">
-              {partner.display_name[0].toUpperCase()}
+              {category.display_name[0].toUpperCase()}
             </div>
           )}
         </div>
 
         {/* 이름 */}
         <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">
-          {partner.display_name}
+          {category.display_name}
         </h1>
 
         {/* 소개 */}
-        {partner.bio && (
+        {category.bio && (
           <p className="text-center text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
-            {partner.bio}
+            {category.bio}
           </p>
         )}
 

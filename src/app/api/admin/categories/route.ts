@@ -41,14 +41,22 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: '관리자 권한이 필요합니다' }, { status: 403 })
   }
 
-  const { name, description, sort_order } = await request.json()
-  if (!name?.trim()) {
-    return NextResponse.json({ error: '카테고리 이름은 필수입니다' }, { status: 400 })
+  const { name, description, sort_order, slug, display_name, bio, avatar_url } = await request.json()
+  if (!name?.trim() || !slug?.trim() || !display_name?.trim()) {
+    return NextResponse.json({ error: '카테고리 이름, 슬러그, 표시 이름은 필수입니다' }, { status: 400 })
   }
 
   const { data, error } = await supabase
     .from('partner_categories')
-    .insert({ name: name.trim(), description: description || null, sort_order: sort_order ?? 0 })
+    .insert({
+      name: name.trim(),
+      description: description || null,
+      sort_order: sort_order ?? 0,
+      slug: slug.trim(),
+      display_name: display_name.trim(),
+      bio: bio || null,
+      avatar_url: avatar_url || null,
+    })
     .select()
     .single()
 

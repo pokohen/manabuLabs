@@ -24,10 +24,11 @@ MANABU LABS - 일본어 학습 웹 애플리케이션 + 파트너/광고 배너 
 - 문법 학습 (동사, 형용사, 조사 퀴즈)
 - AI 기반 예문 생성
 - TTS 음성 재생
-- 파트너 시스템 (링크트리 스타일 공개 페이지)
+- 단체(카테고리) 기반 파트너 시스템 (링크트리 스타일 공개 페이지)
 - 광고 배너 캐러셀 (홈 + 서랍 메뉴)
 - 역할 기반 접근 제어 (default / partner / admin)
 - 관리자 대시보드 (회원/카테고리/파트너/배너 관리)
+- Supabase Realtime Presence 기반 동시 편집 표시
 
 ## 디렉토리 구조
 
@@ -44,9 +45,9 @@ src/
 │   │   ├── banners/              # 공개 배너 조회
 │   │   ├── example-sentence/     # AI 예문 생성
 │   │   ├── partner/
-│   │   │   ├── banners/          # 파트너 배너 자체 관리
-│   │   │   ├── links/            # 파트너 링크 관리
-│   │   │   └── profile/          # 파트너 프로필 관리
+│   │   │   ├── banners/          # 단체 배너 관리 (category_id 기반)
+│   │   │   ├── links/            # 단체 링크 관리 (category_id 기반)
+│   │   │   └── profile/          # 단체 프로필 관리 (partner_categories 대상)
 │   │   ├── particle-mask/        # 조사 마스킹
 │   │   ├── tokenize/             # 토큰화
 │   │   └── tts/                  # 음성 합성
@@ -54,7 +55,7 @@ src/
 │   ├── base-study/               # 히라가나/가타카나 학습
 │   ├── grammar-study/            # 문법 학습
 │   ├── kanji-study/              # 한자 학습
-│   ├── partner/[slug]/           # 공개 파트너 페이지
+│   ├── partner/[slug]/           # 공개 단체 페이지 (카테고리 slug 조회)
 │   ├── partner-dashboard/        # 파트너 대시보드
 │   ├── word-sentence/            # 단어/문장 학습
 │   ├── quiz/                     # 퀴즈
@@ -65,9 +66,12 @@ src/
 │   ├── layout.tsx                # 루트 레이아웃
 │   └── page.tsx                  # 홈페이지
 ├── components/
-│   ├── AuthProvider.tsx           # 인증 + 역할 + 파트너 상태 초기화
+│   ├── AuthProvider.tsx           # 인증 + 역할 + 파트너/카테고리 상태 초기화
 │   ├── BannerCarousel.tsx         # 배너 캐러셀 (홈/서랍)
+│   ├── BannerEditor.tsx           # 배너 이미지 편집 (크롭/텍스트/업로드)
 │   ├── Header.tsx                 # 네비게이션 + 서랍 메뉴
+│   ├── PresenceIndicator.tsx      # Realtime Presence 동시 편집 표시
+│   ├── StoreHydrator.tsx          # 서버 → 클라이언트 스토어 하이드레이션
 │   ├── ThemeProvider.tsx          # 테마 관리
 │   └── ...                        # 기타 UI 컴포넌트
 ├── lib/
@@ -82,7 +86,7 @@ src/
 │   └── ...
 ├── store/
 │   ├── authStore.ts               # 인증 상태 (user, role, lastStudiedMenu)
-│   ├── partnerStore.ts            # 파트너 상태 (isPartner, partner)
+│   ├── partnerStore.ts            # 파트너 상태 (isPartner, partner, category)
 │   ├── themeStore.ts              # 테마 상태
 │   └── quizStore.ts               # 퀴즈 상태
 ├── data/                          # 정적 데이터 (문법, 한자)
@@ -115,21 +119,21 @@ Supabase PostgreSQL. 상세 스키마는 `docs/DATABASE.md` 참조.
 | 테이블 | 설명 |
 |--------|------|
 | `user_preferences` | 사용자 설정 + 역할 (role) |
-| `partner_categories` | 파트너 카테고리 |
-| `partners` | 파트너 프로필 |
-| `partner_links` | 파트너 링크 |
-| `banners` | 광고 배너 |
+| `partner_categories` | 단체 프로필 (slug, display_name, bio, avatar_url) |
+| `partners` | 단체 멤버 (user ↔ category 연결) |
+| `partner_links` | 단체 링크 (category_id FK) |
+| `banners` | 광고 배너 (category_id FK) |
 
 ### 역할 시스템
 
 `user_preferences.role` 필드로 관리:
 - `default` — 일반 사용자
-- `partner` — 파트너 (자기 프로필/링크/배너 관리)
+- `partner` — 파트너 (소속 단체의 프로필/링크/배너 공유 편집)
 - `admin` — 관리자 (전체 관리)
 
 ### CASCADE 삭제
 
-카테고리 삭제 → 파트너 삭제 → 링크/배너 삭제 + 트리거로 role을 default로 리셋
+카테고리 삭제 → 소속 파트너 삭제 → 카테고리 소속 링크/배너 삭제 + 트리거로 role을 default로 리셋
 
 ## 코드 컨벤션
 

@@ -26,8 +26,8 @@
 
 | 경로 | 설명 | 인증 |
 |------|------|------|
-| `/partner/[slug]` | 공개 파트너 페이지 (링크트리 스타일) | 불필요 |
-| `/partner-dashboard` | 파트너 대시보드 (프로필/링크/배너 관리) | **필요** (partner role) |
+| `/partner/[slug]` | 공개 단체 페이지 (카테고리 slug 조회, 링크트리 스타일) | 불필요 |
+| `/partner-dashboard` | 단체 대시보드 (프로필/링크/배너 공유 편집 + Presence 표시) | **필요** (partner role) |
 
 ### 관리자
 
@@ -59,16 +59,16 @@
 
 | 메서드 | 경로 | 설명 |
 |--------|------|------|
-| GET | `/api/partner/profile` | 본인 파트너 프로필 조회 |
-| PATCH | `/api/partner/profile` | 프로필 수정 (display_name, bio) |
-| GET | `/api/partner/links` | 본인 링크 목록 |
-| POST | `/api/partner/links` | 링크 추가 |
-| PATCH | `/api/partner/links` | 링크 수정 |
-| DELETE | `/api/partner/links` | 링크 삭제 |
-| GET | `/api/partner/banners` | 본인 배너 목록 |
-| POST | `/api/partner/banners` | 배너 추가 |
-| PATCH | `/api/partner/banners` | 배너 수정 |
-| DELETE | `/api/partner/banners` | 배너 삭제 |
+| GET | `/api/partner/profile` | 소속 단체 프로필 조회 (partner_categories) |
+| PATCH | `/api/partner/profile` | 단체 프로필 수정 (display_name, bio) |
+| GET | `/api/partner/links` | 소속 단체 링크 목록 (category_id 기반) |
+| POST | `/api/partner/links` | 단체 링크 추가 |
+| PATCH | `/api/partner/links` | 단체 링크 수정 |
+| DELETE | `/api/partner/links` | 단체 링크 삭제 |
+| GET | `/api/partner/banners` | 소속 단체 배너 목록 (category_id 기반) |
+| POST | `/api/partner/banners` | 단체 배너 추가 |
+| PATCH | `/api/partner/banners` | 단체 배너 수정 |
+| DELETE | `/api/partner/banners` | 단체 배너 삭제 |
 
 ### 관리자 API (admin role 필요)
 
@@ -98,8 +98,11 @@
 | 컴포넌트 | 설명 |
 |----------|------|
 | `Header` | 네비게이션 헤더 + 서랍 메뉴 (배너, 파트너/관리자 링크 포함) |
-| `AuthProvider` | 인증 상태 초기화, 사용자 설정 로드, 파트너 정보 로드 |
+| `AuthProvider` | 인증 상태 초기화, 사용자 설정 로드, 파트너/카테고리 정보 로드 |
 | `BannerCarousel` | 배너 캐러셀 (자동 슬라이드, 수동 이동, 반응형) |
+| `BannerEditor` | 배너 이미지 편집 (크롭/텍스트 오버레이/WebP 업로드) |
+| `PresenceIndicator` | Supabase Realtime Presence로 동시 편집 중인 멤버 표시 |
+| `StoreHydrator` | 서버 데이터를 클라이언트 Zustand 스토어에 주입 |
 | `ThemeProvider` / `ThemeToggle` | 테마 관리 (light/dark/auto) |
 | `Logo` / `LogoIcon` | 로고 컴포넌트 |
 | `Button` | 공통 버튼 |
@@ -109,7 +112,7 @@
 | 스토어 | 상태 |
 |--------|------|
 | `authStore` | `user`, `isLoading`, `lastStudiedMenu`, `role` |
-| `partnerStore` | `isPartner`, `partner` |
+| `partnerStore` | `isPartner`, `partner`, `category` |
 | `themeStore` | `mode`, `resolvedTheme` |
 | `quizStore` | 퀴즈 설정 및 진행 상태 |
 
@@ -121,7 +124,7 @@
 사용자 로그인 (Google OAuth)
   │
   ├─ AuthProvider: user_preferences에서 theme, role 로드
-  ├─ AuthProvider: partners 테이블에서 파트너 정보 로드
+  ├─ AuthProvider: partners + partner_categories 조인으로 파트너/단체 정보 로드
   │
   ├─ role = 'default'  → 일반 사용자
   ├─ role = 'partner'  → 파트너 대시보드 접근 가능

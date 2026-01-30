@@ -25,7 +25,7 @@ export async function GET() {
   // 관리자는 비활성 포함 전체 파트너 조회 (카테고리 조인)
   const { data, error } = await supabase
     .from('partners')
-    .select('*, partner_categories(name)')
+    .select('*, partner_categories(name, slug, display_name)')
     .order('created_at', { ascending: false })
 
   if (error) {
@@ -42,14 +42,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: '관리자 권한이 필요합니다' }, { status: 403 })
   }
 
-  const { user_id, slug, display_name, bio, category_id } = await request.json()
-  if (!user_id || !slug || !display_name) {
-    return NextResponse.json({ error: 'user_id, slug, display_name은 필수입니다' }, { status: 400 })
+  const { user_id, category_id } = await request.json()
+  if (!user_id || !category_id) {
+    return NextResponse.json({ error: 'user_id와 category_id는 필수입니다' }, { status: 400 })
   }
 
   const { data, error } = await supabase
     .from('partners')
-    .insert({ user_id, slug, display_name, bio: bio || null, category_id: category_id || null })
+    .insert({ user_id, category_id })
     .select()
     .single()
 

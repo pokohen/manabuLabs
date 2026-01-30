@@ -25,7 +25,7 @@ export async function GET() {
   // 관리자는 비활성 포함 전체 배너 조회
   const { data, error } = await supabase
     .from('banners')
-    .select('*, partners(display_name, slug)')
+    .select('*, partner_categories(display_name, slug)')
     .order('sort_order', { ascending: true })
 
   if (error) {
@@ -42,15 +42,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: '관리자 권한이 필요합니다' }, { status: 403 })
   }
 
-  const { partner_id, title, image_url, link_url, position, sort_order } = await request.json()
-  if (!partner_id || !title || !image_url || !link_url) {
+  const { category_id, title, image_url, link_url, position, sort_order } = await request.json()
+  if (!category_id || !title || !image_url || !link_url) {
     return NextResponse.json({ error: '필수 항목을 입력해주세요' }, { status: 400 })
   }
 
   const { data, error } = await supabase
     .from('banners')
     .insert({
-      partner_id,
+      category_id,
       title,
       image_url,
       link_url,

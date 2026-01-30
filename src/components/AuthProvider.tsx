@@ -23,6 +23,12 @@ export function AuthProvider() {
   // 초기 사용자 로드 + auth state 리스너
   useEffect(() => {
     const initAuth = async () => {
+      // StoreHydrator가 이미 서버 데이터를 주입한 경우 초기 fetch 스킵
+      const state = useAuthStore.getState()
+      if (!state.isLoading && state.user !== null) {
+        return
+      }
+
       const { data: { user } } = await supabase.auth.getUser()
       setUser(user)
       setLoading(false)
@@ -111,12 +117,17 @@ export function AuthProvider() {
   async function loadPartnerInfo(userId: string) {
     const { data } = await supabase
       .from('partners')
-      .select('*')
+      .select('*, partner_categories(*)')
       .eq('user_id', userId)
       .eq('is_active', true)
       .single()
 
-    setPartner(data ?? null)
+    if (data) {
+      const { partner_categories, ...partnerData } = data
+      setPartner(partnerData, partner_categories ?? null)
+    } else {
+      setPartner(null)
+    }
   }
 
   return null
