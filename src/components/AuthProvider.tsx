@@ -25,17 +25,13 @@ export function AuthProvider() {
   useEffect(() => {
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (event, session) => {
-        console.log('[AuthProvider] onAuthStateChange:', event, { hasSession: !!session, userId: session?.user?.id })
-
         // StoreHydrator가 이미 서버 데이터를 주입한 경우 초기 fetch 스킵
         if (event === 'INITIAL_SESSION') {
           const state = useAuthStore.getState()
           if (!state.isLoading && state.user !== null) {
-            console.log('[AuthProvider] INITIAL_SESSION 스킵 (StoreHydrator)')
             return
           }
           if (!session) {
-            console.log('[AuthProvider] INITIAL_SESSION 세션 없음 → 비로그인')
             setUser(null)
             setLoading(false)
             return
@@ -50,7 +46,6 @@ export function AuthProvider() {
           // DB 쿼리를 콜백 밖으로 defer → auth lock deadlock 방지
           pendingUserId.current = user.id
         } else if (event === 'SIGNED_OUT') {
-          console.log('[AuthProvider] SIGNED_OUT → 상태 초기화')
           pendingUserId.current = null
           clearPartner()
           setRole('default')
@@ -72,15 +67,8 @@ export function AuthProvider() {
     pendingUserId.current = null
 
     async function loadData() {
-      console.log('[AuthProvider] loadUserPreferences 호출 시작:', userId)
-      try {
-        await loadUserPreferences(userId)
-        console.log('[AuthProvider] loadPartnerInfo 호출 시작')
-        await loadPartnerInfo(userId)
-        console.log('[AuthProvider] 데이터 로드 완료')
-      } catch (e) {
-        console.error('[AuthProvider] 데이터 로드 실패:', e)
-      }
+      await loadUserPreferences(userId)
+      await loadPartnerInfo(userId)
     }
     loadData()
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -105,13 +93,11 @@ export function AuthProvider() {
   }, [pathname, setLastStudiedMenu])
 
   async function loadUserPreferences(userId: string) {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('user_preferences')
       .select('theme, last_studied_menu, deleted_at, role')
       .eq('user_id', userId)
       .single()
-
-    console.log('[AuthProvider] loadUserPreferences:', { userId, data, error })
 
     // 소프트 삭제 복구: 7일 이내 재로그인 시 deleted_at 해제
     if (data?.deleted_at) {

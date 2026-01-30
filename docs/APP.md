@@ -140,26 +140,96 @@
 
 ## 인증 / 권한 흐름
 
+### 로그인 흐름 (Google OAuth + PKCE)
+
 ```
-사용자 로그인 (Google OAuth)
-  │
-  ├─ AuthProvider: user_preferences에서 theme, role 로드
-  ├─ AuthProvider: partners + partner_categories 조인으로 파트너/단체 정보 로드
-  │
-  ├─ role = 'default'  → 일반 사용자
-  ├─ role = 'partner'  → 파트너 대시보드 접근 가능
-  └─ role = 'admin'    → 관리자 대시보드 접근 가능
+1. 사용자가 /login 에서 "Google로 로그인" 클릭
+   │
+2. supabase.auth.signInWithOAuth({ provider: 'google' })
+   │  redirectTo: /auth/callback?next=<redirectTo>
+   │
+3. Google 인증 → Supabase Auth → /auth/callback?code=...&next=...
+   │
+4. /auth/callback (서버 Route Handler)
+   │  supabase.auth.exchangeCodeForSession(code)
+   │  → 세션 쿠키 설정 후 next 경로로 redirect
+   │
+5. 리다이렉트된 페이지 로드
+   │
+6. AuthProvider (onAuthStateChange)
+   │  SIGNED_IN 이벤트 수신 → setUser(user), setLoading(false)
+   │
+7. 별도 useEffect에서 DB 데이터 로드 (auth lock 해제 후)
+   ├─ user_preferences → role, theme, last_studied_menu
+   └─ partners + partner_categories → 파트너/단체 정보
 ```
+
+### AuthProvider 구조 (중요)
+
+`onAuthStateChange` 콜백 안에서 Supabase DB 쿼리를 직접 `await`하면
+`navigator.locks` 기반 auth lock과 deadlock이 발생할 수 있음 (프로덕션 환경에서 확인됨).
+
+따라서 다음과 같이 2단계로 분리:
+
+1. **`onAuthStateChange` 콜백 (동기)** — user/loading 상태만 업데이트, DB 쿼리 안 함
+2. **별도 `useEffect` (user 의존)** — user 변경 시 `loadUserPreferences` / `loadPartnerInfo` 실행
+
+```
+onAuthStateChange (동기 콜백)
+  ├─ INITIAL_SESSION + StoreHydrator 이미 주입 → 스킵
+  ├─ INITIAL_SESSION + 세션 없음 → setUser(null), setLoading(false)
+  ├─ SIGNED_IN / TOKEN_REFRESHED → setUser(user), setLoading(false), pendingUserId 설정
+  └─ SIGNED_OUT → clearPartner(), setRole('default')
+
+useEffect([user]) — onAuthStateChange 완료 후 실행
+  ├─ loadUserPreferences(userId) → role, theme 적용
+  └─ loadPartnerInfo(userId) → 파트너/카테고리 정보 적용
+```
+
+### 로그아웃 흐름
+
+```
+Header에서 "로그아웃" 클릭
+  → supabase.auth.signOut()
+  → window.location.href = '/' (풀 리로드로 서버 쿠키 정리)
+```
+
+`router.push()`가 아닌 `window.location.href`를 사용해야
+서버 미들웨어가 만료된 세션 쿠키를 정리할 수 있음.
+
+### 서버 사이드 인증 (StoreHydrator)
+
+보호 페이지(`/admin`, `/profile`, `/partner-dashboard`, `/word-sentence`)는
+서버 컴포넌트에서 `getServerAuthData()`로 인증 데이터를 미리 로드하고
+`StoreHydrator`로 클라이언트 Zustand 스토어에 주입:
+
+```
+서버 컴포넌트 (page.tsx)
+  ├─ getServerAuthData() → user, role, partner, category
+  ├─ role 체크 (admin/partner) → 실패 시 redirect
+  └─ <StoreHydrator user={...} role={...} /> → 클라이언트 스토어 초기화
+```
+
+이 경우 AuthProvider의 `INITIAL_SESSION`에서 StoreHydrator가 이미 데이터를
+주입했음을 감지하고 중복 fetch를 스킵.
+
+### 역할 시스템
+
+| 역할 | 접근 가능 |
+|------|-----------|
+| `default` | 일반 학습 기능 |
+| `partner` | + 파트너 대시보드 (`/partner-dashboard`) |
+| `admin` | + 관리자 대시보드 (`/admin`) |
 
 ### 보호 경로 (middleware)
 
-비로그인 시 `/login`으로 리다이렉트:
+비로그인 시 `/login?redirectTo=<현재경로>`로 리다이렉트:
 - `/word-sentence`
 - `/profile`
 - `/partner-dashboard`
 - `/admin`
 
-역할 체크는 각 페이지 컴포넌트와 API 라우트에서 수행합니다.
+역할 체크는 각 페이지의 서버 컴포넌트와 API 라우트에서 수행.
 
 ---
 

@@ -212,15 +212,8 @@ export default function Header() {
                 </button>
                 <button
                   onClick={async () => {
-                    console.log('[Header] 로그아웃 클릭')
-                    try {
-                      const supabase = createBrowserSupabaseClient()
-                      const { error } = await supabase.auth.signOut()
-                      console.log('[Header] signOut 결과:', { error })
-                      if (error) console.error('[Header] signOut error:', error)
-                    } catch (e) {
-                      console.error('[Header] signOut exception:', e)
-                    }
+                    const supabase = createBrowserSupabaseClient()
+                    await supabase.auth.signOut()
                     window.location.href = '/'
                   }}
                   className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-red-500 dark:hover:text-red-400 transition-colors cursor-pointer shrink-0 px-2 py-1"
