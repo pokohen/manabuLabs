@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/Button'
 import type { GrammarPattern, GrammarExample } from '@/data/grammar'
 import { LearningCompletionScreen, IntroStep, FormationStep, ExamplesStep, QuizStep } from '../common'
@@ -29,14 +29,20 @@ export default function StepLearning({ patterns, categoryLabel, initialIndex = 0
   const [isSpeaking, setIsSpeaking] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
 
+  const isInitialMount = useRef(true)
   const currentPattern = patterns[currentPatternIndex]
   const totalPatterns = patterns.length
   const progress = ((currentPatternIndex) / totalPatterns) * 100
 
-  // URL 동기화
+  // URL 동기화 (초기 마운트 시에는 건너뛰기)
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      return
+    }
     onIndexChange?.(currentPatternIndex)
-  }, [currentPatternIndex, onIndexChange])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPatternIndex])
 
   const steps: LearningStep[] = ['intro', 'formation', 'examples', 'quiz']
   const currentStepIndex = steps.indexOf(currentStep)

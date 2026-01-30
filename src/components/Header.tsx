@@ -173,36 +173,46 @@ export default function Header() {
           <div className="mb-3">
             {!isLoading && user ? (
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-zinc-200 dark:border-zinc-700 shrink-0">
-                  {user.user_metadata?.avatar_url ? (
-                    <img
-                      src={user.user_metadata.avatar_url}
-                      alt="프로필"
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-zinc-300 dark:bg-zinc-600 flex items-center justify-center text-xs font-bold text-white">
-                      {(user.user_metadata?.full_name ?? user.email ?? '?')[0].toUpperCase()}
-                    </div>
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200 truncate">
-                    {user.user_metadata?.full_name ?? user.email}
-                  </p>
-                  <button
-                    onClick={async () => {
-                      const supabase = createBrowserSupabaseClient()
-                      await supabase.auth.signOut()
-                      setIsDrawerOpen(false)
-                      router.push('/')
-                    }}
-                    className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-red-500 dark:hover:text-red-400 transition-colors cursor-pointer"
-                  >
-                    로그아웃
-                  </button>
-                </div>
+                <button
+                  onClick={() => {
+                    setIsDrawerOpen(false)
+                    router.push('/profile')
+                  }}
+                  className="flex items-center gap-3 flex-1 min-w-0 cursor-pointer hover:opacity-80 transition-opacity"
+                >
+                  <div className="w-9 h-9 rounded-full overflow-hidden border-2 border-zinc-200 dark:border-zinc-700 shrink-0">
+                    {user.user_metadata?.avatar_url ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={user.user_metadata.avatar_url}
+                        alt="프로필"
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-zinc-300 dark:bg-zinc-600 flex items-center justify-center text-xs font-bold text-white">
+                        {(user.user_metadata?.full_name ?? user.email ?? '?')[0].toUpperCase()}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex-1 min-w-0 text-left">
+                    <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200 truncate">
+                      {user.user_metadata?.full_name ?? user.email}
+                    </p>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400">프로필 설정</p>
+                  </div>
+                </button>
+                <button
+                  onClick={async () => {
+                    const supabase = createBrowserSupabaseClient()
+                    await supabase.auth.signOut()
+                    setIsDrawerOpen(false)
+                    router.push('/')
+                  }}
+                  className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-red-500 dark:hover:text-red-400 transition-colors cursor-pointer shrink-0 px-2 py-1"
+                >
+                  로그아웃
+                </button>
               </div>
             ) : !isLoading ? (
               <button

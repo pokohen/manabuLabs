@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/Button'
 import type { Particle, GrammarExample } from '@/data/grammar'
 import { LearningCompletionScreen, SpeakerButton } from '../common'
@@ -28,14 +28,20 @@ export default function ParticleStepLearning({ particles, categoryLabel, initial
   const [showQuizResult, setShowQuizResult] = useState(false)
   const [isCompleted, setIsCompleted] = useState(false)
 
+  const isInitialMount = useRef(true)
   const currentParticle = particles[currentIndex]
   const totalParticles = particles.length
   const progress = (currentIndex / totalParticles) * 100
 
-  // URL 동기화
+  // URL 동기화 (초기 마운트 시에는 건너뛰기)
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      return
+    }
     onIndexChange?.(currentIndex)
-  }, [currentIndex, onIndexChange])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex])
 
   const steps: LearningStep[] = ['intro', 'usages', 'examples', 'quiz']
   const currentStepIndex = steps.indexOf(currentStep)

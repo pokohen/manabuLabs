@@ -33,11 +33,11 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  // /word-sentence 보호: 비로그인 시 /login으로 리다이렉트
-  if (
-    !user &&
-    request.nextUrl.pathname.startsWith('/word-sentence')
-  ) {
+  // 보호 경로: 비로그인 시 /login으로 리다이렉트
+  const protectedPaths = ['/word-sentence', '/profile']
+  const isProtected = protectedPaths.some((p) => request.nextUrl.pathname.startsWith(p))
+
+  if (!user && isProtected) {
     const url = request.nextUrl.clone()
     url.pathname = '/login'
     url.searchParams.set('redirectTo', request.nextUrl.pathname)

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Button } from '@/components/Button'
 import type { VerbConjugation } from '@/data/grammar'
 import { QuizInput } from '../common'
@@ -31,13 +31,19 @@ export default function VerbStepLearning({
   const [isCompleted, setIsCompleted] = useState(false)
   const [quizKey, setQuizKey] = useState(0) // QuizInput 리셋용
   const [quizMode, setQuizMode] = useState<QuizMode>('typing')
+  const isInitialMount = useRef(true)
 
   const currentConjugation = conjugations[currentIndex]
 
-  // URL 동기화
+  // URL 동기화 (초기 마운트 시에는 건너뛰기)
   useEffect(() => {
+    if (isInitialMount.current) {
+      isInitialMount.current = false
+      return
+    }
     onIndexChange?.(currentIndex)
-  }, [currentIndex, onIndexChange])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentIndex])
 
   // 퀴즈용 랜덤 예시 (클라이언트에서만 생성)
   const [quizExample, setQuizExample] = useState(currentConjugation.examples[0])

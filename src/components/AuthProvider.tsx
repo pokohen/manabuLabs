@@ -69,9 +69,21 @@ export function AuthProvider() {
   async function loadUserPreferences(userId: string) {
     const { data } = await supabase
       .from('user_preferences')
-      .select('theme, last_studied_menu')
+      .select('theme, last_studied_menu, deleted_at')
       .eq('user_id', userId)
       .single()
+
+    // 소프트 삭제 복구: 7일 이내 재로그인 시 deleted_at 해제
+    if (data?.deleted_at) {
+      const deletedAt = new Date(data.deleted_at)
+      const daysSince = (Date.now() - deletedAt.getTime()) / (1000 * 60 * 60 * 24)
+      if (daysSince < 7) {
+        await supabase
+          .from('user_preferences')
+          .update({ deleted_at: null, updated_at: new Date().toISOString() })
+          .eq('user_id', userId)
+      }
+    }
 
     if (data?.theme) {
       setMode(data.theme as ThemeMode)
