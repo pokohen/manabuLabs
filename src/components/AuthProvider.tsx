@@ -30,8 +30,10 @@ export function AuthProvider() {
           if (!state.isLoading && state.user !== null) {
             return
           }
-          // 토큰 갱신 중 일시적 null session → 스킵
+          // 세션 없음 → 비로그인 상태 확정
           if (!session) {
+            setUser(null)
+            setLoading(false)
             return
           }
         }
