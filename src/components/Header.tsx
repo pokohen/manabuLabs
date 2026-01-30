@@ -216,12 +216,12 @@ export default function Header() {
                     try {
                       const supabase = createBrowserSupabaseClient()
                       const { error } = await supabase.auth.signOut()
+                      console.log('[Header] signOut 결과:', { error })
                       if (error) console.error('[Header] signOut error:', error)
-                      setIsDrawerOpen(false)
-                      router.push('/')
                     } catch (e) {
                       console.error('[Header] signOut exception:', e)
                     }
+                    window.location.href = '/'
                   }}
                   className="text-xs text-zinc-500 dark:text-zinc-400 hover:text-red-500 dark:hover:text-red-400 transition-colors cursor-pointer shrink-0 px-2 py-1"
                 >

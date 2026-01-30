@@ -47,8 +47,15 @@ export function AuthProvider() {
         setLoading(false)
 
         if (user) {
-          await loadUserPreferences(user.id)
-          await loadPartnerInfo(user.id)
+          try {
+            console.log('[AuthProvider] loadUserPreferences 호출 시작:', user.id)
+            await loadUserPreferences(user.id)
+            console.log('[AuthProvider] loadPartnerInfo 호출 시작')
+            await loadPartnerInfo(user.id)
+            console.log('[AuthProvider] 데이터 로드 완료')
+          } catch (e) {
+            console.error('[AuthProvider] 데이터 로드 실패:', e)
+          }
         } else if (event === 'SIGNED_OUT') {
           console.log('[AuthProvider] SIGNED_OUT → 상태 초기화')
           clearPartner()
