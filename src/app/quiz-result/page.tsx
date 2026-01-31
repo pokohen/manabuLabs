@@ -104,7 +104,8 @@ export default function QuizResultPage() {
 
           <Button
             onClick={handleRestart}
-            className="w-full py-3 px-4 bg-blue-600 hover:bg-blue-700"
+            variant="primary"
+            fullWidth
           >
             다시 시작하기
           </Button>
@@ -237,7 +238,7 @@ export default function QuizResultPage() {
             router.push('/')
           }}
           variant="secondary"
-          className="w-full py-3 px-4 bg-zinc-500 hover:bg-zinc-600"
+          fullWidth
         >
           홈으로
         </Button>

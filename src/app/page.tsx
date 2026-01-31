@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { Button } from '@/components/Button'
+import { NavigationCard } from '@/components/NavigationCard'
 import Logo from '@/components/Logo'
 import BannerCarousel from '@/components/BannerCarousel'
 import { useAuthStore } from '@/store/authStore'
@@ -43,33 +43,37 @@ export default function Home() {
 
         <div className="w-full max-w-md gap-4 mt-8 grid grid-cols-2">
 
-          <Button
+          <NavigationCard
             onClick={() => router.push('/base-study')}
-            className="w-full py-6 px-6 bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white text-xl font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-[1.02]"
+            colorClass="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700"
+            className="py-6 rounded-xl hover:shadow-xl hover:scale-[1.02]"
           >
             히라가나<br />가타카나
-          </Button>
+          </NavigationCard>
 
-          <Button
+          <NavigationCard
             onClick={() => router.push('/grammar-study')}
-            className="w-full py-6 px-6 bg-gradient-to-r from-yellow-500 to-lime-600 hover:from-yellow-600 hover:to-lime-700 text-white text-xl font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-[1.02]"
+            colorClass="bg-gradient-to-r from-yellow-500 to-lime-600 hover:from-yellow-600 hover:to-lime-700"
+            className="py-6 rounded-xl hover:shadow-xl hover:scale-[1.02]"
           >
             문법 공부
-          </Button>
+          </NavigationCard>
 
-          <Button
+          <NavigationCard
             onClick={() => router.push('/kanji-study')}
-            className="w-full py-6 px-6 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white text-xl font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-[1.02]"
+            colorClass="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700"
+            className="py-6 rounded-xl hover:shadow-xl hover:scale-[1.02]"
           >
             한자 공부<br />(beta)
-          </Button>
+          </NavigationCard>
 
-          <Button
+          <NavigationCard
             onClick={() => router.push('/word-sentence')}
-            className="w-full py-6 px-6 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white text-xl font-bold rounded-xl transition-all shadow-lg hover:shadow-xl hover:scale-[1.02]"
+            colorClass="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700"
+            className="py-6 rounded-xl hover:shadow-xl hover:scale-[1.02]"
           >
             예시 문장 보기
-          </Button>
+          </NavigationCard>
         </div>
       </main>
     </div>

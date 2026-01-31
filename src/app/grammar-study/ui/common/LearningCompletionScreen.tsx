@@ -32,14 +32,17 @@ export default function LearningCompletionScreen({
           {onGoToList && (
             <Button
               onClick={onGoToList}
-              className="w-full py-4 px-4 bg-blue-500 hover:bg-blue-600 text-white text-lg font-bold rounded-lg transition-colors"
+              variant="primary"
+              size="lg"
+              fullWidth
             >
               전체 리스트 보기
             </Button>
           )}
           <Button
             onClick={onExit}
-            className="w-full py-3 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors"
+            variant="secondary"
+            fullWidth
           >
             메뉴로 돌아가기
           </Button>

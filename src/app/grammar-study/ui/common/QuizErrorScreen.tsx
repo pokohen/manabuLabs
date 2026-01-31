@@ -27,13 +27,15 @@ export default function QuizErrorScreen({
           <div className="space-y-3">
             <Button
               onClick={onRetry}
-              className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg"
+              variant="success"
+              fullWidth
             >
               다시 시도
             </Button>
             <Button
               onClick={onExit}
-              className="w-full py-3 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg"
+              variant="secondary"
+              fullWidth
             >
               나가기
             </Button>

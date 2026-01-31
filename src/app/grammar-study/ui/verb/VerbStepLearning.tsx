@@ -148,14 +148,17 @@ export default function VerbStepLearning({
             {onGoToList && (
               <Button
                 onClick={onGoToList}
-                className="w-full py-4 px-4 bg-blue-500 hover:bg-blue-600 text-white text-lg font-bold rounded-lg transition-colors"
+                variant="primary"
+                size="lg"
+                fullWidth
               >
                 전체 리스트 보기
               </Button>
             )}
             <Button
               onClick={onExit}
-              className="w-full py-3 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors"
+              variant="secondary"
+              fullWidth
             >
               메뉴로 돌아가기
             </Button>
@@ -277,6 +280,7 @@ export default function VerbStepLearning({
                     </div>
                     <Button
                       onClick={() => speakJapanese(example.conjugated, example.reading)}
+                      variant="none"
                       className="p-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 rounded-full transition-colors"
                       disabled={isSpeaking}
                     >
@@ -293,7 +297,9 @@ export default function VerbStepLearning({
             <div className="pt-4">
               <Button
                 onClick={() => setStep('quiz')}
-                className="w-full py-4 px-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold rounded-lg transition-colors"
+                variant="success"
+                size="lg"
+                fullWidth
               >
                 확인 퀴즈
               </Button>

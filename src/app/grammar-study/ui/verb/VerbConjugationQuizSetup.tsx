@@ -77,7 +77,9 @@ export default function VerbConjugationQuizSetup({ onStart, onBack }: VerbConjug
           <div className="pt-4 space-y-3">
             <Button
               onClick={handleStart}
-              className="w-full py-4 px-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold rounded-lg transition-colors"
+              variant="success"
+              size="lg"
+              fullWidth
             >
               퀴즈 시작하기
             </Button>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { Button } from '@/components/Button'
+import { NavigationCard } from '@/components/NavigationCard'
 import { basicGrammarCategories } from '@/data/grammar'
 
 export default function BasicGrammarPage() {
@@ -19,16 +19,16 @@ export default function BasicGrammarPage() {
 
         <div className="w-full space-y-3 mt-4">
           {basicGrammarCategories.map((category) => (
-            <Button
+            <NavigationCard
               key={category.id}
               onClick={() => router.push(`/grammar-study/${category.id}`)}
-              className={`w-full py-5 px-6 ${category.color} text-white text-xl font-bold rounded-lg transition-colors shadow-lg`}
+              colorClass={category.color}
             >
               <div className="flex flex-col items-center">
                 <span>{category.label}</span>
                 <span className="text-sm font-normal opacity-80 mt-1">{category.description}</span>
               </div>
-            </Button>
+            </NavigationCard>
           ))}
         </div>
 

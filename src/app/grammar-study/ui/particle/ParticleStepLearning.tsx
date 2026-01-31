@@ -156,14 +156,16 @@ export default function ParticleStepLearning({ particles, categoryLabel, initial
               {!isLastParticle && (
                 <Button
                   onClick={handleSkip}
-                  className="py-1 px-3 bg-transparent hover:bg-zinc-200 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-white text-sm font-medium rounded-lg transition-colors"
+                  variant="outline"
+                  size="xs"
                 >
                   건너뛰기
                 </Button>
               )}
               <Button
                 onClick={onExit}
-                className="py-1 px-3 bg-zinc-500 hover:bg-zinc-600 text-white text-sm font-medium rounded-lg transition-colors"
+                variant="secondary"
+                size="xs"
               >
                 나가기
               </Button>
@@ -369,7 +371,8 @@ export default function ParticleStepLearning({ particles, categoryLabel, initial
               {currentStepIndex > 0 && (
                 <Button
                   onClick={handlePrev}
-                  className="flex-1 py-3 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-black dark:text-white font-medium rounded-lg transition-colors"
+                  variant="neutral"
+                  className="flex-1"
                 >
                   이전
                 </Button>
@@ -379,7 +382,8 @@ export default function ParticleStepLearning({ particles, categoryLabel, initial
                 showQuizResult && (
                   <Button
                     onClick={isLastParticle ? () => setIsCompleted(true) : handleNext}
-                    className="flex-1 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors"
+                    variant="warning"
+                    className="flex-1"
                   >
                     {isLastParticle ? '학습 완료!' : '다음 조사'}
                   </Button>
@@ -387,7 +391,8 @@ export default function ParticleStepLearning({ particles, categoryLabel, initial
               ) : (
                 <Button
                   onClick={handleNext}
-                  className="flex-1 py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors"
+                  variant="warning"
+                  className="flex-1"
                 >
                   다음
                 </Button>

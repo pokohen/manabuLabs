@@ -53,7 +53,9 @@ export default function ParticleQuizSetup({ onStart, onBack }: ParticleQuizSetup
         <div className="w-full space-y-3 mt-4">
           <Button
             onClick={() => onStart({ questionCount })}
-            className="w-full py-4 px-4 bg-orange-500 hover:bg-orange-600 text-white text-xl font-bold rounded-lg transition-colors shadow-lg"
+            variant="warning"
+            size="lg"
+            fullWidth
           >
             퀴즈 시작
           </Button>

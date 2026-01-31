@@ -159,7 +159,9 @@ export default function QuizPage() {
           {showResult && (
             <Button
               onClick={nextQuestion}
-              className="w-full mt-6 py-3 px-4 bg-blue-600 hover:bg-blue-700"
+              variant="primary"
+              fullWidth
+              className="mt-6"
             >
               {currentQuestionIndex < questions.length - 1 ? '다음 문제' : '결과 보기'}
             </Button>

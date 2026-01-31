@@ -112,24 +112,16 @@ export default function MonjiStudyPage() {
         {/* 가나 타입 선택 */}
         <div className="flex gap-2 w-full max-w-xs">
           <Button
-            variant="none"
+            variant={kanaType === 'hiragana' ? 'primary' : 'neutral'}
             onClick={() => setKanaType('hiragana')}
-            className={`flex-1 py-3 px-4 font-medium rounded-lg transition-colors ${
-              kanaType === 'hiragana'
-                ? 'bg-blue-600 text-white'
-                : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
-            }`}
+            className="flex-1"
           >
             히라가나
           </Button>
           <Button
-            variant="none"
+            variant={kanaType === 'katakana' ? 'primary' : 'neutral'}
             onClick={() => setKanaType('katakana')}
-            className={`flex-1 py-3 px-4 font-medium rounded-lg transition-colors ${
-              kanaType === 'katakana'
-                ? 'bg-blue-600 text-white'
-                : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
-            }`}
+            className="flex-1"
           >
             가타카나
           </Button>

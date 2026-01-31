@@ -106,7 +106,9 @@ export default function QuizInput({
             <Button
               onClick={handleTypingCheck}
               disabled={!typingInput}
-              className="w-full py-4 px-4 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-400 text-white text-lg font-bold rounded-lg transition-colors"
+              variant="success"
+              size="lg"
+              fullWidth
             >
               확인하기
             </Button>
@@ -120,13 +122,15 @@ export default function QuizInput({
             <div className="flex gap-2">
               <Button
                 onClick={handleClearCanvas}
-                className="flex-1 py-3 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors"
+                variant="secondary"
+                className="flex-1"
               >
                 지우기
               </Button>
               <Button
                 onClick={handleShowAnswer}
-                className="flex-1 py-3 px-4 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors"
+                variant="primary"
+                className="flex-1"
               >
                 정답 보기
               </Button>
@@ -215,13 +219,15 @@ export default function QuizInput({
           <div className="flex gap-2">
             <Button
               onClick={() => handleSelfGrade(false)}
-              className="flex-1 py-3 px-4 bg-red-500 hover:bg-red-600 text-white font-medium rounded-lg transition-colors"
+              variant="danger"
+              className="flex-1"
             >
               틀렸어요
             </Button>
             <Button
               onClick={() => handleSelfGrade(true)}
-              className="flex-1 py-3 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors"
+              variant="success"
+              className="flex-1"
             >
               맞았어요
             </Button>
@@ -246,7 +252,9 @@ export default function QuizInput({
       {isCorrect !== null && (
         <Button
           onClick={onComplete}
-          className="w-full py-4 px-4 bg-emerald-600 hover:bg-emerald-700 text-white text-lg font-bold rounded-lg transition-colors"
+          variant="success"
+          size="lg"
+          fullWidth
         >
           {completeButtonText}
         </Button>

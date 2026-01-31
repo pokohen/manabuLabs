@@ -350,17 +350,17 @@ export default function StrokeOrderDisplay({
           <Button
             onClick={playAnimation}
             disabled={isAnimating}
+            variant="primary"
             size="sm"
-            className="flex-1 py-2 gap-2"
+            className="flex-1 gap-2"
           >
             <Icon name="play" size="sm" />
             {isAnimating ? '재생 중...' : '재생'}
           </Button>
           <Button
             onClick={resetAnimation}
-            variant="secondary"
+            variant="neutral"
             size="sm"
-            className="py-2 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-black dark:text-white"
           >
             초기화
           </Button>

@@ -77,7 +77,9 @@ export default function AdjectiveQuizSetup({ onStart, onBack }: AdjectiveQuizSet
           <div className="pt-4 space-y-3">
             <Button
               onClick={handleStart}
-              className="w-full py-4 px-4 bg-orange-600 hover:bg-orange-700 text-white text-lg font-bold rounded-lg transition-colors"
+              variant="warning"
+              size="lg"
+              fullWidth
             >
               퀴즈 시작하기
             </Button>

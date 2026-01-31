@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from '@/components/Button'
+import { NavigationCard } from '@/components/NavigationCard'
 import {
   getGrammarDataByCategory,
   grammarCategories,
@@ -162,9 +162,9 @@ export default function GrammarStepPage({
           <div className="w-full space-y-4 mt-4">
             {/* 단계별 학습 (patterns, verb, particles 타입 지원) */}
             {(type === 'patterns' || type === 'verb' || type === 'particles') && (
-              <Button
+              <NavigationCard
                 onClick={() => onModeChange('step')}
-                className={`w-full py-5 px-6 ${type === 'particles' ? 'bg-orange-500 hover:bg-orange-600' : 'bg-green-500 hover:bg-green-600'} text-white text-xl font-bold rounded-lg transition-colors shadow-lg`}
+                colorClass={type === 'particles' ? 'bg-orange-500 hover:bg-orange-600' : 'bg-green-500 hover:bg-green-600'}
               >
                 <div className="flex flex-col items-center">
                   <span>단계별 학습</span>
@@ -172,13 +172,13 @@ export default function GrammarStepPage({
                     {type === 'patterns' ? '하나씩 집중하며 퀴즈로 확인' : type === 'verb' ? '활용형별로 학습하기' : '조사별로 집중 학습'}
                   </span>
                 </div>
-              </Button>
+              </NavigationCard>
             )}
 
             {/* 리스트 보기 */}
-            <Button
+            <NavigationCard
               onClick={() => onModeChange('list')}
-              className="w-full py-5 px-6 bg-blue-500 hover:bg-blue-600 text-white text-xl font-bold rounded-lg transition-colors shadow-lg"
+              colorClass="bg-blue-500 hover:bg-blue-600"
             >
               <div className="flex flex-col items-center">
                 <span>전체 리스트 보기</span>
@@ -186,13 +186,13 @@ export default function GrammarStepPage({
                   모든 항목을 한눈에 탐색
                 </span>
               </div>
-            </Button>
+            </NavigationCard>
 
             {/* 문제 풀기 */}
             {onQuiz && (
-              <Button
+              <NavigationCard
                 onClick={onQuiz}
-                className="w-full py-5 px-6 bg-emerald-600 hover:bg-emerald-700 text-white text-xl font-bold rounded-lg transition-colors shadow-lg"
+                colorClass="bg-emerald-600 hover:bg-emerald-700"
               >
                 <div className="flex flex-col items-center">
                   <span>문제 풀기</span>
@@ -200,7 +200,7 @@ export default function GrammarStepPage({
                     {type === 'patterns' ? '퍼즐로 예문 맞추기' : type === 'particles' ? '빈칸에 조사 넣기' : '문제로 활용형 연습하기'}
                   </span>
                 </div>
-              </Button>
+              </NavigationCard>
             )}
           </div>
 

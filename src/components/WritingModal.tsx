@@ -295,8 +295,8 @@ export default function WritingModal({
             <div className="flex gap-2">
               <Button
                 onClick={clearCanvas}
-                variant="secondary"
-                className="flex-1 py-3 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-black dark:text-white"
+                variant="neutral"
+                className="flex-1"
               >
                 지우기
               </Button>
@@ -304,7 +304,7 @@ export default function WritingModal({
                 <Button
                   onClick={onPlaySound}
                   variant="primary"
-                  className="flex-1 py-3 gap-2"
+                  className="flex-1 gap-2"
                 >
                   <Icon name="speaker" size="md" />
                   발음 듣기

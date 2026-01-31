@@ -35,21 +35,15 @@ export default function QuizSetup() {
             <div className="grid grid-cols-2 gap-3">
               <Button
                 onClick={() => setKanaType('hiragana')}
-                className={`py-4 px-4 font-medium rounded-lg transition-colors ${
-                  kanaType === 'hiragana'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
-                }`}
+                variant={kanaType === 'hiragana' ? 'primary' : 'neutral'}
+                size="lg"
               >
                 히라가나 (あ)
               </Button>
               <Button
                 onClick={() => setKanaType('katakana')}
-                className={`py-4 px-4 font-medium rounded-lg transition-colors ${
-                  kanaType === 'katakana'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
-                }`}
+                variant={kanaType === 'katakana' ? 'primary' : 'neutral'}
+                size="lg"
               >
                 가타카나 (ア)
               </Button>
@@ -64,31 +58,22 @@ export default function QuizSetup() {
             <div className="grid grid-cols-3 gap-3">
               <Button
                 onClick={() => setQuestionCount(10)}
-                className={`py-4 px-4 font-medium rounded-lg transition-colors ${
-                  questionCount === 10
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
-                }`}
+                variant={questionCount === 10 ? 'primary' : 'neutral'}
+                size="lg"
               >
                 10문제
               </Button>
               <Button
                 onClick={() => setQuestionCount(20)}
-                className={`py-4 px-4 font-medium rounded-lg transition-colors ${
-                  questionCount === 20
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
-                }`}
+                variant={questionCount === 20 ? 'primary' : 'neutral'}
+                size="lg"
               >
                 20문제
               </Button>
               <Button
                 onClick={() => setQuestionCount('all')}
-                className={`py-4 px-4 font-medium rounded-lg transition-colors ${
-                  questionCount === 'all'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
-                }`}
+                variant={questionCount === 'all' ? 'primary' : 'neutral'}
+                size="lg"
               >
                 전체
               </Button>
@@ -103,33 +88,30 @@ export default function QuizSetup() {
             <div className="space-y-3">
               <Button
                 onClick={() => setTimerMode('none')}
-                className={`w-full py-4 px-4 font-medium rounded-lg transition-colors text-left ${
-                  timerMode === 'none'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
-                }`}
+                variant={timerMode === 'none' ? 'primary' : 'neutral'}
+                size="lg"
+                fullWidth
+                className="text-left"
               >
                 <div className="font-bold">타이머 없음&nbsp;</div>
                 <div className="text-sm opacity-80">편안하게 풀기</div>
               </Button>
               <Button
                 onClick={() => setTimerMode('per-question')}
-                className={`w-full py-4 px-4 font-medium rounded-lg transition-colors text-left ${
-                  timerMode === 'per-question'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
-                }`}
+                variant={timerMode === 'per-question' ? 'primary' : 'neutral'}
+                size="lg"
+                fullWidth
+                className="text-left"
               >
                 <div className="font-bold">문제당 10초&nbsp;</div>
                 <div className="text-sm opacity-80">각 문제마다 10초 제한</div>
               </Button>
               <Button
                 onClick={() => setTimerMode('time-attack')}
-                className={`w-full py-4 px-4 font-medium rounded-lg transition-colors text-left ${
-                  timerMode === 'time-attack'
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white dark:bg-zinc-800 text-black dark:text-white'
-                }`}
+                variant={timerMode === 'time-attack' ? 'primary' : 'neutral'}
+                size="lg"
+                fullWidth
+                className="text-left"
               >
                 <div className="font-bold">타임어택 (20분)&nbsp;</div>
                 <div className="text-sm opacity-80">전체 20분 안에 모든 문제 풀기</div>
@@ -141,7 +123,9 @@ export default function QuizSetup() {
           <div className="pt-4 space-y-3">
             <Button
               onClick={handleStartQuiz}
-              className="w-full py-4 px-4 bg-green-600 hover:bg-green-700 text-white text-lg font-bold rounded-lg transition-colors"
+              variant="success"
+              size="lg"
+              fullWidth
             >
               퀴즈 시작하기
             </Button>

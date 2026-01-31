@@ -1,7 +1,7 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
-import { Button } from '@/components/Button'
+import { NavigationCard } from '@/components/NavigationCard'
 import { grammarMenu, isGroupCategory } from '@/data/grammar'
 
 export default function GrammarStudyPage() {
@@ -18,37 +18,18 @@ export default function GrammarStudyPage() {
         </p>
 
         <div className="w-full space-y-3 mt-4">
-          {grammarMenu.map((item) => {
-            // 그룹 카테고리는 별도 페이지로 이동
-            if (isGroupCategory(item)) {
-              return (
-                <Button
-                  key={item.id}
-                  onClick={() => router.push(`/grammar-study/${item.id}`)}
-                  className={`w-full py-5 px-6 ${item.color} text-white text-xl font-bold rounded-lg transition-colors shadow-lg`}
-                >
-                  <div className="flex flex-col items-center">
-                    <span>{item.label}</span>
-                    <span className="text-sm font-normal opacity-80 mt-1">{item.description}</span>
-                  </div>
-                </Button>
-              )
-            }
-
-            // 단일 카테고리
-            return (
-              <Button
-                key={item.id}
-                onClick={() => router.push(`/grammar-study/${item.id}`)}
-                className={`w-full py-5 px-6 ${item.color} text-white text-xl font-bold rounded-lg transition-colors shadow-lg`}
-              >
-                <div className="flex flex-col items-center">
-                  <span>{item.label}</span>
-                  <span className="text-sm font-normal opacity-80 mt-1">{item.description}</span>
-                </div>
-              </Button>
-            )
-          })}
+          {grammarMenu.map((item) => (
+            <NavigationCard
+              key={item.id}
+              onClick={() => router.push(`/grammar-study/${item.id}`)}
+              colorClass={item.color}
+            >
+              <div className="flex flex-col items-center">
+                <span>{item.label}</span>
+                <span className="text-sm font-normal opacity-80 mt-1">{item.description}</span>
+              </div>
+            </NavigationCard>
+          ))}
         </div>
 
       </main>

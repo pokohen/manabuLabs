@@ -334,7 +334,8 @@ export default function GrammarPuzzleQuiz({ level, questionCount, onExit }: Gram
           <p className="text-zinc-600 dark:text-zinc-400 mb-4">문제를 불러올 수 없습니다.</p>
           <Button
             onClick={onExit}
-            className="py-2 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg"
+            variant="secondary"
+            size="sm"
           >
             나가기
           </Button>

@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Button } from '@/components/Button'
+import { NavigationCard } from '@/components/NavigationCard'
 import { JLPTLevel } from '@/data/kanji'
 import KanjiStepPage from './ui/stepPage'
 
@@ -41,13 +41,13 @@ export default function KanjiStudyPage() {
 
         <div className="w-full space-y-4 mt-4">
           {jlptLevels.map(({ level, label, color }) => (
-            <Button
+            <NavigationCard
               key={level}
               onClick={() => setSelectedLevel(level)}
-              className={`w-full py-5 px-6 ${color} text-white text-xl font-bold rounded-lg transition-colors shadow-lg`}
+              colorClass={color}
             >
               {label}
-            </Button>
+            </NavigationCard>
           ))}
         </div>
 

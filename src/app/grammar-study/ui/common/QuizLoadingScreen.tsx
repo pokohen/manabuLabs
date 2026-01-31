@@ -49,7 +49,9 @@ export default function QuizLoadingScreen({
 
         <Button
           onClick={onCancel}
-          className="mt-4 py-2 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg transition-colors"
+          variant="secondary"
+          size="sm"
+          className="mt-4"
         >
           취소
         </Button>

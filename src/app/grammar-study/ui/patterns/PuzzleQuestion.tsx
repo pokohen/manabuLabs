@@ -72,7 +72,8 @@ export default function PuzzleQuestion({
               </button>
               <Button
                 onClick={onExit}
-                className="py-1 px-3 bg-zinc-500 hover:bg-zinc-600 text-white text-sm font-medium rounded-lg transition-colors"
+                variant="secondary"
+                size="xs"
               >
                 나가기
               </Button>
@@ -178,7 +179,8 @@ export default function PuzzleQuestion({
               <Button
                 onClick={onCheck}
                 disabled={selectedWords.length === 0}
-                className="w-full py-3 bg-emerald-600 hover:bg-emerald-700 disabled:bg-zinc-300 disabled:dark:bg-zinc-700 text-white font-medium rounded-lg transition-colors"
+                variant="success"
+                fullWidth
               >
                 확인하기
               </Button>
@@ -187,14 +189,16 @@ export default function PuzzleQuestion({
                 {!isCorrect && (
                   <Button
                     onClick={onShowGrammar}
-                    className="flex-1 py-3 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-900 dark:text-white font-medium rounded-lg transition-colors"
+                    variant="neutral"
+                    className="flex-1"
                   >
                     문법 보기
                   </Button>
                 )}
                 <Button
                   onClick={onNext}
-                  className="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors"
+                  variant="success"
+                  className="flex-1"
                 >
                   {isLastQuestion ? '결과 보기' : '다음 문제'}
                 </Button>

@@ -170,7 +170,8 @@ export default function WordSentenceClient({ userId }: { userId: string }) {
             onClick={handleGetExamples}
             disabled={!inputWord.trim() || usageCount >= DAILY_LIMIT}
             isLoading={isLoading}
-            className="w-full py-3 px-4 bg-green-600 hover:bg-green-700 disabled:bg-zinc-400"
+            variant="success"
+            fullWidth
           >
             {usageCount >= DAILY_LIMIT ? '오늘 한도 초과' : '예시 문장 생성'}
           </Button>

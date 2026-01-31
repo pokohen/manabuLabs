@@ -79,13 +79,15 @@ export default function KanjiStepPage({ step, onBack }: KanjiStepPageProps) {
             <div className="flex gap-3 mt-6">
               <Button
                 onClick={() => setPageMode('list')}
-                className="flex-1 py-3 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-900 dark:text-white font-medium rounded-lg transition-colors"
+                variant="neutral"
+                className="flex-1"
               >
                 취소
               </Button>
               <Button
                 onClick={() => setPageMode('quiz')}
-                className="flex-1 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors"
+                variant="primary"
+                className="flex-1"
               >
                 시작하기
               </Button>
@@ -109,7 +111,8 @@ export default function KanjiStepPage({ step, onBack }: KanjiStepPageProps) {
           {/* 퀴즈 버튼 */}
           <Button
             onClick={() => setPageMode('quiz-setup')}
-            className="w-full py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors"
+            variant="primary"
+            fullWidth
           >
             읽기 퀴즈 시작
           </Button>

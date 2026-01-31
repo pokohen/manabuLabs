@@ -275,7 +275,8 @@ export default function ParticleQuiz({ questionCount, onExit }: ParticleQuizProp
             </h1>
             <Button
               onClick={onExit}
-              className="py-1 px-3 bg-zinc-500 hover:bg-zinc-600 text-white text-sm font-medium rounded-lg transition-colors"
+              variant="secondary"
+              size="xs"
             >
               나가기
             </Button>
@@ -425,14 +426,16 @@ export default function ParticleQuiz({ questionCount, onExit }: ParticleQuizProp
               <Button
                 onClick={handleCheck}
                 disabled={!selectedAnswer || maskedData.isLoading}
-                className="w-full py-3 bg-orange-500 hover:bg-orange-600 disabled:bg-zinc-300 disabled:dark:bg-zinc-700 text-white font-medium rounded-lg transition-colors"
+                variant="warning"
+                fullWidth
               >
                 확인하기
               </Button>
             ) : (
               <Button
                 onClick={handleNext}
-                className="w-full py-3 bg-orange-500 hover:bg-orange-600 text-white font-medium rounded-lg transition-colors"
+                variant="warning"
+                fullWidth
               >
                 {currentIndex < questions.length - 1 ? '다음 문제' : '결과 보기'}
               </Button>

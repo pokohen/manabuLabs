@@ -183,13 +183,15 @@ export default function KanjiReadingQuiz({ level, questionCount, onExit }: Kanji
             <div className="flex gap-3">
               <Button
                 onClick={handleRetry}
-                className="flex-1 py-3 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-zinc-900 dark:text-white font-medium rounded-lg transition-colors"
+                variant="neutral"
+                className="flex-1"
               >
                 다시 풀기
               </Button>
               <Button
                 onClick={onExit}
-                className="flex-1 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors"
+                variant="primary"
+                className="flex-1"
               >
                 나가기
               </Button>
@@ -223,7 +225,8 @@ export default function KanjiReadingQuiz({ level, questionCount, onExit }: Kanji
           </p>
           <Button
             onClick={onExit}
-            className="py-2 px-4 bg-zinc-500 hover:bg-zinc-600 text-white font-medium rounded-lg"
+            variant="secondary"
+            size="sm"
           >
             돌아가기
           </Button>
@@ -243,7 +246,8 @@ export default function KanjiReadingQuiz({ level, questionCount, onExit }: Kanji
             </h1>
             <Button
               onClick={onExit}
-              className="py-1 px-3 bg-zinc-500 hover:bg-zinc-600 text-white text-sm font-medium rounded-lg transition-colors"
+              variant="secondary"
+              size="xs"
             >
               나가기
             </Button>
@@ -359,14 +363,16 @@ export default function KanjiReadingQuiz({ level, questionCount, onExit }: Kanji
               <Button
                 onClick={handleCheck}
                 disabled={!selectedAnswer}
-                className="w-full py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-zinc-300 disabled:dark:bg-zinc-700 text-white font-medium rounded-lg transition-colors"
+                variant="primary"
+                fullWidth
               >
                 확인하기
               </Button>
             ) : (
               <Button
                 onClick={handleNext}
-                className="w-full py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-lg transition-colors"
+                variant="primary"
+                fullWidth
               >
                 {currentIndex < questions.length - 1 ? '다음 문제' : '결과 보기'}
               </Button>

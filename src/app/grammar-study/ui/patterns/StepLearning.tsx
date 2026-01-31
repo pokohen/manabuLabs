@@ -187,14 +187,16 @@ export default function StepLearning({ patterns, categoryLabel, initialIndex = 0
               {!isLastPattern && (
                 <Button
                   onClick={handleSkip}
-                  className="py-1 px-3 bg-transparent hover:bg-zinc-200 dark:hover:bg-zinc-700 border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-white text-sm font-medium rounded-lg transition-colors"
+                  variant="outline"
+                  size="xs"
                 >
                   건너뛰기
                 </Button>
               )}
               <Button
                 onClick={onExit}
-                className="py-1 px-3 bg-zinc-500 hover:bg-zinc-600 text-white text-sm font-medium rounded-lg transition-colors"
+                variant="secondary"
+                size="xs"
               >
                 나가기
               </Button>
@@ -274,7 +276,8 @@ export default function StepLearning({ patterns, categoryLabel, initialIndex = 0
               {currentStepIndex > 0 && (
                 <Button
                   onClick={handlePrev}
-                  className="flex-1 py-3 bg-zinc-200 dark:bg-zinc-700 hover:bg-zinc-300 dark:hover:bg-zinc-600 text-black dark:text-white font-medium rounded-lg transition-colors"
+                  variant="neutral"
+                  className="flex-1"
                 >
                   이전
                 </Button>
@@ -284,7 +287,8 @@ export default function StepLearning({ patterns, categoryLabel, initialIndex = 0
                 showQuizResult && (
                   <Button
                     onClick={isLastPattern ? () => setIsCompleted(true) : handleNext}
-                    className="flex-1 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-colors"
+                    variant="success"
+                    className="flex-1"
                   >
                     {isLastPattern ? '학습 완료!' : '다음 문법'}
                   </Button>
@@ -292,7 +296,8 @@ export default function StepLearning({ patterns, categoryLabel, initialIndex = 0
               ) : (
                 <Button
                   onClick={handleNext}
-                  className="flex-1 py-3 bg-green-500 hover:bg-green-600 text-white font-medium rounded-lg transition-colors"
+                  variant="success"
+                  className="flex-1"
                 >
                   다음
                 </Button>

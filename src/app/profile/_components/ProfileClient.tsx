@@ -125,7 +125,8 @@ export default function ProfileClient({ user: initialUser }: { user: User }) {
                 onClick={handleSaveName}
                 disabled={!displayName.trim() || displayName.trim() === (user.user_metadata?.full_name ?? '')}
                 isLoading={isSaving}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-sm"
+                variant="primary"
+                size="sm"
               >
                 저장
               </Button>
@@ -171,7 +172,9 @@ export default function ProfileClient({ user: initialUser }: { user: User }) {
               <div className="flex gap-2">
                 <Button
                   onClick={() => { setShowDeleteConfirm(false); setDeleteInput('') }}
-                  className="flex-1 py-2.5 bg-blue-600 hover:bg-blue-700 text-sm"
+                  variant="primary"
+                  size="sm"
+                  className="flex-1"
                 >
                   취소
                 </Button>
